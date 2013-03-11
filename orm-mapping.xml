@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orm-mapping>
+
+    <entity name="page" class="flowcode\cms\domain\Page" table="page" >
+        
+        <property name="Id" column="id"/>
+        <property name="Permalink" column="permalink"/>
+        <property name="Name" column="name"/>
+        <property name="Description" column="description"/>
+        <property name="HtmlContent" column="htmlcontent"/>
+        <property name="Status" column="status"/>
+        <property name="Type" column="type"/>
+        
+        <filter name="generic" columns="name,description" perPage="20" />
+    </entity>
+    
+    <entity name="user" class="flowcode\cms\domain\User" table="user" >
+        <property name="Id" column="id"/>
+        <property name="Name" column="name"/>
+        <property name="Username" column="username"/>
+        <property name="Password" column="password"/>
+        <property name="Role" column="role"/>
+        <property name="Mail" column="mail"/>
+    </entity>
+    
+    <entity name="menu" class="flowcode\cms\domain\Menu" table="menu" >
+        <property name="Id" column="id"/>
+        <property name="Name" column="name"/>
+        
+        <relation entity="itemmenu" 
+                  name="Items" 
+                  table="menu_item_menu" 
+                  localColumn="id_menu" 
+                  foreignColumn="id_item_menu" 
+                  cardinality="many-to-many" />
+        
+    </entity>
+    
+    <entity name="itemmenu" class="flowcode\cms\domain\ItemMenu" table="item_menu" >
+        <property name="Id" column="id"/>
+        <property name="Name" column="name"/>
+        <property name="MenuId" column="id_menu"/>
+        <property name="FatherId" column="id_father"/>
+        <property name="PageId" column="id_page"/>
+        <property name="LinkUrl" column="linkurl"/>
+        <property name="order" column="order"/>
+    </entity>
+                
+       
+    <entity name="post" class="flowcode\blog\domain\Post" table="post" >
+        <property name="Id" column="id"/>
+        <property name="Permalink" column="permalink"/>
+        <property name="Title" column="title"/>
+        <property name="Body" column="body"/>
+        <property name="Intro" column="intro"/>
+        <property name="Type" column="type"/>
+        <property name="Status" column="status"/>
+        <property name="ImageSlot" column="image_slot"/>
+        <property name="ImageSlotTop" column="image_slot_top"/>
+        <property name="ImageSlotLeft" column="image_slot_left"/>
+        <property name="ImageSlotSize" column="image_slot_size"/>
+        <property name="Date" column="date"/>
+        <relation entity="tag" 
+                  name="Tags" 
+                  table="post_tag" 
+                  localColumn="id_post" 
+                  foreignColumn="id_tag" 
+                  cardinality="many-to-many" />
+        <filter name="generic" columns="title,body,intro" perPage="20" />
+    </entity>
+    
+    <entity name="tag" class="flowcode\blog\domain\Tag" table="tag" >
+        <property name="Id" column="id"/>
+        <property name="Name" column="name"/>
+    </entity>
+                
+</orm-mapping>

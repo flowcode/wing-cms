@@ -1,0 +1,127 @@
+/* 
+    Document   : blog
+    Created on : Jan 5, 2013, 8:26:20 AM
+    Author     : JMA <jaguero@flowcode.com.ar>
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.post{
+    width: 90%;
+    padding: 5px;
+    font-size: 18px;
+    font-family: "Roman Unicode Regular";
+    margin-bottom: 50px;
+    color: #666;
+}
+.post-date{
+    font-family: 'Yanone Kaffeesatz Thin';
+}
+
+.post-title{
+    text-decoration: none;
+    font-family: 'Yanone Kaffeesatz Thin';
+    font-size: 46px;
+    display: block;
+    color: black;
+}
+.post-title:hover{
+    color: green;
+}
+
+.post-read-more{
+    font-family: 'Yanone Kaffeesatz Thin';
+    font-weight: bold;
+    font-size: 12px;
+    padding: 3px;
+    background-color: green;
+    border: 1px solid green;
+    color: white;
+    text-decoration: none;
+}
+.post-read-more:hover{
+    background-color: white;
+    color: green;
+}
+.post a{
+    cursor: pointer;
+}
+#post-body{
+    font-size: 12px;
+    display: none;
+    position: absolute;
+    z-index: 3;
+    background-color: black;
+    top: 0px;
+    overflow-y: scroll;
+}
+#post-body .titular{
+    width: 100%;
+    display: table;
+}
+#post-body .titular span{
+    font-size: 28px;
+    display: inline-block;
+    color: #ff8000;
+    padding-top: 9px;
+    padding-bottom: 9px;
+}
+.noticia{
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+}
+.noticia .fecha{
+    color: #999;
+}
+.noticia .post-body{
+    padding-bottom: 50px;
+    font-family: 'Roman Unicode Regular';
+    font-size: 18px;
+}
+.noticia h1{
+    font-family: "Yanone Kaffeesatz Thin";
+    font-size: 40px;
+}
+a.post-back{
+    float: right;
+    color: #ff8000;
+    line-height: 50px;
+    cursor: pointer;
+}
+.post-img-slot{
+    width: 100%;
+    height: 150px;
+}
+.post-btns{
+    background-color: #333;
+    margin-bottom: 20px;
+    height: 18px;
+}
+.post-btns a{
+    display: block;
+    float: left;
+    color: #ff8000;
+    cursor: pointer;
+}
+
+#blog-content a{
+    color: #ff8000 !important;
+}
+
+.pager{
+    display: block;  
+    margin: auto;
+    text-align: center;
+    color: #666;
+}
+.pager a{
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+    
+}
+.pager a:hover{
+    color: green;
+}
