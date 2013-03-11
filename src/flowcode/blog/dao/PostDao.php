@@ -5,8 +5,8 @@ namespace flowcode\blog\dao;
 use Exception;
 use flowcode\blog\domain\Post;
 use flowcode\orm\EntityManager;
-use flowcode\smooth\mvc\DataSource;
-use flowcode\smooth\utils\Pager;
+use flowcode\wing\mvc\DataSource;
+use flowcode\wing\utils\Pager;
 
 class PostDao {
 

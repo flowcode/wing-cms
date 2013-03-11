@@ -2,7 +2,7 @@
 
 namespace flowcode\cms\domain;
 
-use flowcode\smooth\mvc\Entity;
+use flowcode\wing\mvc\Entity;
 
 /**
  * Usuario de la aplicacion.

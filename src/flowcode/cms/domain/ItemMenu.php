@@ -3,7 +3,7 @@
 namespace flowcode\cms\domain;
 
 use flowcode\cms\service\PageService;
-use flowcode\smooth\mvc\Entity;
+use flowcode\wing\mvc\Entity;
 
 /**
  * Item de un menu.

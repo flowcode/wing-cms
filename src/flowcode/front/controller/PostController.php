@@ -4,9 +4,9 @@ namespace flowcode\front\controller;
 
 use flowcode\blog\service\PostService;
 use flowcode\cms\domain\Page;
-use flowcode\smooth\mvc\Controller;
-use flowcode\smooth\mvc\HttpRequest;
-use flowcode\smooth\mvc\View;
+use flowcode\wing\mvc\Controller;
+use flowcode\wing\mvc\HttpRequest;
+use flowcode\wing\mvc\View;
 
 /**
  * Description of HomeController

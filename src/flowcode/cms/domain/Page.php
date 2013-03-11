@@ -2,7 +2,7 @@
 
 namespace flowcode\cms\domain;
 
-use flowcode\smooth\mvc\Entity;
+use flowcode\wing\mvc\Entity;
 
 /**
  * Una seccion es una unidad de visualización del portal.

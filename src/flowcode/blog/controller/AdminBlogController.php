@@ -6,10 +6,10 @@ use flowcode\blog\domain\Post;
 use flowcode\blog\domain\Tag;
 use flowcode\blog\service\PostService;
 use flowcode\blog\service\TagService;
-use flowcode\smooth\mvc\Controller;
-use flowcode\smooth\mvc\HttpRequest;
-use flowcode\smooth\mvc\View;
-use flowcode\smooth\utils\PermalinkBuilder;
+use flowcode\wing\mvc\Controller;
+use flowcode\wing\mvc\HttpRequest;
+use flowcode\wing\mvc\View;
+use flowcode\wing\utils\PermalinkBuilder;
 
 /**
  * Description of AdminNoticia

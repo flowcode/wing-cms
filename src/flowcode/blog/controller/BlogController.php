@@ -5,8 +5,8 @@ namespace flowcode\naranja\controller;
 use flowcode\naranja\domain\Noticia;
 use flowcode\naranja\service\DateService;
 use flowcode\naranja\service\NoticiaService;
-use flowcode\smooth\mvc\Controller;
-use flowcode\smooth\mvc\HttpRequest;
+use flowcode\wing\mvc\Controller;
+use flowcode\wing\mvc\HttpRequest;
 
 class BlogController extends Controller {
 

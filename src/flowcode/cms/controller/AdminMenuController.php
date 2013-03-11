@@ -7,10 +7,10 @@ use flowcode\cms\domain\Menu;
 use flowcode\cms\service\ItemMenuService;
 use flowcode\cms\service\MenuService;
 use flowcode\cms\service\PageService;
-use flowcode\smooth\mvc\Controller;
-use flowcode\smooth\mvc\HttpRequest;
-use flowcode\smooth\mvc\PlainView;
-use flowcode\smooth\mvc\View;
+use flowcode\wing\mvc\Controller;
+use flowcode\wing\mvc\HttpRequest;
+use flowcode\wing\mvc\PlainView;
+use flowcode\wing\mvc\View;
 
 /**
  * Description of AdminMenu

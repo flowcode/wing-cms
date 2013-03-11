@@ -5,9 +5,9 @@ namespace flowcode\cms\controller;
 use flowcode\cms\domain\Page;
 use flowcode\cms\domain\PlainPageManager;
 use flowcode\cms\service\PageService;
-use flowcode\smooth\mvc\Controller;
-use flowcode\smooth\mvc\HttpRequest;
-use flowcode\smooth\mvc\View;
+use flowcode\wing\mvc\Controller;
+use flowcode\wing\mvc\HttpRequest;
+use flowcode\wing\mvc\View;
 
 /**
  * 
@@ -34,6 +34,7 @@ class PageController extends Controller {
         $page = null;
         $page = $this->pageService->getPageByPermalink($permalink);
 
+
         if (is_null($page)) {
             return $this->manageNotFound($permalink);
         }
@@ -42,7 +43,7 @@ class PageController extends Controller {
             case Page::$type_plain:
                 return $this->managePlainPage($page);
                 break;
-            case Page::$listado:
+            case Page::$type_custom:
                 $this->manageCustomPage($page);
                 break;
             default:

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Naranja - Panel de Administraci&oacute;n</title>
+        <title><? echo flowcode\wing\mvc\Config::getByModule("front", "site", "name") ?> - Admin Panel</title>
         <link rel="stylesheet" href="/css/admin.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="/css/overcast/jquery-ui-1.8.18.custom.css" type="text/css" />

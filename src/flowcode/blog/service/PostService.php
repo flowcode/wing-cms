@@ -5,7 +5,7 @@ namespace flowcode\blog\service;
 use Exception;
 use flowcode\blog\dao\PostDao;
 use flowcode\blog\domain\Post;
-use flowcode\smooth\mvc\Config;
+use flowcode\wing\mvc\Config;
 
 /**
  * 

@@ -6,16 +6,10 @@
         Purpose of the stylesheet follows.
 */
 
-@import url("fonts/fonts.css");
-@import url("blog.css");
 
 /* main structure */
 body{
-    font-family: "Yanone Kaffeesatz Thin";
-    color: #333333;
-    margin: 0px;
-    background-size: cover;
-    background-repeat: no-repeat;
+
 }
 
 #header{
@@ -27,14 +21,6 @@ body{
     margin: auto;
     min-height: 500px;
     display: table;
-}
-#right-container{
-    width: 240px;
-    float: right;
-}
-#left-container{
-    width: 650px;
-    float: left;
 }
 
 #footer{
@@ -76,13 +62,11 @@ body{
 #main-menu a{
     text-decoration: none;
     font-weight: bold;
-    color: #666;
     font-size: 20px;
     display: inline-block;
     padding: 5px 10px 5px;
 }
 #main-menu a:hover{
-    color: green;
 }
 
 #main-menu ul{
@@ -100,25 +84,4 @@ body{
 }
 #blogTitle span{
     font-size: 50px;
-    font-family: "TRASHED";
-}
-
-/* home */
-#home-posts{
-    min-height: 400px;
-    padding-bottom: 2px;
-}
-
-/* right content */
-#links{
-    background-color: white;
-    box-shadow: 0px 1px 10px #ddd; 
-    padding: 10px;
-    min-height: 400px;
-}
-#links a{
-    color: green;
-}
-.link-container{
-    margin-top: 10px;
 }

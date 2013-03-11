@@ -4,7 +4,7 @@ namespace flowcode\cms\dao;
 
 use flowcode\cms\domain\Page;
 use flowcode\orm\EntityManager;
-use flowcode\smooth\utils\Pager;
+use flowcode\wing\utils\Pager;
 
 /**
  * Description of PageDao

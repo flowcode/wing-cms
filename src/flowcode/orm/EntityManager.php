@@ -4,8 +4,8 @@ namespace flowcode\orm;
 
 use flowcode\orm\builder\MapperBuilder;
 use flowcode\orm\domain\Relation;
-use flowcode\smooth\mvc\DataSource;
-use flowcode\smooth\utils\Pager;
+use flowcode\wing\mvc\DataSource;
+use flowcode\wing\utils\Pager;
 
 /**
  * Description of EntityManager
@@ -488,7 +488,7 @@ class EntityManager {
      * @param type $orderColumn
      * @param type $orderType
      * @param type $page
-     * @return \flowcode\smooth\utils\Pager
+     * @return \flowcode\wing\utils\Pager
      */
     public function findByWhereFilterPaged($name, $filter, $orderColumn = null, $orderType = NULL, $page = 1) {
         $mapper = MapperBuilder::buildFromName($this->mapping, $name);

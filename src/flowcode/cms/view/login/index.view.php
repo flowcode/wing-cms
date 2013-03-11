@@ -28,7 +28,7 @@
         </div>
         <div class="span4 offset1">
             <br/>
-            <img src="<?php echo flowcode\smooth\mvc\Config::get("images", "logo") ?>" class="img-album"/>
+            <img src="<?php echo flowcode\wing\mvc\Config::get("images", "logo") ?>" class="img-album"/>
         </div>
     </div>
 </div>

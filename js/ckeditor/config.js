@@ -15,5 +15,7 @@ CKEDITOR.editorConfig = function( config ) {
     config.filebrowserImageUploadUrl = '/src/kcfinder/upload.php?type=images';
     config.filebrowserFlashUploadUrl = '/src/kcfinder/upload.php?type=flash';
     config.skin = 'moono-dark';
-        
+    
+    config.extraPlugins = 'syntaxhighlight';
+    
 };

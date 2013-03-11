@@ -4,8 +4,8 @@ namespace flowcode\cms\service;
 
 use flowcode\cms\dao\PageDao;
 use flowcode\cms\domain\Page;
-use flowcode\smooth\mvc\Config;
-use flowcode\smooth\utils\Pager;
+use flowcode\wing\mvc\Config;
+use flowcode\wing\utils\Pager;
 
 /**
  * 

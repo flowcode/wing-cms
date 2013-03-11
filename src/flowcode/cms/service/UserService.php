@@ -4,7 +4,7 @@ namespace flowcode\cms\service;
 
 use flowcode\cms\dao\UserDao;
 use flowcode\cms\domain\User;
-use flowcode\smooth\mvc\Config;
+use flowcode\wing\mvc\Config;
 
 /**
  * @author Juan Manuel Aguero.

@@ -2,7 +2,7 @@
 
 namespace flowcode\blog\domain;
 
-use flowcode\smooth\mvc\Entity;
+use flowcode\wing\mvc\Entity;
 
 /**
  * Description of Tag

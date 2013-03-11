@@ -2,12 +2,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title><? echo flowcode\smooth\mvc\Config::getByModule("front", "site", "name") ?> - Admin Panel</title>
+        <title><? echo flowcode\wing\mvc\Config::getByModule("front", "site", "name") ?> - Admin Panel</title>
         <meta NAME="robots" CONTENT="noindex, nofollow" />
         <link rel="icon" type="image/png" href="/images/flowcode-fav.png" />
         <link rel="stylesheet" href="/css/admin.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="/css/overcast/jquery-ui-1.8.18.custom.css" type="text/css" />
+        <link rel="stylesheet" href="/css/bootstrap-admin/bootstrap.min.css" type="text/css" media="screen" />
         <script src="/js/jquery-1.7.1.min.js" type="text/javascript" ></script>
         <script src="/js/jquery-ui-1.8.21.custom.min.js" type="text/javascript" ></script>
         <script src="/js/bootstrap.min.js" type="text/javascript" ></script>

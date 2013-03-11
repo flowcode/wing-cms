@@ -5,7 +5,7 @@ namespace flowcode\cms\dao;
 use Exception;
 use flowcode\cms\domain\User;
 use flowcode\orm\EntityManager;
-use flowcode\smooth\mvc\DataSource;
+use flowcode\wing\mvc\DataSource;
 
 /**
  * Engloba las operaciones de persistencia de un Usuario.
