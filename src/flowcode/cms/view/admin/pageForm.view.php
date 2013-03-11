@@ -44,8 +44,8 @@
 </style>
 
 <div class="page-header">
-    <h1>Pagina
-        <small>Crear o editar</small>
+    <h1>Page
+        <small>Create or edit</small>
     </h1>
 </div>
 
