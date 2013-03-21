@@ -46,9 +46,8 @@ class View implements IView{
         $modulepath = Config::get("modulepath", "all");
 
         $viewData = $this->viewData;
-
         /* render view */
-        $viewfile = $modulepath . $this->getViewName() . ".view.php";
+        $viewfile = __DIR__."/../../../../".$modulepath . $this->getViewName() . ".view.php";
         if (file_exists($viewfile)) {
             ob_start();
             require_once $viewfile;
@@ -74,9 +73,8 @@ class View implements IView{
         } else {
             $settedMaster = $this->specificMaster;
         }
-
         if (!is_null($settedMaster)) {
-            $masterfile = $modulepath . $settedMaster . ".view.php";
+            $masterfile = __DIR__."/../../../../".$modulepath . $settedMaster . ".view.php";
             if (file_exists($masterfile)) {
                 require_once $masterfile;
             } else {

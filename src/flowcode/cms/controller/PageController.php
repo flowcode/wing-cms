@@ -33,8 +33,7 @@ class PageController extends Controller {
 
         $page = null;
         $page = $this->pageService->getPageByPermalink($permalink);
-
-
+        
         if (is_null($page)) {
             return $this->manageNotFound($permalink);
         }
@@ -65,8 +64,14 @@ class PageController extends Controller {
     }
 
     private function manageNotFound($permalink) {
+        $viewData['page'] = new Page();
         $viewData['msg'] = "";
         return View::getControllerView($this, "front/view/page/page-not-found", $viewData);
+    }
+
+    public function error() {
+        $viewData['data'] = "";
+        return View::getViewWithSpecificMaster($this, "cms/view/page/error-page", $viewData, "cms/view/master-static");
     }
 
 }

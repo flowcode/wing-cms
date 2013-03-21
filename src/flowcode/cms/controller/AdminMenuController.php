@@ -126,16 +126,17 @@ class AdminMenuController extends Controller {
         return new PlainView($viewData);
     }
 
-    public function guardarOrdenAction(HttpRequest $httpRequest) {
+    public function saveItemsOrder(HttpRequest $httpRequest) {
 
         $items = $httpRequest->getParameter("items");
         foreach ($items as $item) {
             $itemMenuSrv = new ItemMenuService();
-            $itemMenu = $itemMenuSrv->obtenerItemMenuPorId($item["id"]);
-            $itemMenu->setOrden($item["orden"]);
-            $itemMenuSrv->guardarItemMenu($itemMenu);
-            echo "ok";
+            $itemMenu = $itemMenuSrv->findById($item["id"]);
+            $itemMenu->setOrder($item["orden"]);
+            $itemMenuSrv->save($itemMenu);
+            $viewData['data'] = "ok";
         }
+        return View::getPlainView($this, $viewName, $viewData);
     }
 
 }

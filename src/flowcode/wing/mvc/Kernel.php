@@ -5,6 +5,7 @@ namespace flowcode\wing\mvc;
 use flowcode\wing\config\Setup;
 use flowcode\wing\mvc\HttpRequest;
 use flowcode\wing\mvc\HttpRequestBuilder;
+use flowcode\wing\utils\KLogger;
 
 class Kernel {
 
@@ -21,7 +22,6 @@ class Kernel {
     }
 
     public function handleRequest($requestedUrl) {
-
         require_once (__DIR__ . '/Autoloader.php');
 
         $setup = new Setup();
@@ -79,6 +79,10 @@ class Kernel {
         }
 
         $method = $request->getAction();
+        $this->dispatch($controller, $method, $request);
+    }
+
+    private function dispatch(Controller $controller, $method, HttpRequest $request) {
         $view = $controller->$method($request);
         $view->render();
     }
@@ -91,7 +95,16 @@ class Kernel {
     public function shutdown() {
         if (($error = error_get_last())) {
             ob_clean();
-            header("Location: /lo-sentimos");
+            $setup = new Setup();
+            
+            /* log error */
+            KLogger::instance($setup->getLogDir())->logCrit($error["message"]);
+            
+            $request = new HttpRequest();
+            $class = $setup->getDefaultController();
+            $method = $setup->getErrorMethod();
+            $controller = new $class();
+            $this->dispatch($controller, $method, $request);
         }
     }
 

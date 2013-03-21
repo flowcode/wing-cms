@@ -11,6 +11,36 @@
         $("#item-menu-form").dialog("close");
     }
     
+    function doGuardar(){
+        guardarOrden();
+      
+    }
+    
+    function guardarOrden(){
+        var itemsArray = new Array();
+        var itemMenus = $(".item-menu");
+        for(var l=0; l<itemMenus.length; l++){
+            var item = {
+                id:  $(itemMenus[l]).attr("id").replace("item-menu-",""),
+                orden: l
+            }
+            itemsArray.push(item);
+        }
+        $.ajax({
+            url: "/adminMenu/saveItemsOrder",
+            type: "POST",
+            data: {items: itemsArray},
+            success: function(data){
+                console.log(data);
+                //var form = document.getElementById("menuForm");
+                //form.submit();
+            },
+            error: function(a,b,c){
+                console.log(a);
+            }
+        });
+    }
+    
     function guardarItem(){
 
         var item = {
@@ -104,6 +134,11 @@
         orden: $("#item-menu-orden").val("");
     }
     
+    $(document).ready(function(){
+        $(".sortable").sortable();
+        $( ".sortable" ).disableSelection();
+    });
+    
 </script>
 <style>
     .item-menu{
@@ -133,7 +168,7 @@
         <small>Editar</small>
     </h1>
 </div>
-<form action="<?php echo "/adminMenu/save" ?>" method="post">
+<form action="<?php echo "/adminMenu/save" ?>" method="post" id="menuForm">
     <input type="hidden" name="id" id="menu-id" value="<?php echo $viewData['menu']->getId() ?>" />
     <div>
         <label>Nombre</label>
@@ -141,7 +176,7 @@
     </div>
     <div class="well">
         <h4>Items</h4>
-        <div id="items">
+        <div id="items" class="sortable">
             <?php foreach ($viewData['items'] as $item): ?>
                 <div class="item-menu" id='<?php echo "item-menu-" . $item->getId() ?>'>
                     <span><?php echo $item->getOrder() ?> |</span>
@@ -165,7 +200,7 @@
     </div>
     <br/>
     <div class="form-actions">
-        <button type="submit" class="btn btn-primary btn-large">Guardar</button>
+        <button type="button" onclick="doGuardar();" class="btn btn-primary btn-large">Guardar</button>
         <a href="/adminMenu/index" class="btn btn-large">Cancelar</a>
     </div>
 </form>

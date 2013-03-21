@@ -11,10 +11,9 @@ class WingSetup {
 
     protected $scanneableControllers;
     protected $dirs;
-    
     protected $defaultController;
     protected $defaultMethod;
-    
+    protected $errorMethod;
     protected $loginController;
     protected $loginMethod;
     protected $restrictedMethod;
@@ -41,9 +40,16 @@ class WingSetup {
     public function getDefaultMethod() {
         return $this->defaultMethod;
     }
-    
+
     public function getDirs() {
         return $this->dirs;
+    }
+
+    public function getLogDir() {
+        $root = __DIR__ . "/../../../..";
+        if (isset($this->dirs["log"])) {
+            return $root . $this->dirs["log"];
+        }
     }
 
     public function setDirs($dirs) {
@@ -74,7 +80,13 @@ class WingSetup {
         $this->restrictedMethod = $restrictedMethod;
     }
 
+    public function getErrorMethod() {
+        return $this->errorMethod;
+    }
 
+    public function setErrorMethod($errorMethod) {
+        $this->errorMethod = $errorMethod;
+    }
 
 }
 
