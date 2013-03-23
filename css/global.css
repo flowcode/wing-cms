@@ -29,7 +29,7 @@ body{
     height: 200px;
 }
 /* header */
-#header .container{
+#header > .container{
     width: 60%;
     margin: auto;
     margin-top: 45px;
@@ -53,9 +53,8 @@ body{
 
 /* menu */
 #main-menu{
-    height: 50px;
+    height: 30px;
     text-align: center;
-    width: 50%;
     margin: auto;
     
 }

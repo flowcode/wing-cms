@@ -16,7 +16,7 @@ class Menu extends Entity {
 
     public function __construct() {
         parent::__construct();
-        $this->items = array();
+        $this->items = NULL;
     }
 
     public function getName() {
@@ -28,11 +28,20 @@ class Menu extends Entity {
     }
 
     public function getItems() {
+        if (is_null($this->items)) {
+            $itemMenuSrv = new \flowcode\cms\service\ItemMenuService();
+            $this->items = $itemMenuSrv->findByMenu($this);
+        }
         return $this->items;
     }
 
     public function setItems($items) {
         $this->items = $items;
+    }
+
+    public function getMainItems() {
+        $itemMenuSrv = new \flowcode\cms\service\ItemMenuService();
+        return $itemMenuSrv->findFathersByMenu($this);
     }
 
 }

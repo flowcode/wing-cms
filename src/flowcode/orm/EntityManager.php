@@ -5,6 +5,7 @@ namespace flowcode\orm;
 use flowcode\orm\builder\MapperBuilder;
 use flowcode\orm\domain\Relation;
 use flowcode\wing\mvc\DataSource;
+use flowcode\wing\mvc\Entity;
 use flowcode\wing\utils\Pager;
 
 /**
@@ -190,12 +191,9 @@ class EntityManager {
 
     public function buildJoinRelationQuery(Relation $relation, $mainSynonym, $joinSynonym) {
         $query = "";
-
         if ($relation->getCardinality() == Relation::$manyToMany) {
             $query .= "INNER JOIN " . $relation->getTable() . " $joinSynonym ";
-            $query .= "ON $joinSynonym." . $relation->getLocalColumn() . " = " . $mainSynonym . ".id ";
-            $query .= "INNER JOIN " . $relation->getTable() . " $joinSynonym ";
-            $query .= "ON $joinSynonym." . $relation->getLocalColumn() . " = " . $mainSynonym . ".id ";
+            $query .= "ON $joinSynonym." . $relation->getForeignColumn() . " = " . $mainSynonym . ".id ";
         }
 
         return $query;
@@ -488,7 +486,7 @@ class EntityManager {
      * @param type $orderColumn
      * @param type $orderType
      * @param type $page
-     * @return \flowcode\wing\utils\Pager
+     * @return Pager
      */
     public function findByWhereFilterPaged($name, $filter, $orderColumn = null, $orderType = NULL, $page = 1) {
         $mapper = MapperBuilder::buildFromName($this->mapping, $name);
@@ -566,6 +564,32 @@ class EntityManager {
         $pager = new Pager($array, $itemCount, $mapper->getFilter("generic")->getItemsPerPage());
 
         return $pager;
+    }
+
+    public function findRelation(Entity $entity, $relationName) {
+        $mapper = MapperBuilder::buildFromMapping($this->mapping, get_class($entity));
+        $relation = $mapper->getRelation($relationName);
+        $relationMapper = MapperBuilder::buildFromName($this->mapping, $relation->getEntity());
+
+        $selectQuery = "SELECT tmain.* FROM `" . $relationMapper->getTable() . "` tmain ";
+
+        $joinQuery = $this->buildJoinRelationQuery($relation, "tmain", "j1");
+
+        $whereQuery = "WHERE j1." . $relation->getLocalColumn() . " = '" . $entity->getId() . "'";
+
+        $query = $selectQuery . $joinQuery . $whereQuery;
+        $queryResult = $this->conn->executeQuery($query);
+        $array = array();
+        if ($queryResult) {
+            $class = $relationMapper->getClass();
+            foreach ($queryResult as $row) {
+                $newEntity = new $class();
+                $this->populateEntity($newEntity, $row, $relationMapper);
+                $array[] = $newEntity;
+            }
+        }
+
+        return $array;
     }
 
 }

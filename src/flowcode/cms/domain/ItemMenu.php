@@ -17,13 +17,14 @@ class ItemMenu extends Entity {
     private $fatherId;
     private $pageId;
     private $linkUrl;
+    private $linkTarget;
     private $order;
     private $subItems;
     private $page = null;
 
     public function __construct() {
         parent::__construct();
-        $this->subItems = array();
+        $this->subItems = NULL;
     }
 
     public function getName() {
@@ -75,6 +76,10 @@ class ItemMenu extends Entity {
     }
 
     public function getSubItems() {
+        if (is_null($this->subItems)) {
+            $itemMenuSrv = new \flowcode\cms\service\ItemMenuService();
+            $this->subItems = $itemMenuSrv->findByFatherId($this->getId());
+        }
         return $this->subItems;
     }
 
@@ -97,6 +102,15 @@ class ItemMenu extends Entity {
         }
         return $this->page;
     }
+    
+    public function getLinkTarget() {
+        return $this->linkTarget;
+    }
+
+    public function setLinkTarget($linkTarget) {
+        $this->linkTarget = $linkTarget;
+    }
+
 
 }
 

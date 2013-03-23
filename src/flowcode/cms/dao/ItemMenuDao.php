@@ -43,6 +43,12 @@ class ItemMenuDao {
         $em = EntityManager::getInstance();
         return $em->findAll("itemmenu");
     }
+    
+    function findFathersByMenuId($menuId){
+        $em = EntityManager::getInstance();
+        $where = "id_father = '0' AND id_menu='$menuId'";
+        return $em->findByWhereFilter("itemmenu", $where);
+    }
 
     /**
      * Obtiene los itemMenus de un menu.
@@ -64,7 +70,7 @@ class ItemMenuDao {
      */
     function findByFatherId($fatherId) {
         $em = EntityManager::getInstance();
-        $where = "id_padre = '$fatherId'";
+        $where = "id_father = '$fatherId'";
         return $em->findByWhereFilter("itemmenu", $where);
     }
 

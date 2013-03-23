@@ -112,7 +112,7 @@ class PostDao {
                 $em = EntityManager::getInstance();
                 $em->populateEntity($entity, $fila);
 
-                // agrego a la lista
+// agrego a la lista
                 $noticias[] = $entity;
             }
         }
@@ -128,6 +128,12 @@ class PostDao {
         $pager = new Pager($noticias, $itemCount, $cantSlotsPorPagina);
 
         return $pager;
+    }
+
+    public function findTags(Post $post) {
+        $em = EntityManager::getInstance();
+        $tags = $em->findRelation($post, "Tags");
+        return $tags;
     }
 
 }

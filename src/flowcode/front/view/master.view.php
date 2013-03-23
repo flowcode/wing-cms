@@ -7,9 +7,17 @@
         <meta name="description" content="<? echo $viewData['page']->getDescription() ?>" />
 
         <link rel="stylesheet" href="/css/global.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="/css/bootstrap-front/bootstrap.min.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" media="screen" />
+        <script src="/js/jquery-1.7.1.min.js" type="text/javascript" ></script>
         <script src="/js/bootstrap.min.js" type="text/javascript" ></script>
+        <script src="/js/bootstrap-dropdown.js" type="text/javascript" ></script>
+        <script src="/js/bootstrap-affix.js" type="text/javascript" ></script>
         <script src="/js/global.js" type="text/javascript" ></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.dropdown-toggle').dropdown();
+            });
+        </script>
     </head>
 
     <body>
@@ -17,26 +25,63 @@
         <div id="header">
             <div class="container">
                 <div id="blogTitle">
-                    <span>Wing CMS</span>
+                    <span><h1>Wing CMS</h1></span>
                 </div>
-                <div id="main-menu">
-                    <ul>
-                        <?php $menu = \flowcode\cms\controller\MenuController::getMenu("1"); ?>
-                        <?php $items = $menu->getItems(); ?>
-                        <?php foreach ($items as $item): ?>
-                            <li>
-                                <?php if ($item->getPage() != NULL): ?>
-                                    <a href="/<?php echo $item->getUrl() ?>"><?php echo $item->getName() ?></a>
-                                <?php else: ?>
-                                    <?php if ($item->getLinkUrl() != ""): ?>
-                                        <a href="<?php echo $item->getLinkUrl(); ?>" target="_blank" ><?php echo $item->getName(); ?></a>
-                                    <?php else: ?>
-                                        <a><?php echo $item->getName(); ?></a>
-                                    <?php endif; ?>
-                                <?php endif; ?>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <ul class="nav">
+                                <?php $menu = \flowcode\cms\controller\MenuController::getMenu("1"); ?>
+                                <?php $items = $menu->getMainItems(); ?>
+                                <?php foreach ($items as $item): ?>
+                                    <? if (count($item->getSubItems()) > 0): ?>
+                                        <li class="dropdown" id="menu-<?php echo $item->getId(); ?>">
+                                            <?php if ($item->getPage() != NULL): ?>
+                                                <a class="dropdown-toggle" href="/<?php echo $item->getUrl() ?>"><?php echo $item->getName() ?></a>
+                                            <?php else: ?>
+                                                <?php if ($item->getLinkUrl() != ""): ?>
+                                                    <a class="dropdown-toggle" href="<?php echo $item->getLinkUrl(); ?>" ><?php echo $item->getName(); ?></a>
+                                                <?php else: ?>
+                                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#menu-<?php echo $item->getId(); ?>">
+                                                        <?php echo $item->getName(); ?>
+                                                        <b class="caret"></b>
+                                                    </a>
+                                                <?php endif; ?>
+                                            <?php endif; ?>
+                                            <ul class="dropdown-menu">
+                                                <?php foreach ($item->getSubItems() as $subitem): ?>
+                                                    <li>
+                                                        <?php if ($subitem->getPage() != NULL): ?>
+                                                            <a href="/<?php echo $subitem->getUrl() ?>"><?php echo $subitem->getName() ?></a>
+                                                        <?php else: ?>
+                                                            <?php if ($subitem->getLinkUrl() != ""): ?>
+                                                                <a href="<?php echo $subitem->getLinkUrl(); ?>" ><?php echo $subitem->getName(); ?></a>
+                                                            <?php else: ?>
+                                                                <a><?php echo $subitem->getName(); ?></a>
+                                                            <?php endif; ?>
+                                                        <?php endif; ?>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </li>
+
+                                    <? else: ?>
+                                        <li>
+                                            <?php if ($item->getPage() != NULL): ?>
+                                                <a href="/<?php echo $item->getUrl() ?>"><?php echo $item->getName() ?></a>
+                                            <?php else: ?>
+                                                <?php if ($item->getLinkUrl() != ""): ?>
+                                                    <a href="<?php echo $item->getLinkUrl(); ?>" ><?php echo $item->getName(); ?></a>
+                                                <?php else: ?>
+                                                    <a><?php echo $item->getName(); ?></a>
+                                                <?php endif; ?>
+                                            <?php endif; ?>
+                                        </li>
+                                    <? endif; ?>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

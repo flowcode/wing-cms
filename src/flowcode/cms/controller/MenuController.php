@@ -3,7 +3,6 @@
 namespace flowcode\cms\controller;
 
 use flowcode\cms\domain\Menu;
-use flowcode\cms\service\ItemMenuService;
 use flowcode\cms\service\MenuService;
 
 /**
@@ -19,11 +18,7 @@ class MenuController {
      */
     public static function getMenu($id) {
         $menuService = new MenuService();
-        $itemMenuService = new ItemMenuService();
         $menu = $menuService->findById($id);
-
-        $items = $itemMenuService->findByMenu($menu);
-        $menu->setItems($items);
         return $menu;
     }
 

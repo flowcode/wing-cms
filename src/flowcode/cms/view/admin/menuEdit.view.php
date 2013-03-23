@@ -32,8 +32,8 @@
             data: {items: itemsArray},
             success: function(data){
                 console.log(data);
-                //var form = document.getElementById("menuForm");
-                //form.submit();
+                var form = document.getElementById("menuForm");
+                form.submit();
             },
             error: function(a,b,c){
                 console.log(a);
@@ -46,8 +46,9 @@
         var item = {
             name: $("#item-menu-nombre").val(),
             pageId: $("#item-menu-seccion").val(),
-            menuId: $("#item-menu-menu-id").val(),
+            menuId: $("#menu-id").val(),
             linkUrl: $("#item-menu-link").val(),
+            linTarget: $("#item-menu-linktarget").val(),
             order: $("#item-menu-orden").val(),
             fatherId: $("#item-menu-padre").val()
         }
@@ -61,6 +62,7 @@
                 name: item.name, 
                 pageId: item.pageId,
                 linkurl: escape(item.linkUrl),
+                linktarget: item.linTarget,
                 order: item.order,
                 fatherId: item.fatherId,
                 menuId: item.menuId
@@ -179,20 +181,21 @@
         <div id="items" class="sortable">
             <?php foreach ($viewData['items'] as $item): ?>
                 <div class="item-menu" id='<?php echo "item-menu-" . $item->getId() ?>'>
-                    <span><?php echo $item->getOrder() ?> |</span>
+                    <span><i class="icon-move"></i></span>
                     <span><?php echo $item->getName() ?></span>
                     <a onclick='eliminarItem(<?php echo $item->getId() ?>)'><li class="icon-remove"></li></a>
                     <a onclick='nuevoItemHijo(<?php echo $item->getId() ?>)'><li class='icon-plus'></li></a>
                     <a onclick='editarItem(<?php echo $item->getId() ?>)'><li class='icon-edit'></li></a>
-                    <?php $subitems = $item->getSubItems(); ?>
-                    <?php foreach ($subitems as $subitem): ?>
-                        <div class="item-menu item-menu-hijo" id='<?php echo "item-menu-" . $subitem->getId() ?>'>
-                            <span><?php echo $subitem->getOrder() ?> |</span>
-                            <span><?php echo $subitem->getName() ?></span>
-                            <a onclick='eliminarItem(<?php echo $subitem->getId() ?>)'><li class="icon-remove"></li></a>
-                            <a onclick='editarItemHijo(<?php echo $subitem->getId() ?>)'><li class="icon-edit"></li></a>
-                        </div>
-                    <?php endforeach; ?>
+                    <div class="sortable">
+                        <?php foreach ($item->getSubItems() as $subitem): ?>
+                            <div class="item-menu item-menu-hijo" id='<?php echo "item-menu-" . $subitem->getId() ?>'>
+                                <span><i class="icon-move"></i></span>
+                                <span><?php echo $subitem->getName() ?></span>
+                                <a onclick='eliminarItem(<?php echo $subitem->getId() ?>)'><li class="icon-remove"></li></a>
+                                <a onclick='editarItemHijo(<?php echo $subitem->getId() ?>)'><li class="icon-edit"></li></a>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -222,10 +225,17 @@
         </select>
         <label>Link</label>
         <input type="text" id="item-menu-link" placeholder="Url del link..." />
+        <label>Target</label>
+        <select name="target" id="item-menu-linktarget">
+            <optgroup>
+                <option value="_blank">new tab</option>
+                <option value="">same tab</option>
+            </optgroup>
+        </select>
     </div>
     <div>
         <label>Orden</label>
-        <input type="text" id="item-menu-orden" />
+        <input type="text" id="item-menu-orden" value="1" />
     </div>
     <br/>
     <a class="btn btn-primary" onclick="guardarItem();" >Guardar</a>

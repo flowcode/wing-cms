@@ -78,7 +78,7 @@ class AdminMenuController extends Controller {
         $pages = $pageSrv->findAll();
 
         $itemMenuSrv = new ItemMenuService();
-        $items = $itemMenuSrv->findByMenu($menu);
+        $items = $itemMenuSrv->findFathersByMenu($menu);
 
         $viewData['menu'] = $menu;
         $viewData['items'] = $items;
@@ -108,6 +108,7 @@ class AdminMenuController extends Controller {
         $itemmenu->setPageId($httpRequest->getParameter("pageId"));
         $itemmenu->setMenuId($httpRequest->getParameter("menuId"));
         $itemmenu->setLinkUrl($httpRequest->getParameter("linkurl"));
+        $itemmenu->setLinkTarget($httpRequest->getParameter("linktarget"));
         $itemmenu->setOrder($httpRequest->getParameter("order"));
 
         $id = $itemMenuSrv->save($itemmenu);

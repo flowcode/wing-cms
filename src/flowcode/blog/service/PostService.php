@@ -73,12 +73,8 @@ class PostService {
         $this->noticiaDao->eliminarNoticiaPorId($id);
     }
 
-    /**
-     * Obtiene las categorias de noticias.
-     * @return Array lista de categorias de noticias. 
-     */
-    public function obtenerCategorias() {
-        return $this->noticiaDao->obtenerCategorias();
+    public function findTagsByPost(Post $post) {
+        return $this->postDao->findTags($post);
     }
 
 }

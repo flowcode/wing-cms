@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><? echo flowcode\wing\mvc\Config::getByModule("front", "site", "name") ?> - Admin Panel</title>
         <link rel="stylesheet" href="/css/admin.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="/css/bootstrap-admin/bootstrap.min.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="/css/bootstrap-back.min.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="/css/overcast/jquery-ui-1.8.18.custom.css" type="text/css" />
         <script src="/js/jquery-1.7.1.min.js" type="text/javascript" ></script>
         <script src="/js/jquery-ui-1.8.18.custom.min.js" type="text/javascript" ></script>

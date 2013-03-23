@@ -2,6 +2,7 @@
 
 namespace flowcode\blog\domain;
 
+use flowcode\blog\service\PostService;
 use flowcode\wing\mvc\Config;
 use flowcode\wing\mvc\Entity;
 
@@ -32,6 +33,7 @@ class Post extends Entity {
         $this->imageSlotLeft = 0;
         $this->imageSlotTop = 0;
         $this->imageSlotSize = 100;
+        $this->tags = null;
     }
 
     public function getPermalink() {
@@ -144,6 +146,9 @@ class Post extends Entity {
     }
 
     public function getTags() {
+        $postSrv = new PostService();
+        $this->tags = $postSrv->findTagsByPost($this);
+
         return $this->tags;
     }
 

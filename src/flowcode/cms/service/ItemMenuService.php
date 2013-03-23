@@ -49,6 +49,20 @@ class ItemMenuService {
         return $entidad;
     }
 
+    public function findByFatherId($fatherId = NULL) {
+        if (!is_null($fatherId)) {
+            $items = $this->itemmenuDao->findByFatherId($fatherId);
+        } else {
+            $items = array();
+        }
+        return $items;
+    }
+    
+    public function findFathersByMenu(Menu $menu){
+        $itemmenus = $this->itemmenuDao->findFathersByMenuId($menu->getId());
+        return $itemmenus;
+    }
+
     /**
      * Elimina una itemmenu por su id.
      * @param type $id 

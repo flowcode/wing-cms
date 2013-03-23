@@ -49,7 +49,7 @@ class MapperBuilder {
                     $relInstance->setLocalColumn($relation->attributes()->localColumn->__toString());
                     $relInstance->setForeignColumn($relation->attributes()->foreignColumn->__toString());
 
-                    $relations[] = $relInstance;
+                    $relations[$relInstance->getName()] = $relInstance;
                 }
                 $instance->setRelations($relations);
 

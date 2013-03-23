@@ -43,6 +43,7 @@
         <property name="FatherId" column="id_father"/>
         <property name="PageId" column="id_page"/>
         <property name="LinkUrl" column="linkurl"/>
+        <property name="LinkTarget" column="linktarget"/>
         <property name="order" column="order"/>
     </entity>
                 
