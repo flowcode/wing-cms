@@ -15,7 +15,7 @@
         <script src="/js/bootstrap-affix.js" type="text/javascript" ></script>
         <script src="/js/bootstrap-tooltip.js" type="text/javascript" ></script>
         <script type="text/javascript">
-            $(document).ready(function(){
+            $(document).ready(function() {
                 $('.dropdown-toggle').dropdown();
                 $('#main-menu-fix').affix();
             });
@@ -29,7 +29,7 @@
                 <div class="navbar-inner">
                     <div class="container">
                         <a class="brand">
-                            Panel de Control
+                            <? echo flowcode\wing\mvc\Config::getByModule("front", "site", "name") ?>
                         </a>
                         <?php if (isset($_SESSION['user']['username'])): ?>
                             <ul class="nav">
@@ -40,15 +40,15 @@
                                         <b class="caret"></b>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li class="nav-header">Blog</li>
-                                        <li><a href="/adminBlog/tags">Tags</a></li>
-                                        <li><a href="/adminBlog/index">Posts</a></li>
-                                        <li class="divider"></li>
-                                        <li class="nav-header">Pages</li>
-                                        <li><a href="/adminPage/pages">Admin Pages</a></li>
-                                        <li class="divider"></li>
-                                        <li class="nav-header">Menus</li>
-                                        <li><a href="/adminMenu/index">Administrar</a></li>
+                                        <li class="dropdown-submenu">
+                                            <a href="#" tabindex="-1">Blog</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="/adminBlog/tags">Tags</a></li>
+                                                <li><a href="/adminBlog/index">Posts</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="/adminPage/pages">Pages</a></li>
+                                        <li><a href="/adminMenu/index">Menus</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown" id="menu-settings">

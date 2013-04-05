@@ -14,7 +14,7 @@
         <script src="/js/bootstrap-affix.js" type="text/javascript" ></script>
         <script src="/js/bootstrap-tooltip.js" type="text/javascript" ></script>
         <script type="text/javascript">
-            $(document).ready(function(){
+            $(document).ready(function() {
                 $('.dropdown-toggle').dropdown();
                 $('#main-menu-fix').affix();
             });
@@ -113,16 +113,9 @@
         </div>
 
         <!-- Contenido  -->
-        <div id="content" class="container-fluid">
-            <div class="row-fluid">
-                <!-- Menu principal  -->
-                <div class="span2">
+        <div id="content" class="container">
+            <?php echo $content ?>
 
-                </div>
-                <div class="span9">
-                    <?php echo $content ?>
-                </div>
-            </div>
         </div>
     </body>
 </html>

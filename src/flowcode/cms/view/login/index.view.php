@@ -1,34 +1,26 @@
-<br/><br/>
-<div class="row-fluid">
-    <div class="span10 well offset1 well-large">
-        <div class="span7">
-            <h1 class="offset2">Login</h1>
-            <form name="form" method="post" action="/adminLogin/validate" class="form-horizontal">
-                <div class="control-group">
-                    <label class="control-label" for="username">Username</label>
-                    <div class="controls">
-                        <input id="username" name="username" type="text" />
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label" for="password">Password</label>
-                    <div class="controls">
-                        <input id="password" name="password" type="password" />
-                    </div>
-                </div>
-                <div><? echo $viewData["message"] ?></div>
-
-                <div class="control-group">
-                    <div class="controls">
-                        <button type="submit" class="btn">Entrar</button>
-                    </div>
-                </div>
-            </form>
+<div class="login">
+    <div class="login-screen">
+        <div class="login-icon">
+            <img src="/images/flowcode-fav.png" alt="Welcome to Mail App" />
+            <h4>Welcome to <small><? echo flowcode\wing\mvc\Config::getByModule("front", "site", "name") ?></small></h4>
         </div>
-        <div class="span4 offset1">
-            <br/>
-            <img src="<?php echo flowcode\wing\mvc\Config::get("images", "logo") ?>" class="img-album"/>
+
+        <div class="login-form">
+            <form name="form" method="post" action="/adminLogin/validate">
+                <div class="control-group">
+                    <input type="text" class="login-field" value="" placeholder="Enter your name" id="login-name" name="username" />
+                    <label class="login-field-icon fui-man-16" for="login-name"></label>
+                </div>
+
+                <div class="control-group">
+                    <input type="password" class="login-field" value="" placeholder="Password" id="login-pass" name="password" />
+                    <label class="login-field-icon fui-lock-16" for="login-pass"></label>
+                </div>
+
+                <div><? echo $viewData["message"] ?></div>
+                <button class="btn btn-primary btn-large btn-block" type="submit">Login</button>
+                <a class="login-link" href="#">Lost your password?</a>
+            </form>
         </div>
     </div>
 </div>

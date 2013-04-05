@@ -1,6 +1,6 @@
 <div class="page-header">
     <h1>Posts
-        <a class="btn" href="/adminBlog/createPost" ><li class="icon-plus"></li> Nuevo</a>
+        <a class="btn" href="/adminBlog/createPost" ><li class="icon-plus icon-white"></li> Nuevo</a>
     </h1>
 </div>
 
@@ -8,11 +8,11 @@
 <form action="/adminBlog/index" method="post" class="form-search">
     <div class="input-append">
         <input id="search" type="text" name="search" placeholder="Buscar…" class="span8 search-query" value="<?php echo $viewData['filter'] ?>"/>
-        <button type="submit"class="btn"><li class="icon-search"></li> Buscar</button>
+        <button type="submit"class="btn"><li class="icon-search icon-white"></li> Buscar</button>
     </div>
 </form>
 
-<table class="table table-striped table-bordered table-condensed">
+<table class="table table-condensed">
     <thead>
     <th>#</th>
     <th>Titulo</th>
@@ -27,8 +27,8 @@
         <td><div style = "width: 300px; height: 35px; overflow: hidden;"><?php echo $entidad->getIntro() ?></div></td>
         <td><?php echo $entidad->getDate() ?></td>
         <td>
-            <a title="Editar" href="<?php echo "/adminBlog/editPost/" . $entidad->getId() ?>" class="btn btn-mini" ><li class="icon-edit"></li></a>
-            <a title="Eliminar" href="<?php echo "/adminBlog/eliminar/" . $entidad->getId() ?>" class="btn btn-mini btn-danger" onclick="if(confirm('Estás seguro?')){return true;}return false;"><li class="icon-remove"></li></a>
+            <a title="Editar" href="<?php echo "/adminBlog/editPost/" . $entidad->getId() ?>" class="btn btn-mini" ><li class="icon-edit icon-white"></li></a>
+            <a title="Eliminar" href="<?php echo "/adminBlog/eliminar/" . $entidad->getId() ?>" class="btn btn-mini btn-danger icon-white" onclick="if(confirm('Estás seguro?')){return true;}return false;"><li class="icon-remove"></li></a>
         </td>
     </tr>
 <?php endforeach; ?>

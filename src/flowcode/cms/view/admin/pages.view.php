@@ -1,6 +1,6 @@
 <div class="page-header">
     <h1>Paginas
-        <a class="btn" href="/adminPage/create" ><li class="icon-plus"></li> Nueva</a>
+        <a class="btn" href="/adminPage/create" ><li class="icon-plus icon-white"></li> Nueva</a>
     </h1>
 </div>
 
@@ -8,11 +8,11 @@
 <form action="/adminPage/pages" method="post" class="form-search">
     <div class="input-append">
         <input id="search" type="text" name="search" placeholder="Buscar…" class="span-9 search-query" value="<?php echo $viewData['filter'] ?>"/>
-        <button type="submit"class="btn"><li class="icon-search"></li> Buscar</button>
+        <button type="submit"class="btn"><li class="icon-search icon-white"></li> Buscar</button>
     </div>
 </form>
 
-<table class="table table-striped table-bordered table-condensed">
+<table class="table table-condensed">
     <thead>
         <th>#</th>
         <th>Nombre</th>
@@ -29,8 +29,8 @@
         <td><?php echo $entidad->getStatus() ?></td>
         <td><?php echo $entidad->getType() ?></td>
         <td>
-            <a title="Editar" href="<?php echo "/adminPage/edit/id/" . $entidad->getId() ?>" class="btn btn-mini" ><li class="icon-edit"></li></a>
-            <a title="Eliminar" href="<?php echo "/adminPage/delete/id/" . $entidad->getId() ?>" class="btn btn-mini btn-danger" onclick="if(confirm('Estás seguro?')){return true;}return false;" ><li class="icon-remove"></li></a>
+            <a title="Editar" href="<?php echo "/adminPage/edit/id/" . $entidad->getId() ?>" class="btn btn-mini" ><li class="icon-edit icon-white"></li></a>
+            <a title="Eliminar" href="<?php echo "/adminPage/delete/id/" . $entidad->getId() ?>" class="btn btn-mini btn-danger" onclick="if(confirm('Estás seguro?')){return true;}return false;" ><li class="icon-remove icon-white"></li></a>
         </td>
     </tr>
 <?php endforeach; ?>
