@@ -21,7 +21,7 @@
         </script>
     </head>
 
-    <body>
+    <body style="background-image: url('/images/bg-login.jpeg'); background-size: cover;">
         <!--          Aca va el contenido del header  -->
         <div id="header">
             <div class="navbar">

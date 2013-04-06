@@ -66,7 +66,7 @@
                             <ul class="nav pull-right">
                                 <li class="dropdown" id="menu1">
                                     <a class="dropdown-toggle brand" data-toggle="dropdown" href="#menu1">
-                                        <?php echo $_SESSION['user']['username'] ?>
+                                        <i class="icon-user icon-white"></i> <?php echo $_SESSION['user']['username'] ?>
                                         <b class="caret"></b>
                                     </a>
                                     <ul class="dropdown-menu">

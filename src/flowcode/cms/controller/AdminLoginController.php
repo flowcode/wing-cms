@@ -35,9 +35,9 @@ class AdminLoginController extends Controller {
             return true;
         }
 
-        $viewData["message"] = "Invalid username and password combination.";
+        $viewData["message"] = "Invalid username and password combination";
 
-        return View::getViewWithSpecificMaster($viewData, "login/index", $this, "master-login");
+        return View::getViewWithSpecificMaster($this, "cms/view/login/index", $viewData, "cms/view/master-login");
     }
 
     public function logout(HttpRequest $httpRequest) {

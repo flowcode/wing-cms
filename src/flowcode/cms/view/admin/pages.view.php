@@ -40,11 +40,11 @@
 </p>
 <input type="hidden" id="pagina-sel" value="" />
 <ul class="pager">
-    <li><a onclick="actualizarPagina(<?php echo $viewData['pager']->getPrevPage() ?>)">Prev</a></li>
+    <li><a class="previous" onclick="actualizarPagina(<?php echo $viewData['pager']->getPrevPage() ?>)"><i class="icon-chevron-left icon-white"></i></a></li>
     <span>pagina</span>
     <strong><?php echo $viewData['page'] ?></strong>
     <span>de <?php echo $viewData['pager']->getPageCount() ?></span>
-    <li><a onclick="actualizarPagina(<?php echo $viewData['pager']->getNextPage() ?>)">Next</a></li>
+    <li><a class="next" onclick="actualizarPagina(<?php echo $viewData['pager']->getNextPage() ?>)"><i class="icon-chevron-right icon-white"></i></a></li>
 </ul>
 <script>
     $(document).ready(function(){

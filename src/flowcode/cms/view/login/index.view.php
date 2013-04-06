@@ -1,3 +1,8 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#login-name").focus();
+    });
+</script>
 <div class="login">
     <div class="login-screen">
         <div class="login-icon">
@@ -17,7 +22,10 @@
                     <label class="login-field-icon fui-lock-16" for="login-pass"></label>
                 </div>
 
-                <div><? echo $viewData["message"] ?></div>
+                <? if (strlen($viewData["message"]) != 0): ?>
+                    <div class="alert alert-error"><strong>Error!</strong> <? echo $viewData["message"] ?></span></div>
+                <? endif; ?>
+
                 <button class="btn btn-primary btn-large btn-block" type="submit">Login</button>
                 <a class="login-link" href="#">Lost your password?</a>
             </form>

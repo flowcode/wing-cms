@@ -28,21 +28,21 @@
         <td><?php echo $entidad->getDate() ?></td>
         <td>
             <a title="Editar" href="<?php echo "/adminBlog/editPost/" . $entidad->getId() ?>" class="btn btn-mini" ><li class="icon-edit icon-white"></li></a>
-            <a title="Eliminar" href="<?php echo "/adminBlog/eliminar/" . $entidad->getId() ?>" class="btn btn-mini btn-danger icon-white" onclick="if(confirm('Estás seguro?')){return true;}return false;"><li class="icon-remove"></li></a>
+            <a title="Eliminar" href="<?php echo "/adminBlog/eliminar/" . $entidad->getId() ?>" class="btn btn-mini btn-danger" onclick="if(confirm('Estás seguro?')){return true;}return false;"><li class="icon-remove icon-white"></li></a>
         </td>
     </tr>
 <?php endforeach; ?>
 </table>
 <p class="pull-right">
-    <span class="label">Info</span> Total de <?php echo $viewData['pager']->getItemCount() ?> noticias.
+    Total de <?php echo $viewData['pager']->getItemCount() ?> noticias.
 </p>
 <input type="hidden" id="pagina-sel" value="" />
 <ul class="pager">
-    <li><a onclick="actualizarPagina(<?php echo $viewData['pager']->getPrevPage() ?>)">Prev</a></li>
+    <li><a class="previous" onclick="actualizarPagina(<?php echo $viewData['pager']->getPrevPage() ?>)"><i class="icon-chevron-left icon-white"></i></a></li>
     <span>pagina</span>
     <strong><?php echo $viewData['page'] ?></strong>
     <span>de <?php echo $viewData['pager']->getPageCount() ?></span>
-    <li><a onclick="actualizarPagina(<?php echo $viewData['pager']->getNextPage() ?>)">Next</a></li>
+    <li><a class="next" onclick="actualizarPagina(<?php echo $viewData['pager']->getNextPage() ?>)"><i class="icon-chevron-right icon-white"></i></a></li>
 </ul>
 <script>
     $(document).ready(function(){
