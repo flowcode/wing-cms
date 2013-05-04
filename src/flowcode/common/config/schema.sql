@@ -1,6 +1,6 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
-CREATE TABLE IF NOT EXISTS `item_menu` (
+CREATE TABLE `item_menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(250) NOT NULL,
   `id_menu` int(11) DEFAULT NULL,
@@ -8,8 +8,10 @@ CREATE TABLE IF NOT EXISTS `item_menu` (
   `id_page` bigint(20) DEFAULT NULL,
   `linkurl` varchar(255) DEFAULT NULL,
   `order` int(11) NOT NULL,
+  `linktarget` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE IF NOT EXISTS `menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

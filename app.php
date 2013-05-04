@@ -16,7 +16,7 @@ require_once $kernel_dir;
 use flowcode\wing\mvc\Kernel;
 
 $kernel = new Kernel();
-$kernel->init("dev");
+$kernel->init("prod");
 
 $kernel->handleRequest($_SERVER['REQUEST_URI']);
 ?>

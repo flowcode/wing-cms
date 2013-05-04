@@ -1,3 +1,0 @@
-2013-03-14 10:51:04 - CRIT --> fatal!!!
-2013-03-14 11:17:13 - CRIT --> Call to undefined method flowcode\front\controller\BlogController::stupid()
-2013-03-14 11:18:21 - CRIT --> Call to undefined method flowcode\front\controller\BlogController::stupid()
