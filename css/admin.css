@@ -1,5 +1,10 @@
 @import url("fonts/fonts.css");
 
+.history-spin{
+    display: block;
+    margin: 200px auto auto auto;
+}
+
 .footer {
     /*    position:absolute;*/
     bottom:0;
@@ -70,4 +75,7 @@
 #picture_preview{
     max-height: 95%;
     max-width: 95%;
+}
+.dialog{
+    display: none;
 }

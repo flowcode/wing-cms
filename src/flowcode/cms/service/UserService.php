@@ -126,32 +126,6 @@ class UserService {
     }
 
     /**
-     * Enviar un mail de confirmacion al mail del usuario.
-     * @param type $usuario 
-     */
-    public function enviarMailConfirmacion($usuario) {
-        $nombre = $usuario->getNombre();
-        $userMail = $usuario->getMail();
-        $username = $usuario->getUsername();
-
-        $subject = 'Interpeñas - Confirmar direccion de e-mail';
-
-        $url = Config::get("global", "url");
-        $imgUri = $url . Config::get("images", "logo");
-
-        $message = "<img src='" . $imgUri . "'/>";
-        $message .= "<p>Gracias " . $nombre . " por registrate. Para completar tu alta, por favor, haz click en el siguiente enlace.</p>";
-        $message .= "<p><a href='" . $url . "/usuario/confirmar/user/" . $username . "/mail/" . $userMail . "'>Confirmar e-mail</a></p>";
-
-        $headers = "MIME-Version: 1.0\r\n"
-                . "Content-Type: text/html; charset=utf-8\r\n"
-                . "Content-Transfer-Encoding: 8bit\r\n"
-                . "From: =?UTF-8?B?" . base64_encode("Interpeñas") . "?= <web@interp.es>\r\n"
-                . "X-Mailer: PHP/" . phpversion();
-        mail($userMail, $subject, $message, $headers);
-    }
-
-    /**
      * Authentica un usuario en la sesion.
      * @param type $user 
      */
@@ -159,26 +133,9 @@ class UserService {
         if ($user->getUsername() != "") {
             $_SESSION['user']['username'] = $user->getUsername();
         }
-        $_SESSION['user']['role'] = $user->getRole();
-    }
-
-    /**
-     * Confirma el mail de un usuario.
-     * @param type $username
-     * @param type $mail
-     * @return boolean 
-     */
-    public function confirmarUsuario($username, $mail) {
-        $respuesta = false;
-        $usuario = $this->userDao->obtenerUsuarioPorUsername($username);
-
-        if ($usuario != null && $usuario->getMail() == $mail) {
-            $usuario->setConfirmed(1);
-            $this->save($usuario);
-            $respuesta = true;
+        foreach ($user->getRoles() as $role) {
+            $_SESSION['user']['roles'][] = $role->getName();
         }
-
-        return $respuesta;
     }
 
     public function getUserDao() {
@@ -189,33 +146,8 @@ class UserService {
         $this->userDao = $userDao;
     }
 
-    public function realizarContacto($contacto) {
-
-        $to = "web@interp.es";
-        $nombre = $contacto["nombre"];
-        $userMail = $contacto["mail"];
-
-        $subject = "Interpeñas -Contacto: " . $contacto["asunto"];
-
-        $url = Config::get("global", "url");
-        $imgUri = $url . Config::get("images", "logo");
-
-        $message = "<img src='" . $imgUri . "'/>";
-        $message .= "<br/>";
-        $message .= $contacto["cuerpo"];
-
-        $headers = "MIME-Version: 1.0\r\n"
-                . "Content-Type: text/html; charset=utf-8\r\n"
-                . "Content-Transfer-Encoding: 8bit\r\n"
-                . "From: =?UTF-8?B?" . base64_encode($nombre) . "?= <$userMail>\r\n"
-                . "X-Mailer: PHP/" . phpversion();
-        mail($to, $subject, $message, $headers);
-
-        if (isset($contacto["recibir_copia"])) {
-            mail($userMail, $subject, $message, $headers);
-        }
-
-        return TRUE;
+    public function findRoles(User $user) {
+        return $this->userDao->findRoles($user);
     }
 
 }

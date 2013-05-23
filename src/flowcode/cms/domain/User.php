@@ -2,6 +2,7 @@
 
 namespace flowcode\cms\domain;
 
+use flowcode\cms\service\UserService;
 use flowcode\wing\mvc\Entity;
 
 /**
@@ -14,14 +15,12 @@ class User extends Entity {
     private $name;
     private $username;
     private $password;
-    private $role;
+    private $roles;
     private $mail;
 
     public function __construct() {
         parent::__construct();
-
-        // por default tiene el rol mas generico.
-        $this->role = "user";
+        $this->roles = NULL;
     }
 
     public function getName() {
@@ -52,14 +51,24 @@ class User extends Entity {
         }
     }
 
-    public function getRole() {
-        return $this->role;
+    public function getRoles() {
+        if ($this->roles == NULL) {
+            $userSrv = new UserService();
+            $this->roles = $userSrv->findRoles($this);
+        }
+        return $this->roles;
     }
 
-    public function setRole($role) {
-        if (!is_null($role) && is_string($role)) {
-            $this->role = $role;
+    public function getRolesNames() {
+        $roles = "";
+        foreach ($this->getRoles() as $role) {
+            $roles .= $role->getName() . ", ";
         }
+        return $roles;
+    }
+
+    public function setRoles($roles) {
+        $this->roles = $roles;
     }
 
     public function setMail($mail) {
@@ -68,27 +77,6 @@ class User extends Entity {
 
     public function getMail() {
         return $this->mail;
-    }
-
-    public static function getInstanceFromArray($array) {
-        $instance = new User();
-        if (isset($array['id']))
-            $instance->setId($array['id']);
-        if (isset($array['username']))
-            $instance->setUsername($array["username"]);
-        if (isset($array['password']))
-            $instance->setPassword($array["password"]);
-        if (isset($array['role']))
-            $instance->setRole($array["role"]);
-        if (isset($array['mail']))
-            $instance->setMail($array["mail"]);
-        if (isset($array['nombre']))
-            $instance->setNombre($array["nombre"]);
-        if (isset($array['apellido']))
-            $instance->setApellido($array["apellido"]);
-        if (isset($array['sexo']))
-            $instance->setSexo($array["sexo"]);
-        return $instance;
     }
 
 }

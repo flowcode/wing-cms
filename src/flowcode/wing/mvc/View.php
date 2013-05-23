@@ -11,7 +11,7 @@ use flowcode\wing\mvc\exception\ViewException;
  *
  * @author juanma
  */
-class View implements IView{
+class View implements IView {
 
     protected $decorators;
     protected $viewData;
@@ -28,9 +28,13 @@ class View implements IView{
         $this->specificMaster = $master;
         $this->decorators = array();
     }
-    
-    public static function getPlainView(Controller $controller, $viewName, $viewData){
+
+    public static function getPlainView(Controller $controller, $viewName, $viewData) {
         return new PlainView($viewData, $viewName, $controller);
+    }
+
+    public static function getUnmasteredView($viewName, $viewData) {
+        return new UnmasteredView($viewData, $viewName);
     }
 
     public static function getViewWithSpecificMaster(Controller $controller, $viewName, $viewData, $master) {
@@ -47,7 +51,7 @@ class View implements IView{
 
         $viewData = $this->viewData;
         /* render view */
-        $viewfile = __DIR__."/../../../../".$modulepath . $this->getViewName() . ".view.php";
+        $viewfile = __DIR__ . "/../../../../" . $modulepath . $this->getViewName() . ".view.php";
         if (file_exists($viewfile)) {
             ob_start();
             require_once $viewfile;
@@ -74,7 +78,7 @@ class View implements IView{
             $settedMaster = $this->specificMaster;
         }
         if (!is_null($settedMaster)) {
-            $masterfile = __DIR__."/../../../../".$modulepath . $settedMaster . ".view.php";
+            $masterfile = __DIR__ . "/../../../../" . $modulepath . $settedMaster . ".view.php";
             if (file_exists($masterfile)) {
                 require_once $masterfile;
             } else {

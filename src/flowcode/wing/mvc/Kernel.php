@@ -68,7 +68,7 @@ class Kernel {
             } else {
 
                 // Si esta atenticado, verifico que tenga un rol valido para el controller.
-                if (!$controller->canAccess($_SESSION['user']['role'])) {
+                if (!$controller->canAccess($_SESSION['user']['roles'])) {
                     $request = new HttpRequest("");
                     $request->setAction($setup->getRestrictedMethod());
                     $request->setControllerName("usuario");
@@ -96,9 +96,9 @@ class Kernel {
         if (($error = error_get_last())) {
             ob_clean();
             $setup = new Setup();
-            
+
             /* log error */
-            KLogger::instance($setup->getLogDir())->logCrit($error["message"]);
+            KLogger::instance($setup->getLogDir())->logCrit($error["message"] . "on " . $error["message"]);
             
             $request = new HttpRequest();
             $class = $setup->getDefaultController();

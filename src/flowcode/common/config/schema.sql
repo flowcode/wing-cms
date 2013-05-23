@@ -74,3 +74,28 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
+CREATE  TABLE `role` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(255) NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+CREATE  TABLE `permission` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(255) NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+CREATE  TABLE `user_role` (
+  `id_user` BIGINT NOT NULL ,
+  `id_role` BIGINT NOT NULL ,
+  PRIMARY KEY (`id_user`, `id_role`) )
+ENGINE = InnoDB;
+
+CREATE  TABLE `role_permission` (
+  `id_role` BIGINT NOT NULL ,
+  `id_permission` BIGINT NOT NULL ,
+  PRIMARY KEY (`id_role`, `id_permission`) )
+ENGINE = InnoDB;
+
+

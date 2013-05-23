@@ -38,10 +38,10 @@ class Controller {
         $this->roles[] = $role;
     }
 
-    public function canAccess($role) {
+    public function canAccess($roles) {
         $can = false;
-        foreach ($this->roles as $activeRole) {
-            if ($activeRole == $role) {
+        foreach ($this->roles as $availableRole) {
+            if (in_array($availableRole, $roles)) {
                 $can = true;
                 break;
             }

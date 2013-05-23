@@ -5,42 +5,36 @@ namespace flowcode\wing\mvc;
 /**
  * Description of Config
  *
- * @author juanma
+ * @author Juan Manuel Aguero <jaguero@flowcode.com.ar>
  */
 class Config {
 
     public static function get($section, $param) {
-
-        // dev
-        $path = "common/config/setup.ini";
-
-        //$framework_base = '/var/www/inter/src/flowcode/';
+        $path = "common/config/setup.php";
         $framework_base = dirname(__FILE__) . "/../../";
-
-        // levanto la configuracion de acuerdo al modo de inicio
-        // Parse with sections
-        $config = parse_ini_file($framework_base . $path, true);
-        if (isset($config[$section][$param])) {
-            return $config[$section][$param];
+        require $framework_base . $path;
+        if (isset($setup[$section][$param])) {
+            return $setup[$section][$param];
         } else {
             return NULL;
         }
     }
 
-    public static function getByModule($module, $section, $param) {
-
-        $path = "$module/config/setup.ini";
-
+    public static function getByModule($module, $section, $param = null) {
+        $value = NULL;
+        $path = "$module/config/setup.php";
         $framework_base = dirname(__FILE__) . "/../../";
-
-        // levanto la configuracion de acuerdo al modo de inicio
-        // Parse with sections
-        $config = parse_ini_file($framework_base . $path, true);
-        if (isset($config[$section][$param])) {
-            return $config[$section][$param];
-        } else {
-            return NULL;
+        require $framework_base . $path;
+        if (isset($setup[$section])) {
+            if (!is_null($param)) {
+                if (isset($setup[$section][$param])) {
+                    return $setup[$section][$param];
+                }
+            } else {
+                $value = $setup[$section];
+            }
         }
+        return $value;
     }
 
 }

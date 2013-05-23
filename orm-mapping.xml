@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <orm-mapping>
 
+    <!-- CMS entities -->
     <entity name="page" class="flowcode\cms\domain\Page" table="page" >
         
         <property name="Id" column="id"/>
@@ -19,8 +20,32 @@
         <property name="Name" column="name"/>
         <property name="Username" column="username"/>
         <property name="Password" column="password"/>
-        <property name="Role" column="role"/>
         <property name="Mail" column="mail"/>
+        
+        <relation entity="role" 
+                  name="Roles" 
+                  table="user_role" 
+                  localColumn="id_user" 
+                  foreignColumn="id_role" 
+                  cardinality="many-to-many" />
+        
+    </entity>
+    
+    <entity name="role" class="flowcode\cms\domain\Role" table="role" >
+        <property name="Id" column="id"/>
+        <property name="Name" column="name"/>
+        
+        <relation entity="permission" 
+                  name="Permissions" 
+                  table="role_permission" 
+                  localColumn="id_role" 
+                  foreignColumn="id_permission" 
+                  cardinality="many-to-many" />
+    </entity>
+    
+    <entity name="permission" class="flowcode\cms\domain\Permission" table="permission" >
+        <property name="Id" column="id"/>
+        <property name="Name" column="name"/>
     </entity>
     
     <entity name="menu" class="flowcode\cms\domain\Menu" table="menu" >
@@ -47,7 +72,7 @@
         <property name="order" column="order"/>
     </entity>
                 
-       
+    <!-- BLOG entities -->
     <entity name="post" class="flowcode\blog\domain\Post" table="post" >
         <property name="Id" column="id"/>
         <property name="Permalink" column="permalink"/>

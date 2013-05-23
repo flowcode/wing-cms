@@ -46,6 +46,12 @@ class AdminLoginController extends Controller {
         $this->redirect("/adminLogin/index");
     }
 
+    public function restricted(HttpRequest $httpRequest) {
+        $viewData["message"] = "";
+        $viewData["data"] = "";
+        return View::getViewWithSpecificMaster($this, "cms/view/login/index", $viewData, "cms/view/master-login");
+    }
+
 }
 
 ?>

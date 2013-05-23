@@ -8,18 +8,17 @@
         <link rel="stylesheet" href="/css/admin.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="/css/overcast/jquery-ui-1.8.18.custom.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="/css/jquery.toastmessage.css" type="text/css" media="screen" />
         <script src="/js/jquery-1.7.1.min.js" type="text/javascript" ></script>
         <script src="/js/jquery-ui-1.8.21.custom.min.js" type="text/javascript" ></script>
         <script src="/js/bootstrap.min.js" type="text/javascript" ></script>
         <script src="/js/bootstrap-dropdown.js" type="text/javascript" ></script>
         <script src="/js/bootstrap-affix.js" type="text/javascript" ></script>
         <script src="/js/bootstrap-tooltip.js" type="text/javascript" ></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('.dropdown-toggle').dropdown();
-                $('#main-menu-fix').affix();
-            });
-        </script>
+        <script src="/js/bootstrap-modal.js" type="text/javascript" ></script>
+        <script src="/js/jquery.toastmessage.js" type="text/javascript" ></script>
+        <script type="text/javascript" src="/js/jquery.flowhistory.js"></script>
+        <script type="text/javascript" src="/js/admin.js"></script>
     </head>
 
     <body>
@@ -43,12 +42,12 @@
                                         <li class="dropdown-submenu">
                                             <a href="#" tabindex="-1">Blog</a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="/adminBlog/tags">Tags</a></li>
-                                                <li><a href="/adminBlog/index">Posts</a></li>
+                                                <li><a href="#!adminBlog/tags">Tags</a></li>
+                                                <li><a href="#!adminBlog/index">Posts</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="/adminPage/pages">Pages</a></li>
-                                        <li><a href="/adminMenu/index">Menus</a></li>
+                                        <li><a href="#!adminPage/pages">Pages</a></li>
+                                        <li><a href="#!adminMenu/index">Menus</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown" id="menu-settings">
@@ -57,8 +56,15 @@
                                         <b class="caret"></b>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="/adminConfig/index">System</a></li>
-                                        <li><a href="/adminUsuario/lista">users</a></li>
+                                        <li><a href="#!adminConfig/index">System</a></li>
+                                        <li class="dropdown-submenu">
+                                            <a href="#" tabindex="-1">Users</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#!adminPermission/index">Permissions</a></li>
+                                                <li><a href="#!adminRole/index">Roles</a></li>
+                                                <li><a href="#!adminUser/index">Users</a></li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </li>
 
@@ -90,8 +96,18 @@
 
         <!-- Contenido  -->
         <div id="content" class="container">
-            <?php echo $content ?>
+            <img class="history-spin" src="/images/ajax-loader.gif">
         </div>
-
+        <div class="modal hide fade" id="dialog">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3></h3>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" id="modal-save">Save changes</a>
+                <a class="btn" data-dismiss="modal">Close</a>
+            </div>
+        </div>
     </body>
 </html>

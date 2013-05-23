@@ -12,14 +12,13 @@ class Router {
     
     public static function get($section, $param) {
         
-        //$framework_base = '/var/www/inter/web/flowcode/';
         $framework_base = dirname ( __FILE__ )."/../../";
         
         // Parse with sections
-        $config = parse_ini_file($framework_base."common/config/routing.ini", true);
-        if(isset($config[$section][$param])){
-            return $config[$section][$param];
-        }else{
+        require $framework_base . "common/config/routing.php";
+        if (isset($setup[$section][$param])) {
+            return $setup[$section][$param];
+        } else {
             return NULL;
         }
         

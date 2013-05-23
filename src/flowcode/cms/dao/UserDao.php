@@ -26,36 +26,8 @@ class UserDao {
      * @param Categoria $categoria 
      */
     public function save($usuario) {
-        try {
-            $id = $usuario->getId();
-            $password = $usuario->getPassword();
-            $username = $usuario->getUsername();
-            $role = $usuario->getRole();
-            $mail = $usuario->getMail();
-            $nombre = $usuario->getNombre();
-            $apellido = $usuario->getApellido();
-
-            // si estoy editando el usuario
-            if ($id && $id != null && $id > -1) {
-                $query = "UPDATE user ";
-                $query .= "SET username='$username',";
-                $query .= "password='$password',";
-                $query .= "nombre='$nombre',";
-                $query .= "apellido='$apellido',";
-                $query .= "role='$role',";
-                $query .= "mail='$mail' ";
-                $query .= "Where id=$id ";
-                $this->dataSource->executeNonQuery($query);
-            } else {
-                $query = "INSERT INTO user (username, password, role, mail, nombre, apellido)";
-                $query .= "VALUES ('$username', '$password', '$role', '$mail', '$nombre', '$apellido' )";
-                $newId = $this->dataSource->insertSQL($query);
-                $id = $newId;
-            }
-            return $id;
-        } catch (Exception $pEx) {
-            throw new Exception("Fallo al obtener el usuario. " . $pEx->getMessage());
-        }
+        $em = EntityManager::getInstance();
+        return $em->save($usuario);
     }
 
     public function getUserByUsernamePassword($username, $password) {
@@ -218,14 +190,16 @@ class UserDao {
 
     /**
      * Elimina el Usuario correspondiente al ID.
-     * @param type $id 
+     * @param Boolean $success.
      */
-    function eliminarUsuarioPorId($id) {
+    public function delete(User $user) {
+        $em = EntityManager::getInstance();
+        return $em->delete($user);
+    }
 
-        $query = "DELETE FROM user ";
-        $query .= "WHERE id = $id";
-
-        $this->dataSource->executeNonQuery($query);
+    public function findRoles(User $user) {
+        $em = EntityManager::getInstance();
+        return $em->findRelation($user, "Roles");
     }
 
     private function getInstaceFromArray($array) {
@@ -235,10 +209,8 @@ class UserDao {
             $usuario->setId($array["id"]);
             $usuario->setUsername($array["username"]);
             $usuario->setPassword($array["password"]);
-            $usuario->setRole($array["role"]);
             $usuario->setMail($array["mail"]);
-            $usuario->setNombre($array["nombre"]);
-            $usuario->setApellido($array["apellido"]);
+            $usuario->setName($array["name"]);
         }
         return $usuario;
     }

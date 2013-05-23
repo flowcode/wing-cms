@@ -412,9 +412,8 @@ class EntityManager {
             }
         }
 
-        $page--;
-
-        $pageQuery = " LIMIT $page , " . $mapper->getFilter("generic")->getItemsPerPage();
+        $from = ($page-1)*$mapper->getFilter("generic")->getItemsPerPage();
+        $pageQuery = " LIMIT $from , " . $mapper->getFilter("generic")->getItemsPerPage();
 
         $query = $selectQuery . $whereQuery . $orderQuery . $pageQuery;
         $result = $this->conn->executeQuery($query);
@@ -433,7 +432,7 @@ class EntityManager {
         $query = $selectCountQuery . $whereQuery;
         $result = $this->conn->executeQuery($query);
         $itemCount = $result[0]["total"];
-        $pager = new Pager($array, $itemCount, $mapper->getFilter("generic")->getItemsPerPage());
+        $pager = new Pager($array, $itemCount, $mapper->getFilter("generic")->getItemsPerPage(), $page);
 
         return $pager;
     }
@@ -506,8 +505,8 @@ class EntityManager {
                 $orderQuery .= "ASC";
             }
         }
-
-        $pageQuery = " LIMIT $page , " . $mapper->getFilter("generic")->getItemsPerPage();
+        $from = ($page-1)*$mapper->getFilter("generic")->getItemsPerPage();
+        $pageQuery = " LIMIT $from , " . $mapper->getFilter("generic")->getItemsPerPage();
         $query = $selectQuery . $whereQuery . $orderQuery . $pageQuery;
         $queryResult = $this->conn->executeQuery($query);
 
@@ -525,7 +524,7 @@ class EntityManager {
         $query = $selectCountQuery . $whereQuery;
         $result = $this->conn->executeQuery($query);
         $itemCount = $result[0]["total"];
-        $pager = new Pager($array, $itemCount, $mapper->getFilter("generic")->getItemsPerPage());
+        $pager = new Pager($array, $itemCount, $mapper->getFilter("generic")->getItemsPerPage(), $page);
 
         return $pager;
     }
