@@ -69,8 +69,8 @@ class PostService {
      * 
      * @param type $id 
      */
-    public function eliminarNoticiaPorId($id) {
-        $this->noticiaDao->eliminarNoticiaPorId($id);
+    public function delete(Post $post) {
+        $this->postDao->delete($post);
     }
 
     public function findTagsByPost(Post $post) {

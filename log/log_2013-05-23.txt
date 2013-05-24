@@ -82,3 +82,13 @@
 2013-05-23 2:33:55 - CRIT --> Undefined index: mailon Undefined index: mail
 2013-05-23 3:04:52 - CRIT --> Undefined index: mailon Undefined index: mail
 2013-05-23 3:18:51 - CRIT --> Call to undefined method flowcode\cms\dao\UserDao::eliminarUsuarioPorId()on Call to undefined method flowcode\cms\dao\UserDao::eliminarUsuarioPorId()
+2013-05-23 16:39:14 - CRIT --> Call to a member function render() on a non-objecton Call to a member function render() on a non-object
+2013-05-23 16:39:21 - CRIT --> Call to undefined method flowcode\cms\controller\AdminHomeController::adminPermission()on Call to undefined method flowcode\cms\controller\AdminHomeController::adminPermission()
+2013-05-23 16:39:29 - CRIT --> Call to undefined method flowcode\cms\controller\AdminHomeController::adminRole()on Call to undefined method flowcode\cms\controller\AdminHomeController::adminRole()
+2013-05-23 16:39:32 - CRIT --> Call to undefined method flowcode\cms\controller\AdminHomeController::adminRole()on Call to undefined method flowcode\cms\controller\AdminHomeController::adminRole()
+2013-05-23 16:39:40 - CRIT --> Call to undefined method flowcode\cms\controller\AdminHomeController::adminRole()on Call to undefined method flowcode\cms\controller\AdminHomeController::adminRole()
+2013-05-23 16:39:46 - CRIT --> Call to undefined method flowcode\cms\controller\AdminHomeController::adminBlog()on Call to undefined method flowcode\cms\controller\AdminHomeController::adminBlog()
+2013-05-23 16:39:49 - CRIT --> Call to undefined method flowcode\cms\controller\AdminHomeController::adminRole()on Call to undefined method flowcode\cms\controller\AdminHomeController::adminRole()
+2013-05-23 16:39:50 - CRIT --> Call to undefined method flowcode\cms\controller\AdminHomeController::adminPermission()on Call to undefined method flowcode\cms\controller\AdminHomeController::adminPermission()
+2013-05-23 16:40:50 - CRIT --> Undefined index: mailon Undefined index: mail
+2013-05-23 16:40:59 - CRIT --> Undefined index: mailon Undefined index: mail

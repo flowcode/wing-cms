@@ -6,6 +6,7 @@ use flowcode\cms\domain\Role;
 use flowcode\cms\domain\User;
 use flowcode\cms\service\RoleService;
 use flowcode\cms\service\UserService;
+use flowcode\wing\mvc\BareView;
 use flowcode\wing\mvc\Controller;
 use flowcode\wing\mvc\View;
 
@@ -25,10 +26,8 @@ class AdminUserController extends Controller {
     }
 
     function index($HttpRequest) {
-
         $viewData['users'] = $this->userService->obtenerUsuariosTodos();
-
-        return View::getUnmasteredView("cms/view/admin/userList", $viewData);
+        return new BareView($viewData, "cms/view/admin/userList");
     }
 
     function create($HttpRequest) {
@@ -37,7 +36,7 @@ class AdminUserController extends Controller {
         $roleSrv = new RoleService();
         $viewData['roles'] = $roleSrv->findAll();
 
-        return View::getUnmasteredView("cms/view/admin/userForm", $viewData);
+        return new BareView($viewData, "cms/view/admin/userForm");
     }
 
     function save($HttpRequest) {
@@ -73,8 +72,8 @@ class AdminUserController extends Controller {
         // la guardo
         $id = $this->userService->save($usuario);
 
-        $viewData['users'] = $this->userService->obtenerUsuariosTodos();
-        return View::getUnmasteredView("cms/view/admin/userList", $viewData);
+        $viewData["response"] = "success";
+        return new BareView($viewData, "cms/view/admin/form-response");
     }
 
     function edit($HttpRequest) {
@@ -88,7 +87,7 @@ class AdminUserController extends Controller {
         $roleSrv = new RoleService();
         $viewData['roles'] = $roleSrv->findAll();
 
-        return View::getUnmasteredView("cms/view/admin/userForm", $viewData);
+        return new BareView($viewData, "cms/view/admin/userForm");
     }
 
     function saveEdit($HttpRequest) {
@@ -125,8 +124,8 @@ class AdminUserController extends Controller {
         // la guardo
         $id = $this->userService->modificarUsuario($usuario, $passChange);
 
-        $viewData['users'] = $this->userService->obtenerUsuariosTodos();
-        return View::getUnmasteredView("cms/view/admin/userList", $viewData);
+        $viewData["response"] = "success";
+        return new BareView($viewData, "cms/view/admin/form-response");
     }
 
     function delete($HttpRequest) {
@@ -136,8 +135,8 @@ class AdminUserController extends Controller {
 
         $this->userService->eliminarUsuarioPorId($id);
 
-        $viewData['users'] = $this->userService->obtenerUsuariosTodos();
-        return View::getUnmasteredView("cms/view/admin/userList", $viewData);
+        $viewData["response"] = "success";
+        return new BareView($viewData, "cms/view/admin/form-response");
     }
 
 }

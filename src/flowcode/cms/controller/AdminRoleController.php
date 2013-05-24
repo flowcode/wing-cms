@@ -6,9 +6,9 @@ use flowcode\cms\domain\Permission;
 use flowcode\cms\domain\Role;
 use flowcode\cms\service\PermissionService;
 use flowcode\cms\service\RoleService;
+use flowcode\wing\mvc\BareView;
 use flowcode\wing\mvc\Controller;
 use flowcode\wing\mvc\HttpRequest;
-use flowcode\wing\mvc\View;
 
 /**
  * Description of AdminNoticia
@@ -26,19 +26,17 @@ class AdminRoleController extends Controller {
     }
 
     function index(HttpRequest $HttpRequest) {
-
         $viewData['roles'] = $this->roleService->findAll();
-
-        return View::getControllerView($this, "cms/view/admin/roleList", $viewData);
+        return new BareView($viewData, "cms/view/admin/roleList");
     }
 
     function create(HttpRequest $HttpRequest) {
         $viewData['role'] = new Role();
-        
+
         $permissionSrv = new PermissionService();
         $viewData['permissions'] = $permissionSrv->findAll();
 
-        return View::getControllerView($this, "cms/view/admin/roleForm", $viewData);
+        return new BareView($viewData, "cms/view/admin/roleForm");
     }
 
     function save(HttpRequest $httpRequest) {
@@ -62,7 +60,8 @@ class AdminRoleController extends Controller {
 
         $id = $this->roleService->save($role);
 
-        $this->redirect("/adminRole/index");
+        $viewData['response'] = "success";
+        return new BareView($viewData, "cms/view/admin/form-response");
     }
 
     function edit(HttpRequest $HttpRequest) {
@@ -72,11 +71,11 @@ class AdminRoleController extends Controller {
         $id = $params[0];
 
         $viewData['role'] = $this->roleService->findById($id);
-        
+
         $permissionSrv = new PermissionService();
         $viewData['permissions'] = $permissionSrv->findAll();
 
-        return View::getControllerView($this, "cms/view/admin/roleForm", $viewData);
+        return new BareView($viewData, "cms/view/admin/roleForm");
     }
 
     function delete($HttpRequest) {
@@ -87,7 +86,8 @@ class AdminRoleController extends Controller {
         $role = $this->roleService->findById($id);
         $this->roleService->delete($role);
 
-        $this->redirect("/adminRole/index");
+        $viewData['response'] = "success";
+        return new BareView($viewData, "cms/view/admin/form-response");
     }
 
 }

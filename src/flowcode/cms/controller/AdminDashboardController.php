@@ -10,7 +10,7 @@ use flowcode\wing\mvc\HttpRequest;
 /**
  * 
  */
-class AdminHomeController extends Controller {
+class AdminDashboardController extends Controller {
 
     private $userService;
 
@@ -22,7 +22,7 @@ class AdminHomeController extends Controller {
 
     public function index(HttpRequest $httpRequest) {
         $viewData["message"] = "";
-        return new BareView($viewData, "cms/view/master-admin");
+        return new BareView($viewData, "cms/view/admin/admin-home");
     }
 
 }

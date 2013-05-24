@@ -165,11 +165,6 @@
         background-color: #B8E834;
     }
 </style>
-<div class="page-header">
-    <h1>Menu
-        <small>Editar</small>
-    </h1>
-</div>
 <form action="<?php echo "/adminMenu/save" ?>" method="post" id="menuForm">
     <input type="hidden" name="id" id="menu-id" value="<?php echo $viewData['menu']->getId() ?>" />
     <div>

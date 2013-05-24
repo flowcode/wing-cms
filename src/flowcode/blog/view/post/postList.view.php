@@ -1,11 +1,11 @@
 <div class="page-header">
     <h1>Posts
-        <a class="btn" href="/adminBlog/createPost" ><li class="icon-plus icon-white"></li> Nuevo</a>
+        <a class="btn create" onclick='createEntity("New Post", "/adminBlog/createPost", "/adminBlog/savePost");' ><i class="icon-plus icon-white"></i> Nuevo</a>
     </h1>
 </div>
 
 
-<form action="/adminBlog/index" method="post" class="form-search">
+<form action="#!adminBlog/index" method="post" class="form-search">
     <div class="input-append">
         <input id="search" type="text" name="search" placeholder="Buscar…" class="span8 search-query" value="<?php echo $viewData['filter'] ?>"/>
         <button type="submit"class="btn"><li class="icon-search icon-white"></li> Buscar</button>
@@ -15,7 +15,7 @@
 <table class="table table-condensed">
     <thead>
     <th>#</th>
-    <th>Titulo</th>
+    <th>Titulo</th> 
     <th>Intro</th>
     <th>Fecha</th>
     <th>Acciones</th>
@@ -27,8 +27,8 @@
         <td><div style = "width: 300px; height: 35px; overflow: hidden;"><?php echo $entidad->getIntro() ?></div></td>
         <td><?php echo $entidad->getDate() ?></td>
         <td>
-            <a title="Editar" href="<?php echo "/adminBlog/editPost/" . $entidad->getId() ?>" class="btn btn-mini" ><li class="icon-edit icon-white"></li></a>
-            <a title="Eliminar" href="<?php echo "/adminBlog/eliminar/" . $entidad->getId() ?>" class="btn btn-mini btn-danger" onclick="if(confirm('Estás seguro?')){return true;}return false;"><li class="icon-remove icon-white"></li></a>
+            <a title="Editar" onclick="updateEntity('Edit Post', '/adminBlog/editPost/<? echo $entidad->getId() ?>', '/adminBlog/savePost')" class="btn btn-mini" ><li class="icon-edit icon-white"></li></a>
+            <a title="Eliminar" class="btn btn-mini btn-danger" onclick="if(confirm('Estás seguro?')){deleteEntity('/adminBlog/deletePost/<? echo $entidad->getId() ?>');}return false;"><li class="icon-remove icon-white"></li></a>
         </td>
     </tr>
 <?php endforeach; ?>
@@ -55,7 +55,7 @@
     function actualizarLista(){
         var paginaSel = $('#pagina-sel').val();
      
-        var url = "/adminBlog/index";
+        var url = "#!adminBlog/index";
         if( paginaSel ){
             url += "/page/" + paginaSel.toLowerCase();
         }

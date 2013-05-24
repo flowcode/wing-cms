@@ -4,9 +4,9 @@ namespace flowcode\cms\controller;
 
 use flowcode\cms\domain\Permission;
 use flowcode\cms\service\PermissionService;
+use flowcode\wing\mvc\BareView;
 use flowcode\wing\mvc\Controller;
 use flowcode\wing\mvc\HttpRequest;
-use flowcode\wing\mvc\View;
 
 /**
  * Description of AdminNoticia
@@ -25,12 +25,12 @@ class AdminPermissionController extends Controller {
 
     function index(HttpRequest $HttpRequest) {
         $viewData['permissions'] = $this->permissionService->findAll();
-        return View::getUnmasteredView("cms/view/admin/permissionList", $viewData);
+        return new BareView($viewData, "cms/view/admin/permissionList");
     }
 
     function create(HttpRequest $HttpRequest) {
         $viewData['permission'] = new Permission();
-        return View::getUnmasteredView("cms/view/admin/permissionForm", $viewData);
+        return new BareView($viewData, "cms/view/admin/permissionForm");
     }
 
     function save(HttpRequest $httpRequest) {
@@ -47,8 +47,8 @@ class AdminPermissionController extends Controller {
         // la guardo
         $id = $this->permissionService->save($permission);
 
-        $viewData['permissions'] = $this->permissionService->findAll();
-        return View::getUnmasteredView("cms/view/admin/permissionList", $viewData);
+        $viewData['response'] = "success";
+        return new BareView($viewData, "cms/view/admin/form-response");
     }
 
     function edit(HttpRequest $HttpRequest) {
@@ -59,8 +59,7 @@ class AdminPermissionController extends Controller {
 
         $viewData['permission'] = $this->permissionService->findById($id);
 
-        //return View::getControllerView($this, "cms/view/admin/permissionForm", $viewData);
-        return View::getUnmasteredView("cms/view/admin/permissionForm", $viewData);
+        return new BareView($viewData, "cms/view/admin/permissionForm");
     }
 
     function delete($HttpRequest) {
@@ -71,8 +70,8 @@ class AdminPermissionController extends Controller {
         $permission = $this->permissionService->findById($id);
         $this->permissionService->delete($permission);
 
-        $viewData['permissions'] = $this->permissionService->findAll();
-        return View::getUnmasteredView("cms/view/admin/permissionList", $viewData);
+        $viewData['response'] = "success";
+        return new BareView($viewData, "cms/view/admin/form-response");
     }
 
 }

@@ -1,8 +1,4 @@
-<script type="text/javascript" src="/js/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="/js/icrop.js"></script>
-<script type="text/javascript" src="/js/jquery-ui-timepicker-addon.js"></script>
 <link href="/css/blog.css" rel="stylesheet" type="text/css" />
-<link href="/css/admin.css" rel="stylesheet" type="text/css" />
 <link href="/css/icrop.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
     function openKCFinder_singleFile() {
@@ -11,24 +7,24 @@
             SetFileField(url);
             window.KCFinder = null;
         };
-        window.open('/src/kcfinder/browse.php', 'Admin','height=500,width=600');
+        window.open('/src/kcfinder/browse.php', 'Admin', 'height=500,width=600');
     }
-    
-    function SetFileField( fileUrl ){
-        document.getElementById('image_slot_uri').value = fileUrl ;
+
+    function SetFileField(fileUrl) {
+        document.getElementById('image_slot_uri').value = fileUrl;
         cambiarImageSlot();
     }
-    
-    function cambiarImageSlot(){
+
+    function cambiarImageSlot() {
         var selectedImg = $('#image_slot_uri').val();
-        var bgImg = "url('"+selectedImg+"')";
+        var bgImg = "url('" + selectedImg + "')";
         $('.crop-img').css('background-image', bgImg);
     }
-    
-    function cambiarTipoSlot(){
+
+    function cambiarTipoSlot() {
         var selected = $('#image_slot_tipo').val();
         $('.slotPreview').hide();
-        switch(selected){
+        switch (selected) {
             case 'd':
                 $('.slot-default').show();
                 break;
@@ -38,21 +34,17 @@
         }
         cambiarImageSlot();
     }
-    
-    $(document).ready(function(){
-        CKEDITOR.replace( 'copete', {toolbar : 'Basic'});
-        CKEDITOR.replace( 'sbody' );
+
+    $(document).ready(function() {
+        CKEDITOR.replace('copete', {toolbar: 'Basic'});
+        CKEDITOR.replace('sbody');
         cambiarTipoSlot();
         $("#datepicker").datetimepicker({dateFormat: 'yy-mm-dd'});
     });
-    
+
 </script>
 
-<div class="page-header">
-    <h1>Post</h1>
-</div>
-
-<form action="/adminBlog/savePost" method="post" >
+<form action="/adminBlog/savePost" method="post" class="form">
     <?php if ($viewData['post']->getId() != NULL): ?>
         <input type="hidden" name="id" value="<?php echo $viewData['post']->getId() ?>" />
         <input type="hidden" name="permalink" value="<?php echo $viewData['post']->getPermalink() ?>" />
@@ -102,15 +94,15 @@
             <div class="controls">
                 <select name="type" id="image_slot_tipo" onchange="cambiarTipoSlot()">
                     <option <?php
-                        if ($viewData['post']->getType() == 'd') {
-                            echo "selected='selected'";
-                        }
-                        ?> value="d">default</option>
+                    if ($viewData['post']->getType() == 'd') {
+                        echo "selected='selected'";
+                    }
+                    ?> value="d">default</option>
                     <option <?php
-                        if ($viewData['post']->getType() == 'i') {
-                            echo "selected='selected'";
-                        }
-                        ?>value="i">With Image</option>
+                    if ($viewData['post']->getType() == 'i') {
+                        echo "selected='selected'";
+                    }
+                    ?>value="i">With Image</option>
                 </select>
             </div>
             <?
@@ -172,8 +164,4 @@
         </div>
     </div>
 
-    <div class="form-actions">
-        <input type="submit" value="Guardar" class="btn btn-primary"/>
-        <a class="btn" href="/adminBlog">Cancelar</a>
-    </div> 
 </form>

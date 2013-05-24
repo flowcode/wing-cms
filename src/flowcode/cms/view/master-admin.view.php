@@ -16,6 +16,9 @@
         <script src="/js/bootstrap-affix.js" type="text/javascript" ></script>
         <script src="/js/bootstrap-tooltip.js" type="text/javascript" ></script>
         <script src="/js/bootstrap-modal.js" type="text/javascript" ></script>
+        <script type="text/javascript" src="/js/ckeditor/ckeditor.js"></script>
+        <script type="text/javascript" src="/js/icrop.js"></script>
+        <script type="text/javascript" src="/js/jquery-ui-timepicker-addon.js"></script>
         <script src="/js/jquery.toastmessage.js" type="text/javascript" ></script>
         <script type="text/javascript" src="/js/jquery.flowhistory.js"></script>
         <script type="text/javascript" src="/js/admin.js"></script>

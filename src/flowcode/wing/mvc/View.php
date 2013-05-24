@@ -33,10 +33,6 @@ class View implements IView {
         return new PlainView($viewData, $viewName, $controller);
     }
 
-    public static function getUnmasteredView($viewName, $viewData) {
-        return new UnmasteredView($viewData, $viewName);
-    }
-
     public static function getViewWithSpecificMaster(Controller $controller, $viewName, $viewData, $master) {
         return new View($viewData, $viewName, $controller, $master);
     }

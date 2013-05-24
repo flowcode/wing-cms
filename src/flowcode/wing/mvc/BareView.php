@@ -10,7 +10,7 @@ use flowcode\wing\mvc\exception\ViewException;
  *
  * @author juanma
  */
-class UnmasteredView implements IView {
+class BareView implements IView {
 
     protected $viewData;
     protected $viewName;

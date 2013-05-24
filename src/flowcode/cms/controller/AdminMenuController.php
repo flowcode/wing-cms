@@ -7,6 +7,7 @@ use flowcode\cms\domain\Menu;
 use flowcode\cms\service\ItemMenuService;
 use flowcode\cms\service\MenuService;
 use flowcode\cms\service\PageService;
+use flowcode\wing\mvc\BareView;
 use flowcode\wing\mvc\Controller;
 use flowcode\wing\mvc\HttpRequest;
 use flowcode\wing\mvc\PlainView;
@@ -29,22 +30,12 @@ class AdminMenuController extends Controller {
 
     function index($HttpRequest) {
         $viewData['menus'] = $this->menuService->findAll();
-
-        return View::getControllerView($this, "cms/view/admin/menuList", $viewData);
-    }
-
-    function ver($HttpRequest) {
-        // en el primer parametro tiene que venir el id
-        $params = $HttpRequest->getParams();
-        $id = $params[0];
-        $menu = $this->menuService->obtenerMenuPorId($id);
-        require_once "view/admin/menu/menu.view.php";
+        return new BareView($viewData, "cms/view/admin/menuList");
     }
 
     function create($HttpRequest) {
         $viewData['menu'] = new Menu();
-
-        return View::getControllerView($this, "cms/view/admin/menuCreate", $viewData);
+        return new BareView($viewData, "cms/view/admin/menuCreate");
     }
 
     function save(HttpRequest $httpRequest) {
@@ -84,8 +75,7 @@ class AdminMenuController extends Controller {
         $viewData['items'] = $items;
         $viewData['pages'] = $pages;
 
-
-        return View::getControllerView($this, "cms/view/admin/menuEdit", $viewData);
+        return new BareView($viewData, "cms/view/admin/menuEdit");
     }
 
     function eliminarAction($HttpRequest) {

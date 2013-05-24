@@ -6,6 +6,7 @@ use flowcode\blog\domain\Post;
 use flowcode\blog\domain\Tag;
 use flowcode\blog\service\PostService;
 use flowcode\blog\service\TagService;
+use flowcode\wing\mvc\BareView;
 use flowcode\wing\mvc\Controller;
 use flowcode\wing\mvc\HttpRequest;
 use flowcode\wing\mvc\View;
@@ -36,8 +37,7 @@ class AdminBlogController extends Controller {
         }
 
         $viewData['pager'] = $this->postService->findByFilter($viewData['filter'], $viewData['page']);
-
-        return View::getControllerView($this, "blog/view/post/postList", $viewData);
+        return new BareView($viewData, "blog/view/post/postList");
     }
 
     /**
@@ -52,7 +52,7 @@ class AdminBlogController extends Controller {
         $tagSrv = new TagService();
         $viewData['tags'] = $tagSrv->findAll();
 
-        return View::getControllerView($this, "blog/view/post/postForm", $viewData);
+        return new BareView($viewData, "blog/view/post/postForm");
     }
 
     /**
@@ -99,7 +99,8 @@ class AdminBlogController extends Controller {
         // la guardo
         $id = $this->postService->save($post);
 
-        $this->redirect("/adminBlog/index");
+        $viewData['response'] = "success";
+        return new BareView($viewData, "cms/view/admin/form-response");
     }
 
     /**
@@ -119,21 +120,23 @@ class AdminBlogController extends Controller {
         $tagSrv = new TagService();
         $viewData['tags'] = $tagSrv->findAll();
 
-        return View::getControllerView($this, "blog/view/post/postForm", $viewData);
+        return new BareView($viewData, "blog/view/post/postForm");
     }
 
     /**
      * Eliminar una entidad.
      * @param type $HttpRequest 
      */
-    function eliminar($HttpRequest) {
+    function deletePost($HttpRequest) {
         // en el primer parametro tiene que venir el id
         $params = $HttpRequest->getParams();
         $id = $params[0];
 
-        $this->noticiaService->eliminarNoticiaPorId($id);
+        $post = $this->postService->findById($id);
+        $this->postService->delete($post);
 
-        $this->redirect("/adminNoticia/index");
+        $viewData['response'] = "success";
+        return new BareView($viewData, "cms/view/admin/form-response");
     }
 
     private function buildPermalink($title) {
@@ -153,12 +156,12 @@ class AdminBlogController extends Controller {
     public function tags(HttpRequest $httpRequest) {
         $tagSrv = new TagService();
         $viewData['tags'] = $tagSrv->findAll();
-        return View::getControllerView($this, "blog/view/post/tags", $viewData);
+        return new BareView($viewData, "blog/view/post/tags");
     }
 
     public function createTag(HttpRequest $httpRequest) {
         $viewData['tag'] = new Tag();
-        return View::getControllerView($this, "blog/view/post/tagForm", $viewData);
+        return new BareView($viewData, "blog/view/post/tagForm");
     }
 
     public function saveTag(HttpRequest $httpRequest) {
@@ -170,7 +173,9 @@ class AdminBlogController extends Controller {
 
         $tagSrv = new TagService();
         $tagSrv->save($tag);
-        $this->redirect("/adminBlog/tags");
+
+        $viewData['response'] = "success";
+        return new BareView($viewData, "cms/view/admin/form-response");
     }
 
     public function deleteTag(HttpRequest $httpRequest) {
@@ -179,7 +184,9 @@ class AdminBlogController extends Controller {
         $tagSrv = new TagService();
         $category = $tagSrv->findById($idCategory);
         $tagSrv->delete($category);
-        $this->redirect("/adminPost/tags");
+
+        $viewData['response'] = "success";
+        return new BareView($viewData, "cms/view/admin/form-response");
     }
 
 }

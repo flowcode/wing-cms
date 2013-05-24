@@ -1,9 +1,3 @@
-$(document).ready(function() {
-    $('.dropdown-toggle').dropdown();
-    $('#main-menu-fix').affix();
-    $('.tooltipx').tooltip()
-    $(window).flowhistory();
-});
 
 function sayToUser(level, message) {
     switch (level) {
@@ -49,10 +43,14 @@ function saveEntity(url) {
         type: "post",
         data: $(".form").serialize(),
         success: function(data) {
-            sayToUser("success", "Se guardo correctamente.");
+            if (data == "success") {
+                sayToUser("success", "Se guardo correctamente.");
+            } else {
+                sayToUser("error", "Hubo un error en la operación");
+            }
         },
         error: function(data) {
-            sayToUser("error", "Hubo un error.");
+            sayToUser("error", "Hubo un error en la operación");
         }
     });
 }
@@ -77,8 +75,22 @@ function deleteEntity(urlAction) {
         url: urlAction,
         type: "post",
         success: function(data) {
-            sayToUser("success", "Se borro correctamente");
-            $.fn.flowhistory();
+            if (data == "success") {
+                $.fn.flowhistory();
+                sayToUser("success", "Se borro correctamente");
+            } else {
+                sayToUser("error", "Hubo un error en la operación");
+            }
+        },
+        error: function(data) {
+            sayToUser("error", "Hubo un error en la operación");
         }
     });
 }
+
+$(document).ready(function() {
+    $('.dropdown-toggle').dropdown();
+    $('#main-menu-fix').affix();
+    $('.tooltipx').tooltip()
+    $(window).flowhistory();
+});

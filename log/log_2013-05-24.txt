@@ -1,0 +1,26 @@
+2013-05-24 14:32:56 - CRIT --> Call to a member function render() on a non-objecton Call to a member function render() on a non-object
+2013-05-24 14:59:15 - CRIT --> Call to undefined method flowcode\wing\mvc\View::getUnmasteredView()on Call to undefined method flowcode\wing\mvc\View::getUnmasteredView()
+2013-05-24 14:59:24 - CRIT --> Call to undefined method flowcode\wing\mvc\View::getUnmasteredView()on Call to undefined method flowcode\wing\mvc\View::getUnmasteredView()
+2013-05-24 15:01:22 - CRIT --> Uncaught flowcode\wing\mvc\exception\ViewException: [0]: View /var/www/wing-cms/src/flowcode/wing/mvc/../../../../src/flowcode/Array.view.php not found.
+
+  thrownon Uncaught flowcode\wing\mvc\exception\ViewException: [0]: View /var/www/wing-cms/src/flowcode/wing/mvc/../../../../src/flowcode/Array.view.php not found.
+
+  thrown
+2013-05-24 16:19:46 - CRIT --> Call to a member function getId() on a non-objecton Call to a member function getId() on a non-object
+2013-05-24 16:19:58 - CRIT --> Call to a member function getId() on a non-objecton Call to a member function getId() on a non-object
+2013-05-24 16:20:06 - CRIT --> Call to a member function getId() on a non-objecton Call to a member function getId() on a non-object
+2013-05-24 16:20:22 - CRIT --> Call to a member function getId() on a non-objecton Call to a member function getId() on a non-object
+2013-05-24 16:22:51 - CRIT --> Call to a member function eliminarNoticiaPorId() on a non-objecton Call to a member function eliminarNoticiaPorId() on a non-object
+2013-05-24 16:23:33 - CRIT --> Call to a member function eliminarNoticiaPorId() on a non-objecton Call to a member function eliminarNoticiaPorId() on a non-object
+2013-05-24 16:26:04 - CRIT --> Call to undefined method flowcode\blog\controller\AdminBlogController::eliminar()on Call to undefined method flowcode\blog\controller\AdminBlogController::eliminar()
+2013-05-24 16:31:22 - CRIT --> Call to undefined method flowcode\wing\mvc\View::getUnmasteredView()on Call to undefined method flowcode\wing\mvc\View::getUnmasteredView()
+2013-05-24 16:31:22 - CRIT --> Call to undefined method flowcode\wing\mvc\View::getUnmasteredView()on Call to undefined method flowcode\wing\mvc\View::getUnmasteredView()
+2013-05-24 16:31:22 - CRIT --> Call to undefined method flowcode\wing\mvc\View::getUnmasteredView()on Call to undefined method flowcode\wing\mvc\View::getUnmasteredView()
+2013-05-24 16:35:04 - CRIT --> Call to undefined method flowcode\cms\dao\UserDao::eliminarUsuarioPorId()on Call to undefined method flowcode\cms\dao\UserDao::eliminarUsuarioPorId()
+2013-05-24 16:36:20 - CRIT --> Call to a member function render() on a non-objecton Call to a member function render() on a non-object
+2013-05-24 16:36:35 - CRIT --> Call to a member function render() on a non-objecton Call to a member function render() on a non-object
+2013-05-24 16:36:36 - CRIT --> Call to undefined method flowcode\cms\controller\AdminHomeController::adminDashboard()on Call to undefined method flowcode\cms\controller\AdminHomeController::adminDashboard()
+2013-05-24 16:37:44 - CRIT --> Call to a member function render() on a non-objecton Call to a member function render() on a non-object
+2013-05-24 16:37:49 - CRIT --> Call to a member function render() on a non-objecton Call to a member function render() on a non-object
+2013-05-24 16:42:56 - CRIT --> require_once(): Failed opening required '/var/www/wing-cms/src/flowcode/wing/mvc/../../cms/controller/BareView.php' (include_path='.:/usr/share/php:/usr/share/pear')on require_once(): Failed opening required '/var/www/wing-cms/src/flowcode/wing/mvc/../../cms/controller/BareView.php' (include_path='.:/usr/share/php:/usr/share/pear')
+2013-05-24 16:54:25 - CRIT --> Call to a member function render() on a non-objecton Call to a member function render() on a non-object

@@ -3,6 +3,7 @@
         var hashPattern = "#!";
         var containerId = "content";
         var controllerHistory = true;
+        var controllerDefault = "adminDashboard";
         var fileextension = ".html";
         var methods = {
             init: function() {
@@ -20,6 +21,8 @@
                     var controllerUrl = methods.parseUrl(urlstr);
                     if (controllerUrl != null) {
                         methods.dispatchToController(controllerUrl);
+                    } else {
+                        methods.dispatchToController(controllerDefault);
                     }
                 } else {
                     var filename = methods.parseFile(urlstr);
@@ -31,11 +34,11 @@
 
             },
             parseUrl: function(urlstr) {
-                var from = urlstr.indexOf(hashPattern) + hashPattern.length;
-                if (from > -1) {
+                var patternIndex = urlstr.indexOf(hashPattern);
+                if (patternIndex > -1) {
+                    var from = urlstr.indexOf(hashPattern) + hashPattern.length;
                     var controllerName = urlstr.substring(from, urlstr.length);
                     var urlBase = urlstr.substring(0, (from - hashPattern.length)).slice(0, -5);
-
                     return (urlBase + controllerName);
                 } else {
                     return null;

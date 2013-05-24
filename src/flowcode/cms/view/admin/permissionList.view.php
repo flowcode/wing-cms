@@ -1,13 +1,6 @@
-<script type="text/javascript">
-    $(document).ready(function() {
-        $(".create").click(function() {
-            createEntity("Create Permission", "/adminPermission/create", "/adminPermission/save");
-        });
-    });
-</script>
 <div class="page-header">
     <h1>Permissions
-        <a class="btn create" ><i class="icon-plus icon-white"></i> Nuevo</a>
+        <a class="btn create" onclick='createEntity("Create Permission", "/adminPermission/create", "/adminPermission/save");' ><i class="icon-plus icon-white"></i> Nuevo</a>
     </h1>
 </div>
 
@@ -25,7 +18,7 @@
                 <td><?php echo $entity->getId() ?></td>
                 <td><?php echo $entity->getName() ?></div></td>
                 <td>
-                    <a class="btn btn-mini" onclick="updateEntity('Update Permission','/adminPermission/edit/<? echo $entity->getId() ?>', '/adminPermission/save')" ><i class="icon-edit icon-white"></i></a>
+                    <a class="btn btn-mini" onclick="updateEntity('Update Permission', '/adminPermission/edit/<? echo $entity->getId() ?>', '/adminPermission/save')" ><i class="icon-edit icon-white"></i></a>
                     <a onclick="deleteEntity('<? echo "/adminPermission/delete/" . $entity->getId() ?>')" class="btn btn-mini btn-danger" onclick="if (confirm('Estás seguro?')) {
                 return true;
             }

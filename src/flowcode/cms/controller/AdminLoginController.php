@@ -31,7 +31,7 @@ class AdminLoginController extends Controller {
         $password = $_POST['password'];
 
         if ($this->userService->loginUsuario($username, $password)) {
-            $this->redirect("/admin/index");
+            $this->redirect("/admin");
             return true;
         }
 
