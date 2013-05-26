@@ -67,6 +67,9 @@ function updateEntity(text, urlForm, urlAction) {
                 $.fn.flowhistory()
             });
             $("#dialog").modal();
+        },
+        error: function(data) {
+            sayToUser("error", "Hubo un error en la operación");
         }
     });
 }

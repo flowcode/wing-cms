@@ -164,6 +164,17 @@ class AdminBlogController extends Controller {
         return new BareView($viewData, "blog/view/post/tagForm");
     }
 
+    public function editTag(HttpRequest $httpRequest) {
+
+        // en el primer parametro tiene que venir el id
+        $params = $httpRequest->getParams();
+        $id = $params[0];
+
+        $tagSrv = new TagService();
+        $viewData['tag'] = $tagSrv->findById($id);
+        return new BareView($viewData, "blog/view/post/tagForm");
+    }
+
     public function saveTag(HttpRequest $httpRequest) {
         $tag = new Tag();
         if ($httpRequest->getParameter("id") != "") {
