@@ -77,14 +77,11 @@
         <property name="Id" column="id"/>
         <property name="Permalink" column="permalink"/>
         <property name="Title" column="title"/>
+        <property name="Description" column="description"/>
         <property name="Body" column="body"/>
         <property name="Intro" column="intro"/>
         <property name="Type" column="type"/>
         <property name="Status" column="status"/>
-        <property name="ImageSlot" column="image_slot"/>
-        <property name="ImageSlotTop" column="image_slot_top"/>
-        <property name="ImageSlotLeft" column="image_slot_left"/>
-        <property name="ImageSlotSize" column="image_slot_size"/>
         <property name="Date" column="date"/>
         <relation entity="tag" 
                   name="Tags" 

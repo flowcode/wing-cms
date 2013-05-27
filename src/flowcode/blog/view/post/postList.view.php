@@ -1,6 +1,6 @@
 <div class="page-header">
     <h1>Posts
-        <a class="btn create" onclick='createEntity("New Post", "/adminBlog/createPost", "/adminBlog/savePost");' ><i class="icon-plus icon-white"></i> Nuevo</a>
+        <a class="btn create" onclick='createEntity("New Post", "/adminBlog/createPost", "/adminBlog/savePost");' data-form="/adminBlog/createPost" data-form-action="/adminBlog/savePost" ><i class="icon-plus icon-white"></i> Nuevo</a>
     </h1>
 </div>
 
@@ -16,19 +16,22 @@
     <thead>
     <th>#</th>
     <th>Titulo</th> 
-    <th>Intro</th>
+    <th>Descripci&oacute;n</th>
     <th>Fecha</th>
     <th>Acciones</th>
 </thead>
 <?php foreach ($viewData['pager']->getItems() as $entidad): ?>
     <tr>
-        <td><?php echo $entidad->getId() ?></div></td>
-        <td><div style = "width: 150px; height: 35px; overflow: hidden;"><?php echo $entidad->getTitle() ?></div></td>
-        <td><div style = "width: 300px; height: 35px; overflow: hidden;"><?php echo $entidad->getIntro() ?></div></td>
+        <td><?php echo $entidad->getId() ?></td>
+        <td><?php echo $entidad->getTitle() ?></td>
+        <td><?php echo $entidad->getDescription() ?></td>
         <td><?php echo $entidad->getDate() ?></td>
         <td>
             <a title="Editar" onclick="updateEntity('Edit Post', '/adminBlog/editPost/<? echo $entidad->getId() ?>', '/adminBlog/savePost')" class="btn btn-mini" ><li class="icon-edit icon-white"></li></a>
-            <a title="Eliminar" class="btn btn-mini btn-danger" onclick="if(confirm('Estás seguro?')){deleteEntity('/adminBlog/deletePost/<? echo $entidad->getId() ?>');}return false;"><li class="icon-remove icon-white"></li></a>
+            <a title="Eliminar" class="btn btn-mini btn-danger" onclick="if (confirm('Estás seguro?')) {
+                        deleteEntity('/adminBlog/deletePost/<? echo $entidad->getId() ?>');
+                    }
+                    return false;"><li class="icon-remove icon-white"></li></a>
         </td>
     </tr>
 <?php endforeach; ?>
@@ -45,20 +48,20 @@
     <li><a class="next" onclick="actualizarPagina(<?php echo $viewData['pager']->getNextPage() ?>)"><i class="icon-chevron-right icon-white"></i></a></li>
 </ul>
 <script>
-    $(document).ready(function(){
-        $("#search").focus();
-    });
-    function actualizarPagina(valor){
-        $('#pagina-sel').val(valor);
-        actualizarLista();
-    }
-    function actualizarLista(){
-        var paginaSel = $('#pagina-sel').val();
-     
-        var url = "#!adminBlog/index";
-        if( paginaSel ){
-            url += "/page/" + paginaSel.toLowerCase();
-        }
-        window.location =  url;
-    }
+            $(document).ready(function() {
+                $("#search").focus();
+            });
+            function actualizarPagina(valor) {
+                $('#pagina-sel').val(valor);
+                actualizarLista();
+            }
+            function actualizarLista() {
+                var paginaSel = $('#pagina-sel').val();
+
+                var url = "#!adminBlog/index";
+                if (paginaSel) {
+                    url += "/page/" + paginaSel.toLowerCase();
+                }
+                window.location = url;
+            }
 </script>

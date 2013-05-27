@@ -67,11 +67,6 @@ class AdminBlogController extends Controller {
         $id = (isset($_POST['id']) && !empty($_POST['id'])) ? $_POST['id'] : NULL;
         $permalink = (isset($_POST['permalink']) && !empty($_POST['permalink'])) ? $_POST['permalink'] : $this->buildPermalink($title);
 
-        $imageSlot = $httpRequest->getParameter('image_slot');
-        $imageSlotTop = $httpRequest->getParameter('bgtop');
-        $imageSlotLeft = $httpRequest->getParameter('bgleft');
-        $imageSlotSize = $httpRequest->getParameter('bgsize');
-
         $tags = array();
         if (isset($_POST['tags'])) {
             foreach ($_POST['tags'] as $idTag) {
@@ -86,14 +81,11 @@ class AdminBlogController extends Controller {
         $post->setId($id);
         $post->setPermalink($permalink);
         $post->setTitle($title);
-        $post->setBody($httpRequest->getParameter("body"));
+        $post->setDescription($httpRequest->getParameter("description"));
         $post->setIntro($httpRequest->getParameter("intro"));
+        $post->setBody($httpRequest->getParameter("body"));
         $post->setType($httpRequest->getParameter("type"));
         $post->setDate($httpRequest->getParameter("date"));
-        $post->setImageSlot($imageSlot);
-        $post->setImageSlotLeft($imageSlotLeft);
-        $post->setImageSlotTop($imageSlotTop);
-        $post->setImageSlotSize($imageSlotSize);
         $post->setTags($tags);
 
         // la guardo
