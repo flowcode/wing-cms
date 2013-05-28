@@ -1,8 +1,4 @@
-<div class="page-header">
-    <h1>Role</h1>
-</div>
-
-<form action="/adminRole/save" method="post" class="form-horizontal">
+<form class="form-horizontal form">
     <input type="hidden" name="id" value="<?php echo $viewData['role']->getId() ?>" />
     <div class="control-group">
         <label class="control-label" for="name">Nombre</label>
@@ -29,11 +25,6 @@
                 <?php endforeach; ?>
             </select>
         </div>
-    </div>
-
-    <div class="form-actions">
-        <button type="submit" class="btn btn-primary btn-large">Guardar</button>
-        <a href="/adminRole/index" class="btn btn-large">Cancelar</a>
     </div>
 
 </form>

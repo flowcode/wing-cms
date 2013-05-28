@@ -27,7 +27,7 @@ function createEntity(text, urlForm, urlAction) {
         success: function(data) {
             $("#dialog > .modal-body").html(data);
             $("#dialog h3").html(text);
-            $("#modal-save").click(function() {
+            $("#modal-save").one('click', function() {
                 saveEntity(urlAction);
                 $('#dialog').modal('hide')
                 $.fn.flowhistory()
@@ -38,6 +38,7 @@ function createEntity(text, urlForm, urlAction) {
 }
 
 function saveEntity(url) {
+    console.log($(".form").serialize());
     $.ajax({
         url: url,
         type: "post",
@@ -45,6 +46,7 @@ function saveEntity(url) {
         success: function(data) {
             if (data == "success") {
                 sayToUser("success", "Se guardo correctamente.");
+                $("#dialog > .modal-body").empty();
             } else {
                 sayToUser("error", "Hubo un error en la operación");
             }
@@ -61,7 +63,7 @@ function updateEntity(text, urlForm, urlAction) {
         success: function(data) {
             $("#dialog > .modal-body").html(data);
             $("#dialog h3").html(text);
-            $("#modal-save").click(function() {
+            $("#modal-save").one('click', function() {
                 saveEntity(urlAction);
                 $('#dialog').modal('hide')
                 $.fn.flowhistory()

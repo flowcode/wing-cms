@@ -14,13 +14,10 @@ class Controller {
     protected $name;
 
     /**
-     * Roles disponibles en la aplicacion
-     *  por defecto estan los siguientes roles:
-     *  -admin
-     *  -user
+     * Permissions that are allowed to access to this controller instance.
      * @var type 
      */
-    public $roles = array();
+    protected $permissions = array();
 
     public function setIsSecure($isSecure) {
         $this->isSecure = $isSecure;
@@ -34,16 +31,18 @@ class Controller {
         return $this->isSecure;
     }
 
-    public function addAllowedRole($role) {
-        $this->roles[] = $role;
+    public function addPermission($permission) {
+        $this->permissions[] = $permission;
     }
 
-    public function canAccess($roles) {
+    public function canAccess($user) {
         $can = false;
-        foreach ($this->roles as $availableRole) {
-            if (in_array($availableRole, $roles)) {
-                $can = true;
-                break;
+        foreach ($user["roles"] as $userRole) {
+            foreach ($userRole["permissions"] as $permission) {
+                if (in_array($permission, $this->permissions)) {
+                    $can = true;
+                    break;
+                }
             }
         }
         return $can;

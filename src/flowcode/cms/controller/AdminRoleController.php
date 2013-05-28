@@ -21,7 +21,10 @@ class AdminRoleController extends Controller {
 
     function __construct() {
         $this->setIsSecure(TRUE);
-        $this->addAllowedRole('admin');
+        $this->addPermission('admin-login');
+        $this->addPermission('admin-user-create');
+        $this->addPermission('admin-user-delete');
+        $this->addPermission('admin-user-update');
         $this->roleService = new RoleService();
     }
 
@@ -42,11 +45,10 @@ class AdminRoleController extends Controller {
     function save(HttpRequest $httpRequest) {
 
         $id = (isset($_POST['id']) && !empty($_POST["id"]) ) ? $_POST['id'] : NULL;
-        $nombre = $httpRequest->getParameter("name");
 
         $role = new Role();
         $role->setId($id);
-        $role->setName($nombre);
+        $role->setName($httpRequest->getParameter("name"));
 
         $permissions = array();
         if (isset($_POST['permissions'])) {

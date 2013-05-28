@@ -21,7 +21,7 @@ class AdminUserController extends Controller {
 
     function __construct() {
         $this->setIsSecure(TRUE);
-        $this->addAllowedRole('admin');
+        $this->addPermission('admin-login');
         $this->userService = new UserService();
     }
 

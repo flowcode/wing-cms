@@ -20,7 +20,9 @@ class AdminPageController extends Controller {
 
     function __construct() {
         $this->pageSrv = new PageService();
-        $this->addAllowedRole("admin");
+        $this->addPermission("admin-page-create");
+        $this->addPermission("admin-page-delete");
+        $this->addPermission("admin-page-update");
         $this->setIsSecure(true);
     }
 

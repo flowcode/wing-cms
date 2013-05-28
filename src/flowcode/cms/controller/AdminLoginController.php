@@ -3,6 +3,7 @@
 namespace flowcode\cms\controller;
 
 use flowcode\cms\service\UserService;
+use flowcode\wing\mvc\BareView;
 use flowcode\wing\mvc\Controller;
 use flowcode\wing\mvc\HttpRequest;
 use flowcode\wing\mvc\View;
@@ -49,7 +50,7 @@ class AdminLoginController extends Controller {
     public function restricted(HttpRequest $httpRequest) {
         $viewData["message"] = "";
         $viewData["data"] = "";
-        return View::getViewWithSpecificMaster($this, "cms/view/login/index", $viewData, "cms/view/master-login");
+        return new BareView($viewData, "cms/view/admin/restricted");
     }
 
 }

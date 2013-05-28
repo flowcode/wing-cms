@@ -19,7 +19,9 @@ class AdminPermissionController extends Controller {
 
     function __construct() {
         $this->setIsSecure(TRUE);
-        $this->addAllowedRole('admin');
+        $this->addPermission('admin-user-create');
+        $this->addPermission('admin-user-update');
+        $this->addPermission('admin-user-delete');
         $this->permissionService = new PermissionService();
     }
 

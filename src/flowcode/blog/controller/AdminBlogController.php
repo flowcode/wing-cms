@@ -9,7 +9,6 @@ use flowcode\blog\service\TagService;
 use flowcode\wing\mvc\BareView;
 use flowcode\wing\mvc\Controller;
 use flowcode\wing\mvc\HttpRequest;
-use flowcode\wing\mvc\View;
 use flowcode\wing\utils\PermalinkBuilder;
 
 /**
@@ -23,7 +22,9 @@ class AdminBlogController extends Controller {
 
     function __construct() {
         $this->setIsSecure(TRUE);
-        $this->addAllowedRole('admin');
+        $this->addPermission("admin-blog-post-create");
+        $this->addPermission("admin-blog-post-edit");
+        $this->addPermission("admin-blog-post-delete");
         $this->postService = new PostService();
     }
 

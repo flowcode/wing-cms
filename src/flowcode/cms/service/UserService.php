@@ -134,7 +134,9 @@ class UserService {
             $_SESSION['user']['username'] = $user->getUsername();
         }
         foreach ($user->getRoles() as $role) {
-            $_SESSION['user']['roles'][] = $role->getName();
+            foreach ($role->getPermissions() as $permission) {
+                $_SESSION['user']['roles'][$role->getName()]["permissions"][] = $permission->getName();
+            }
         }
     }
 

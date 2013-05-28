@@ -24,7 +24,9 @@ class AdminMenuController extends Controller {
 
     function __construct() {
         $this->setIsSecure(TRUE);
-        $this->addAllowedRole('admin');
+        $this->addPermission("admin-menu-create");
+        $this->addPermission("admin-menu-edit");
+        $this->addPermission("admin-menu-delete");
         $this->menuService = new MenuService();
     }
 

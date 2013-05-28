@@ -17,7 +17,7 @@ class AdminHomeController extends Controller {
     public function __construct() {
         $this->userService = new UserService();
         $this->setIsSecure(true);
-        $this->addAllowedRole("admin");
+        $this->addPermission("admin-login");
     }
 
     public function index(HttpRequest $httpRequest) {
