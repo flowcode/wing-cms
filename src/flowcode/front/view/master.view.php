@@ -3,8 +3,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="icon" type="image/png" href="/images/flowcode-fav.png" />
-        <title><? echo ucfirst($viewData['page']->getName()) . " | " . \flowcode\wing\mvc\Config::getByModule("front", "site", "name") ?></title>
-        <meta name="description" content="<? echo $viewData['page']->getDescription() ?>" />
+        <? if (isset($viewData['page']) && strlen($viewData['page']->getName()) > 0): ?>
+            <title><? echo ucfirst($viewData['page']->getName() . " | ") . \flowcode\wing\mvc\Config::getByModule("front", "site", "name") ?></title>
+        <? else: ?>
+            <title><? echo ucfirst(\flowcode\wing\mvc\Config::getByModule("front", "site", "name")) ?></title>
+        <? endif; ?>
+        <? if (isset($viewData['page']) && strlen($viewData['page']->getDescription()) > 0): ?>
+            <meta name="description" content="<? echo $viewData['page']->getDescription() ?>" />
+        <? endif; ?>
 
         <link rel="stylesheet" href="/css/global.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" media="screen" />
@@ -13,11 +19,6 @@
         <script src="/js/bootstrap-dropdown.js" type="text/javascript" ></script>
         <script src="/js/bootstrap-affix.js" type="text/javascript" ></script>
         <script src="/js/global.js" type="text/javascript" ></script>
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $('.dropdown-toggle').dropdown();
-            });
-        </script>
     </head>
 
     <body>

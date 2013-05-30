@@ -9,7 +9,6 @@ use flowcode\wing\mvc\Controller;
 use flowcode\wing\mvc\HttpRequest;
 use flowcode\wing\mvc\View;
 
-
 /**
  * Description of HomeController
  *
@@ -25,20 +24,22 @@ class BlogController extends Controller {
 
         $p = explode("/", $httpRequest->getRequestedUrl());
         $permalink = $p[3];
-        
+
         $postSrv = new PostService();
         $post = $postSrv->findByPermalink($permalink);
 
         $page = new Page();
         $page->setName($post->getTitle());
-        $page->setDescription($post->getIntro());
+        if (strlen($post->getDescription()) > 0) {
+            $page->setDescription($post->getDescription());
+        }
 
         $viewData['page'] = $page;
         $viewData['post'] = $post;
 
         return View::getControllerView($this, "front/view/blog/post", $viewData);
     }
-    
+
     public function index(HttpRequest $httpRequest) {
 
         $pageSrv = new PageService();

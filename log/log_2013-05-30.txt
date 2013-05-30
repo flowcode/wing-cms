@@ -1,0 +1,8 @@
+2013-05-30 0:12:43 - CRIT --> Call to a member function render() on a non-object on /var/www/wing-cms/src/flowcode/wing/mvc/Kernel.php at 87
+2013-05-30 0:28:20 - CRIT --> Call to a member function getBody() on a non-object on /var/www/wing-cms/src/flowcode/front/view/blog/index.view.php at 13
+2013-05-30 0:42:59 - CRIT --> Call to a member function render() on a non-object on /var/www/wing-cms/src/flowcode/wing/mvc/Kernel.php at 87
+2013-05-30 2:21:25 - CRIT --> Call to a member function render() on a non-object on /var/www/wing-cms/src/flowcode/wing/mvc/Kernel.php at 87
+2013-05-30 2:22:26 - CRIT --> Call to a member function render() on a non-object on /var/www/wing-cms/src/flowcode/wing/mvc/Kernel.php at 87
+2013-05-30 2:22:31 - CRIT --> Call to a member function render() on a non-object on /var/www/wing-cms/src/flowcode/wing/mvc/Kernel.php at 87
+2013-05-30 2:24:09 - CRIT --> Call to a member function render() on a non-object on /var/www/wing-cms/src/flowcode/wing/mvc/Kernel.php at 87
+2013-05-30 2:24:14 - CRIT --> Call to a member function render() on a non-object on /var/www/wing-cms/src/flowcode/wing/mvc/Kernel.php at 87

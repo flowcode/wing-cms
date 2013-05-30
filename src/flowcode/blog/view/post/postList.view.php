@@ -1,3 +1,26 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#search").focus();
+    });
+    function actualizarPagina(valor) {
+        $('#pagina-sel').val(valor);
+        actualizarLista();
+    }
+    function actualizarLista() {
+        var paginaSel = $('#pagina-sel').val();
+        var searchSel = $('#search').val();
+
+        var url = "#!adminBlog/index";
+        if (paginaSel) {
+            url += "/page/" + paginaSel.toLowerCase();
+        }
+        if (searchSel) {
+            url += "/search/" + encodeURI(searchSel);
+        }
+        window.location = url;
+    }
+</script>
+
 <div class="page-header">
     <h1>Posts
         <a class="btn create" onclick='createEntity("New Post", "/adminBlog/createPost", "/adminBlog/savePost");' data-form="/adminBlog/createPost" data-form-action="/adminBlog/savePost" ><i class="icon-plus icon-white"></i> Nuevo</a>
@@ -5,12 +28,12 @@
 </div>
 
 
-<form action="#!adminBlog/index" method="post" class="form-search">
+<div action="#!adminBlog/index" method="post" class="form-search">
     <div class="input-append">
-        <input id="search" type="text" name="search" placeholder="Buscar…" class="span8 search-query" value="<?php echo $viewData['filter'] ?>"/>
-        <button type="submit"class="btn"><li class="icon-search icon-white"></li> Buscar</button>
+        <input id="search" type="text" name="search" placeholder="Buscar…" class="span8 search-query" value="<?php echo $viewData['filter'] ?>">
+        <button type="button" class="btn" onclick="actualizarLista()" ><i class="icon-search icon-white"></i> Buscar</button>
     </div>
-</form>
+</div>
 
 <table class="table table-condensed">
     <thead>
@@ -29,9 +52,9 @@
         <td>
             <a title="Editar" onclick="updateEntity('Edit Post', '/adminBlog/editPost/<? echo $entidad->getId() ?>', '/adminBlog/savePost')" class="btn btn-mini" ><li class="icon-edit icon-white"></li></a>
             <a title="Eliminar" class="btn btn-mini btn-danger" onclick="if (confirm('Estás seguro?')) {
-                        deleteEntity('/adminBlog/deletePost/<? echo $entidad->getId() ?>');
-                    }
-                    return false;"><li class="icon-remove icon-white"></li></a>
+                deleteEntity('/adminBlog/deletePost/<? echo $entidad->getId() ?>');
+            }
+            return false;"><li class="icon-remove icon-white"></li></a>
         </td>
     </tr>
 <?php endforeach; ?>
@@ -47,21 +70,3 @@
     <span>de <?php echo $viewData['pager']->getPageCount() ?></span>
     <li><a class="next" onclick="actualizarPagina(<?php echo $viewData['pager']->getNextPage() ?>)"><i class="icon-chevron-right icon-white"></i></a></li>
 </ul>
-<script>
-            $(document).ready(function() {
-                $("#search").focus();
-            });
-            function actualizarPagina(valor) {
-                $('#pagina-sel').val(valor);
-                actualizarLista();
-            }
-            function actualizarLista() {
-                var paginaSel = $('#pagina-sel').val();
-
-                var url = "#!adminBlog/index";
-                if (paginaSel) {
-                    url += "/page/" + paginaSel.toLowerCase();
-                }
-                window.location = url;
-            }
-</script>

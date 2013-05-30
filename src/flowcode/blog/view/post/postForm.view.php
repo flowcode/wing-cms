@@ -1,5 +1,3 @@
-<link href="/css/blog.css" rel="stylesheet" type="text/css" />
-<link href="/css/icrop.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
     function openKCFinder_singleFile() {
         window.KCFinder = {};
@@ -38,7 +36,7 @@
     });
 
     $(document).ready(function() {
-        CKEDITOR.replace('sbody');
+        CKEDITOR.replace('sbody', {width: "800"});
         CKEDITOR.replace('intro');
         changeType();
         $("#datepicker").datetimepicker({dateFormat: 'yy-mm-dd'});
@@ -79,14 +77,14 @@
     <div class="control-group" style="display:none;" id="intro-container">
         <label class="control-label">Intro</label>
         <div class="controls">
-            <textarea id="intro" name="intro"><?php echo $viewData['post']->getIntro() ?></textarea>
+            <textarea id="intro" class="ckeditor" name="intro"><?php echo $viewData['post']->getIntro() ?></textarea>
         </div>
     </div>
 
     <div class="control-group">
         <label class="control-label">Cuerpo</label>
         <div class="controls">
-            <textarea id="sbody" name="body" placeholder="Cuerpo del post" ><?php echo $viewData['post']->getBody() ?></textarea>
+            <textarea id="sbody" name="body" class="ckeditor" placeholder="Cuerpo del post" ><?php echo $viewData['post']->getBody() ?></textarea>
         </div>
     </div>
 
@@ -130,6 +128,5 @@
             </div>
         </div>
     </div>
-
 
 </form>

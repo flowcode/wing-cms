@@ -47,12 +47,18 @@ class Pager {
     }
 
     public function getNextPage() {
-        $next = ($this->actualPage < $this->pageCount) ? $this->actualPage + 1 : $this->actualPage;
+        $next = $this->actualPage;
+        if ($this->actualPage < $this->pageCount) {
+            $next = $this->actualPage + 1;
+        }
         return $next;
     }
 
     public function getPrevPage() {
-        $prev = ($this->actualPage > 1) ? $this->actualPage - 1 : $this->actualPage;
+        $prev = $this->actualPage;
+        if ($this->actualPage > 1) {
+            $prev = $this->actualPage - 1;
+        }
         return $prev;
     }
 

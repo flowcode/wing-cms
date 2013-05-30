@@ -28,6 +28,10 @@ function createEntity(text, urlForm, urlAction) {
             $("#dialog > .modal-body").html(data);
             $("#dialog h3").html(text);
             $("#modal-save").one('click', function() {
+                $(".ckeditor").each(function() {
+                    var id = $(this).attr("id");
+                    CKEDITOR.instances[id].updateElement();
+                });
                 saveEntity(urlAction);
                 $('#dialog').modal('hide')
                 $.fn.flowhistory()
@@ -64,6 +68,10 @@ function updateEntity(text, urlForm, urlAction) {
             $("#dialog > .modal-body").html(data);
             $("#dialog h3").html(text);
             $("#modal-save").one('click', function() {
+                $(".ckeditor").each(function() {
+                    var id = $(this).attr("id");
+                    CKEDITOR.instances[id].updateElement();
+                });
                 saveEntity(urlAction);
                 $('#dialog').modal('hide')
                 $.fn.flowhistory()

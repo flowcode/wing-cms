@@ -74,9 +74,8 @@ class PostDao {
      * 
      */
     function findByTagYearMonth($tag, $year, $month, $page = 1) {
-        $page--;
-        $cantSlotsPorPagina = 5;
-        $desde = $page * $cantSlotsPorPagina;
+        $cantSlotsPorPagina = 2;
+        $desde = ($page-1) * $cantSlotsPorPagina;
 
         $selectQuery = "";
 
@@ -111,8 +110,6 @@ class PostDao {
                 $entity = new Post();
                 $em = EntityManager::getInstance();
                 $em->populateEntity($entity, $fila);
-
-// agrego a la lista
                 $noticias[] = $entity;
             }
         }
@@ -125,7 +122,7 @@ class PostDao {
         $query = $selectCountQuery . $whereQuery;
         $result = $this->dataSource->executeQuery($query);
         $itemCount = $result[0]["total"];
-        $pager = new Pager($noticias, $itemCount, $cantSlotsPorPagina);
+        $pager = new Pager($noticias, $itemCount, $cantSlotsPorPagina, $page);
 
         return $pager;
     }

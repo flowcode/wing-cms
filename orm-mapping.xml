@@ -89,7 +89,7 @@
                   localColumn="id_post" 
                   foreignColumn="id_tag" 
                   cardinality="many-to-many" />
-        <filter name="generic" columns="title,body,intro" perPage="20" />
+        <filter name="generic" columns="title,body,intro" perPage="10" />
     </entity>
     
     <entity name="tag" class="flowcode\blog\domain\Tag" table="tag" >
