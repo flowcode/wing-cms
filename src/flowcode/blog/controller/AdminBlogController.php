@@ -186,8 +186,8 @@ class AdminBlogController extends Controller {
         $p = $httpRequest->getParams();
         $idTag = $p[0];
         $tagSrv = new TagService();
-        $category = $tagSrv->findById($idCategory);
-        $tagSrv->delete($category);
+        $tag = $tagSrv->findById($idTag);
+        $tagSrv->delete($tag);
 
         $viewData['response'] = "success";
         return new BareView($viewData, "cms/view/admin/form-response");

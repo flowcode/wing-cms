@@ -1,10 +1,6 @@
 <?php
 
-namespace flowcode\orm\builder;
-
 use flowcode\orm\builder\MapperBuilder;
-use flowcode\orm\domain\Mapper;
-use flowcode\orm\domain\Relation;
 
 /**
  * Description of QueryBuilder
@@ -18,10 +14,10 @@ class QueryBuilder {
      * @param type $entity
      * @return string 
      */
-    public static function buildDeleteQuery($entity, Mapper $mapper) {
+    public static function buildDeleteQuery($entity, $mapper) {
         $query = "";
         foreach ($mapper->getRelations() as $relation) {
-            $query .= self::buildDeleteRelationQuery($relation, $entity);
+            $query .= $this->buildDeleteRelationQuery($relation, $entity);
         }
 
         $query .= "DELETE FROM " . $mapper->getTable() . " ";
@@ -36,9 +32,9 @@ class QueryBuilder {
      * @param type $entity
      * @return string 
      */
-    public static function buildDeleteRelationQuery(Relation $relation, $entity) {
-        $query = "DELETE FROM `" . $relation->getTable() . "` ";
-        $query .= "WHERE " . $relation->getLocalColumn() . " = '" . $entity->getId() . "';";
+    public static function buildDeleteRelationQuery($relation, $entity) {
+        $query = "DELETE FROM " . $relation->getTable() . " ";
+        $query .= "WHERE " . $relation->getForeignColumn() . " = '" . $entity->getId() . "';";
         return $query;
     }
 
@@ -47,7 +43,9 @@ class QueryBuilder {
      * @param type $entity
      * @return string 
      */
-    public static function buildInsertQuery($entity, Mapper $mapper) {
+    public function buildInsertQuery($entity) {
+
+        $mapper = MapperBuilder::buildFromMapping($this->mapping, get_class($entity));
         $fields = "";
         $values = "";
         foreach ($mapper->getPropertys() as $property) {
@@ -67,7 +65,8 @@ class QueryBuilder {
         return $query;
     }
 
-    public static function buildRelationQuery($entity, Mapper $mapper) {
+    public function buildRelationQuery($entity) {
+        $mapper = MapperBuilder::buildFromMapping($this->mapping, get_class($entity));
         $relQuery = "";
         $getid = "getId";
         foreach ($mapper->getRelations() as $relation) {
@@ -97,7 +96,9 @@ class QueryBuilder {
      * @param type $entity
      * @return string 
      */
-    public static function buildUpdateQuery($entity, Mapper $mapper) {
+    public function buildUpdateQuery($entity) {
+        $mapper = MapperBuilder::buildFromMapping($this->mapping, get_class($entity));
+
         $fields = "";
         foreach ($mapper->getPropertys() as $property) {
             if ($property->getColumn() != "id") {
@@ -117,7 +118,7 @@ class QueryBuilder {
      * @param type $entity
      * @param type $relation Name of the relation.
      */
-    public static function buildSelectRelation($entity, $relation, $mapperRelation) {
+    public function buildSelectRelation($entity, $mapper, $relation, $mapperRelation) {
         $query = "";
 
         $fields = "";
@@ -135,51 +136,6 @@ class QueryBuilder {
             $query = "select " . $fields . " from " . $mapperRelation->getTable() . " c ";
             $query .= "where c." . $relation->getForeignColumn() . " = " . $entity->getId();
         }
-        return $query;
-    }
-
-    public static function buildJoinRelationQuery(Relation $relation, $mainSynonym, $joinSynonym) {
-        $query = "";
-        if ($relation->getCardinality() == Relation::$manyToMany) {
-            $query .= "INNER JOIN " . $relation->getTable() . " $joinSynonym ";
-            $query .= "ON $joinSynonym." . $relation->getForeignColumn() . " = " . $mainSynonym . ".id ";
-        }
-
-        return $query;
-    }
-
-    public function getDeleteQuery($entity, Mapper $mapper) {
-        $query = self::buildDeleteQuery($entity, $mapper);
-        return $query;
-    }
-
-    public function getDeleteRelationQuery($relation, $entity) {
-        $query = self::buildDeleteRelationQuery($relation, $entity);
-        return $query;
-    }
-
-    public function getInsertQuery($entity, Mapper $mapper) {
-        $query = self::buildInsertQuery($entity, $mapper);
-        return $query;
-    }
-
-    public function getRelationQuery($entity, Mapper $mapper) {
-        $query = self::buildRelationQuery($entity, $mapper);
-        return $query;
-    }
-
-    public function getUpdateQuery($entity, Mapper $mapper) {
-        $query = self::buildUpdateQuery($entity, $mapper);
-        return $query;
-    }
-
-    public function getSelectRelationQuery($entity, $relation, $mapperRelation) {
-        $query = self::buildSelectRelation($entity, $relation, $mapperRelation);
-        return $query;
-    }
-
-    public function getJoinRelationQuery(Relation $relation, $mainSynonym, $joinSynonym) {
-        $query = self::buildJoinRelationQuery($relation, $mainSynonym, $joinSynonym);
         return $query;
     }
 

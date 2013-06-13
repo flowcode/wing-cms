@@ -1,0 +1,1 @@
+2013-06-13 11:18:12 - CRIT --> Argument 1 passed to flowcode\blog\service\TagService::delete() must be an instance of flowcode\blog\domain\Tag, null given, called in /var/www/wing-cms/src/flowcode/blog/controller/AdminBlogController.php on line 190 and defined on /var/www/wing-cms/src/flowcode/blog/service/TagService.php at 28

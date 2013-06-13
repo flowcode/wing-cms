@@ -23,7 +23,7 @@ class MapperBuilder {
 
             $class = $mappedEntity->attributes()->class;
 
-            if ($classname == $class) {
+            if ($instance->getClass() == $class) {
 
                 $instance->setTable($mappedEntity->attributes()->table->__toString());
 
@@ -49,28 +49,9 @@ class MapperBuilder {
                     $relInstance->setLocalColumn($relation->attributes()->localColumn->__toString());
                     $relInstance->setForeignColumn($relation->attributes()->foreignColumn->__toString());
 
-                    $relations[] = $relInstance;
+                    $relations[$relInstance->getName()] = $relInstance;
                 }
                 $instance->setRelations($relations);
-                
-                // filters
-                $fils = $mappedEntity->filter;
-                $filters = array();
-                foreach ($fils as $filter) {
-                    $filInstance = new Filter();
-                    $filInstance->setName($filter->attributes()->name->__toString());
-                    $filInstance->setItemsPerPage($filter->attributes()->perPage->__toString());
-
-                    $filteredColumns = $filter->attributes()->columns->__toString();
-                    $columList = explode(",", $filteredColumns);
-
-                    foreach ($columList as $columnName) {
-                        $filInstance->addFilteredColumn($columnName);
-                    }
-
-                    $filters[$filInstance->getName()] = $filInstance;
-                }
-                $instance->setFilters($filters);
 
                 break;
             }
@@ -115,10 +96,10 @@ class MapperBuilder {
                     $relInstance->setLocalColumn($relation->attributes()->localColumn->__toString());
                     $relInstance->setForeignColumn($relation->attributes()->foreignColumn->__toString());
 
-                    $relations[] = $relInstance;
+                    $relations[$relInstance->getName()] = $relInstance;
                 }
                 $instance->setRelations($relations);
-                
+
                 // filters
                 $fils = $mappedEntity->filter;
                 $filters = array();

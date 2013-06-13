@@ -82,17 +82,27 @@ class Mapper {
         $this->name = $name;
     }
 
-    public function createObject($raw) {
-        $entity = new $this->class;
-        foreach ($raw as $key => $value) {
-            if ($this->getNameForColumn($key) != NULL) {
-                $method = "set" . $this->getNameForColumn($key);
-                $entity->$method($value);
-            }
-        }
-        return $entity;
+    public function getFilters() {
+        return $this->filters;
     }
-    
+
+    public function setFilters($filters) {
+        $this->filters = $filters;
+    }
+
+    /**
+     * Get a relation bby its name.
+     * @param string $relationName
+     * @return Relation
+     */
+    public function getRelation($relationName) {
+        $relationInstance = null;
+        if (isset($this->relations[$relationName])) {
+            $relationInstance = $this->relations[$relationName];
+        }
+        return $relationInstance;
+    }
+
     /**
      * Return the filter or null.
      * @param String $filtername
@@ -106,12 +116,15 @@ class Mapper {
         return $filter;
     }
 
-    public function getFilters() {
-        return $this->filters;
-    }
-
-    public function setFilters($filters) {
-        $this->filters = $filters;
+    public function createObject($raw) {
+        $entity = new $this->class;
+        foreach ($raw as $key => $value) {
+            if ($this->getNameForColumn($key) != NULL) {
+                $method = "set" . $this->getNameForColumn($key);
+                $entity->$method($value);
+            }
+        }
+        return $entity;
     }
 
 }
