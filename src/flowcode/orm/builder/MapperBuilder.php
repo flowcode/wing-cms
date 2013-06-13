@@ -14,7 +14,7 @@ use flowcode\orm\domain\Relation;
  */
 class MapperBuilder {
 
-    public static function buildFromMapping($mapping, $classname) {
+    public static function buildFromClassName($mapping, $classname) {
 
         $instance = new Mapper();
         $instance->setClass($classname);
@@ -49,10 +49,10 @@ class MapperBuilder {
                     $relInstance->setLocalColumn($relation->attributes()->localColumn->__toString());
                     $relInstance->setForeignColumn($relation->attributes()->foreignColumn->__toString());
 
-                    $relations[] = $relInstance;
+                    $relations[$relInstance->getName()] = $relInstance;
                 }
                 $instance->setRelations($relations);
-                
+
                 // filters
                 $fils = $mappedEntity->filter;
                 $filters = array();
@@ -118,7 +118,7 @@ class MapperBuilder {
                     $relations[] = $relInstance;
                 }
                 $instance->setRelations($relations);
-                
+
                 // filters
                 $fils = $mappedEntity->filter;
                 $filters = array();

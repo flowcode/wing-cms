@@ -92,7 +92,20 @@ class Mapper {
         }
         return $entity;
     }
-    
+
+    /**
+     * Get a relation bby its name.
+     * @param string $relationName
+     * @return Relation
+     */
+    public function getRelation($relationName) {
+        $relationInstance = null;
+        if (isset($this->relations[$relationName])) {
+            $relationInstance = $this->relations[$relationName];
+        }
+        return $relationInstance;
+    }
+
     /**
      * Return the filter or null.
      * @param String $filtername

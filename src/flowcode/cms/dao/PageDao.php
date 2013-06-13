@@ -79,8 +79,9 @@ class PageDao {
 
         $em = EntityManager::getInstance();
         $pages = $em->findByWhereFilter("page", "permalink = '$permalink' ");
-        if (count($pages) > 0) {
-            return $pages[0];
+        if ($pages->count() > 0) {
+            $pages->rewind();
+            return $pages->current();
         } else {
             return NULL;
         }

@@ -2,9 +2,9 @@
 
 $setup = array(
     "masterview" => array(
-        "module" => "cms/view/master-admin",
+        "module" => "none",
         "controller" => array(
-            "page" => "front/view/master",
+            "adminLogin" => "cms/view/master-admin",
         ),
     ),
 );

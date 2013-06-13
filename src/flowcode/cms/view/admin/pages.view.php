@@ -1,6 +1,6 @@
 <div class="page-header">
     <h1>Paginas
-        <a class="btn" href="/adminPage/create" ><li class="icon-plus icon-white"></li> Nueva</a>
+        <a class="btn create" onclick='createEntity("New Tag", "/adminPage/create", "/adminPage/save");' ><li class="icon-plus icon-white"></li> Nueva</a>
     </h1>
 </div>
 

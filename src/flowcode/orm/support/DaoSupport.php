@@ -58,7 +58,7 @@ class DaoSupport {
      * @param type $entity 
      */
     public function updateRelations($entity) {
-        $mapper = MapperBuilder::buildFromMapping($this->mapping, get_class($entity));
+        $mapper = MapperBuilder::buildFromClassName($this->mapping, get_class($entity));
         foreach ($mapper->getRelations() as $relation) {
             if ($relation->getCardinality() == Relation::$manyToMany) {
                 // delete previous relations
@@ -95,7 +95,7 @@ class DaoSupport {
      * @return string 
      */
     public function buildDeleteQuery($entity) {
-        $mapper = MapperBuilder::buildFromMapping($this->mapping, get_class($entity));
+        $mapper = MapperBuilder::buildFromClassName($this->mapping, get_class($entity));
         $query = "";
         foreach ($mapper->getRelations() as $relation) {
             $query .= $this->buildDeleteRelationQuery($relation, $entity);
@@ -126,7 +126,7 @@ class DaoSupport {
      */
     public function buildInsertQuery($entity) {
 
-        $mapper = MapperBuilder::buildFromMapping($this->mapping, get_class($entity));
+        $mapper = MapperBuilder::buildFromClassName($this->mapping, get_class($entity));
         $fields = "";
         $values = "";
         foreach ($mapper->getPropertys() as $property) {
@@ -147,7 +147,7 @@ class DaoSupport {
     }
 
     public function buildRelationQuery($entity) {
-        $mapper = MapperBuilder::buildFromMapping($this->mapping, get_class($entity));
+        $mapper = MapperBuilder::buildFromClassName($this->mapping, get_class($entity));
         $relQuery = "";
         $getid = "getId";
         foreach ($mapper->getRelations() as $relation) {
@@ -178,7 +178,7 @@ class DaoSupport {
      * @return string 
      */
     public function buildUpdateQuery($entity) {
-        $mapper = MapperBuilder::buildFromMapping($this->mapping, get_class($entity));
+        $mapper = MapperBuilder::buildFromClassName($this->mapping, get_class($entity));
 
         $fields = "";
         foreach ($mapper->getPropertys() as $property) {
@@ -226,7 +226,7 @@ class DaoSupport {
      * @return array array of entitys.
      */
     public function findAll($entity, $ordenColumn = null, $ordenType = null) {
-        $mapper = MapperBuilder::buildFromMapping($this->mapping, get_class($entity));
+        $mapper = MapperBuilder::buildFromClassName($this->mapping, get_class($entity));
 
         $query = "SELECT * FROM `" . $mapper->getTable() . "` ";
         if(!is_null($ordenColumn)){
@@ -259,7 +259,7 @@ class DaoSupport {
      * @return \flowcode\orm\support\class 
      */
     public function findById($class, $id) {
-        $mapper = MapperBuilder::buildFromMapping($this->mapping, $class);
+        $mapper = MapperBuilder::buildFromClassName($this->mapping, $class);
 
         $newEntity = NULL;
 
@@ -333,7 +333,7 @@ class DaoSupport {
 
     public function populateEntity($entity, $values, $mapper = null, $relationColumn = null) {
         if (is_null($mapper)) {
-            $mapper = MapperBuilder::buildFromMapping($this->mapping, get_class($entity));
+            $mapper = MapperBuilder::buildFromClassName($this->mapping, get_class($entity));
         }
         foreach ($values as $key => $value) {
             if ($mapper->getNameForColumn($key) != NULL) {

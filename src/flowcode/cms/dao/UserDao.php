@@ -36,8 +36,9 @@ class UserDao {
         $filter = "username = '" . $username . "' AND password = '" . $password . "'";
         $users = $em->findByWhereFilter("user", $filter);
 
-        if (count($users) > 0) {
-            $user = $users[0];
+        if ($users->count() > 0) {
+            $users->rewind();
+            $user = $users->current();
         }
         return $user;
     }

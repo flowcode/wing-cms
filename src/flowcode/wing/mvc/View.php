@@ -61,12 +61,15 @@ class View implements IView {
         if (is_null($this->specificMaster)) {
             $controllers = Config::getByModule($this->getModuleName(), "masterview", "controller");
             if (!is_null($controllers) && isset($controllers[$this->getControllerName()])) {
-                $settedMaster = $controllers[$this->getControllerName()];
+                /* check none masterpage */
+                if ($controllers[$this->getControllerName()] != "none") {
+                    $settedMaster = $controllers[$this->getControllerName()];
+                }
             } else {
 
                 /* not controller masterview */
                 $moduleView = Config::getByModule($this->getModuleName(), "masterview", "module");
-                if (!is_null($moduleView)) {
+                if (!is_null($moduleView) && $moduleView != "none") {
                     $settedMaster = $moduleView;
                 }
             }
@@ -80,6 +83,8 @@ class View implements IView {
             } else {
                 throw new ViewException($settedMaster);
             }
+        }  else {
+            echo $content;
         }
     }
 

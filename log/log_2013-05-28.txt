@@ -1,3 +1,0 @@
-2013-05-28 1:14:10 - CRIT --> Call to a member function render() on a non-object on /var/www/wing-cms/src/flowcode/wing/mvc/Kernel.php at 87
-2013-05-28 1:20:44 - CRIT --> Call to a member function render() on a non-object on /var/www/wing-cms/src/flowcode/wing/mvc/Kernel.php at 87
-2013-05-28 1:20:53 - CRIT --> Call to a member function render() on a non-object on /var/www/wing-cms/src/flowcode/wing/mvc/Kernel.php at 87

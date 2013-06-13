@@ -22,6 +22,10 @@ class User extends Entity {
         parent::__construct();
         $this->roles = NULL;
     }
+    
+    public function __toString() {
+        return $this->username;
+    }
 
     public function getName() {
         return $this->name;

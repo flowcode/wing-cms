@@ -40,7 +40,7 @@ class EntityManager {
      * @param type $entity 
      */
     public function save($entity) {
-        $mapper = MapperBuilder::buildFromMapping($this->mapping, get_class($entity));
+        $mapper = MapperBuilder::buildFromClassName($this->mapping, get_class($entity));
         $id = "";
         if (is_null($entity->getId())) {
 
@@ -170,7 +170,7 @@ class EntityManager {
      * @return boolean 
      */
     public function delete($entity) {
-        $mapper = MapperBuilder::buildFromMapping($this->mapping, get_class($entity));
+        $mapper = MapperBuilder::buildFromClassName($this->mapping, get_class($entity));
         $deleteQuerys = QueryBuilder::buildDeleteQuery($entity, $mapper);
 
         foreach (explode(";", $deleteQuerys) as $q) {
@@ -186,30 +186,23 @@ class EntityManager {
      * @param type $relationName
      * @return \flowcode\orm\class
      */
-    public function findRelation(Entity $entity, $relationName) {
-        $mapper = MapperBuilder::buildFromMapping($this->mapping, get_class($entity));
+    public function findRelation($entity, $relationName) {
+        echo "entity: $entity | relationName: $relationName ";
+        $mapper = MapperBuilder::buildFromClassName($this->mapping, get_class($entity));
         $relation = $mapper->getRelation($relationName);
         $relationMapper = MapperBuilder::buildFromName($this->mapping, $relation->getEntity());
 
         $selectQuery = "SELECT tmain.* FROM `" . $relationMapper->getTable() . "` tmain ";
-
-        $joinQuery = $this->buildJoinRelationQuery($relation, "tmain", "j1");
-
+        $joinQuery = QueryBuilder::buildJoinRelationQuery($relation, "tmain", "j1");
         $whereQuery = "WHERE j1." . $relation->getLocalColumn() . " = '" . $entity->getId() . "'";
 
         $query = $selectQuery . $joinQuery . $whereQuery;
         $queryResult = $this->conn->executeQuery($query);
-        $array = array();
         if ($queryResult) {
-            $class = $relationMapper->getClass();
-            foreach ($queryResult as $row) {
-                $newEntity = new $class();
-                $this->populateEntity($newEntity, $row, $relationMapper);
-                $array[] = $newEntity;
-            }
+            $collection = new Collection($relationMapper->getClass(), $queryResult, $relationMapper);
         }
 
-        return $array;
+        return $collection;
     }
 
     /**
@@ -240,17 +233,13 @@ class EntityManager {
         }
         $result = $this->conn->executeQuery($query);
 
-        $array = array();
         if ($result) {
-            $class = $mapper->getClass();
-            foreach ($result as $row) {
-                $newEntity = new $class();
-                $this->populateEntity($newEntity, $row, $mapper);
-                $array[] = $newEntity;
-            }
+            $collection = new Collection($mapper->getClass(), $result, $mapper);
+        } else {
+            $collection = new Collection($mapper->getClass(), array(), $mapper);
         }
 
-        return $array;
+        return $collection;
     }
 
     /**
@@ -340,7 +329,7 @@ class EntityManager {
 
     public function populateEntity($entity, $values, $mapper = null, $relationColumn = null) {
         if (is_null($mapper)) {
-            $mapper = MapperBuilder::buildFromMapping($this->mapping, get_class($entity));
+            $mapper = MapperBuilder::buildFromClassName($this->mapping, get_class($entity));
         }
         foreach ($values as $key => $value) {
             if ($mapper->getNameForColumn($key) != NULL) {

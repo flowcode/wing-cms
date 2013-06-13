@@ -1,1 +1,3 @@
-2013-06-13 11:18:12 - CRIT --> Argument 1 passed to flowcode\blog\service\TagService::delete() must be an instance of flowcode\blog\domain\Tag, null given, called in /var/www/wing-cms/src/flowcode/blog/controller/AdminBlogController.php on line 190 and defined on /var/www/wing-cms/src/flowcode/blog/service/TagService.php at 28
+2013-06-13 14:09:06 - CRIT --> Method flowcode\blog\domain\Post::__toString() must return a string value on /var/www/wing-cms/src/flowcode/orm/EntityManager.php at 190
+2013-06-13 14:09:11 - CRIT --> Method flowcode\blog\domain\Post::__toString() must return a string value on /var/www/wing-cms/src/flowcode/orm/EntityManager.php at 190
+2013-06-13 14:09:14 - CRIT --> Method flowcode\blog\domain\Post::__toString() must return a string value on /var/www/wing-cms/src/flowcode/orm/EntityManager.php at 190
