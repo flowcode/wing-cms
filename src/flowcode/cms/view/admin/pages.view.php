@@ -29,8 +29,8 @@
         <td><?php echo $entidad->getStatus() ?></td>
         <td><?php echo $entidad->getType() ?></td>
         <td>
-            <a title="Editar" href="<?php echo "/adminPage/edit/id/" . $entidad->getId() ?>" class="btn btn-mini" ><li class="icon-edit icon-white"></li></a>
-            <a title="Eliminar" href="<?php echo "/adminPage/delete/id/" . $entidad->getId() ?>" class="btn btn-mini btn-danger" onclick="if(confirm('Estás seguro?')){return true;}return false;" ><li class="icon-remove icon-white"></li></a>
+            <a title="Editar" onclick="updateEntity('Update Page', '/adminPage/edit/id/<? echo $entidad->getId() ?>', '/adminPage/save')" class="btn btn-mini" ><li class="icon-edit icon-white"></li></a>
+            <a title="Eliminar" class="btn btn-mini btn-danger" onclick="if(confirm('Estás seguro?')){return true;}return false;" onclick="deleteEntity('<? echo "/adminPage/delete/id/" . $entidad->getId() ?>')" ><li class="icon-remove icon-white"></li></a>
         </td>
     </tr>
 <?php endforeach; ?>

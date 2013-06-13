@@ -22,7 +22,7 @@ class User extends Entity {
         parent::__construct();
         $this->roles = NULL;
     }
-    
+
     public function __toString() {
         return $this->username;
     }
@@ -55,6 +55,10 @@ class User extends Entity {
         }
     }
 
+    /**
+     * Get roles.
+     * @return \Iterator roles.
+     */
     public function getRoles() {
         if ($this->roles == NULL) {
             $userSrv = new UserService();
@@ -65,8 +69,11 @@ class User extends Entity {
 
     public function getRolesNames() {
         $roles = "";
-        foreach ($this->getRoles() as $role) {
-            $roles .= $role->getName() . ", ";
+        $rolesCollection = $this->getRoles();
+        if ($rolesCollection->count() > 0) {
+            foreach ($rolesCollection as $role) {
+                $roles .= $role->getName() . ", ";
+            }
         }
         return $roles;
     }

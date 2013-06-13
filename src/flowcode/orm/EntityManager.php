@@ -187,7 +187,6 @@ class EntityManager {
      * @return \flowcode\orm\class
      */
     public function findRelation($entity, $relationName) {
-        echo "entity: $entity | relationName: $relationName ";
         $mapper = MapperBuilder::buildFromClassName($this->mapping, get_class($entity));
         $relation = $mapper->getRelation($relationName);
         $relationMapper = MapperBuilder::buildFromName($this->mapping, $relation->getEntity());
@@ -200,6 +199,8 @@ class EntityManager {
         $queryResult = $this->conn->executeQuery($query);
         if ($queryResult) {
             $collection = new Collection($relationMapper->getClass(), $queryResult, $relationMapper);
+        }  else {
+            $collection = new Collection($relationMapper->getClass(), array(), $relationMapper);
         }
 
         return $collection;

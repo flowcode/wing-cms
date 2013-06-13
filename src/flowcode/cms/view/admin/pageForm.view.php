@@ -1,26 +1,25 @@
 <script type="text/javascript" src="/js/ckeditor/ckeditor.js"></script>
-<link href="/css/admin.css" rel="stylesheet" type="text/css" />
 <script>
-    
-    $(document).ready(function(){
-        
-        $('#tabs a').click(function (e) {
+
+    $(document).ready(function() {
+
+        $('#tabs a').click(function(e) {
             e.preventDefault();
             $(this).tab('show');
         });
-        
-        CKEDITOR.editorConfig = function( config ){
+
+        CKEDITOR.editorConfig = function(config) {
             config.language = 'es'
         };
-        
-        CKEDITOR.replace( 'htmlContent',{width : 700 });
+
+        CKEDITOR.replace('htmlContent', {width: 700});
         elegirContenido();
     });
-    
-    function elegirContenido(){
+
+    function elegirContenido() {
         var tipo = $("#tipo").val();
         $(".contenido").hide();
-        switch(tipo){
+        switch (tipo) {
             case "100":
                 $("#contenido-simple").show();
                 break;
@@ -42,13 +41,6 @@
         border: 1px #666 dotted;
     }
 </style>
-
-<div class="page-header">
-    <h1>Page
-        <small>Create or edit</small>
-    </h1>
-</div>
-
 
 <form action="<?php echo "/adminPage/save" ?>" method="post">
     <input type="hidden" name="id"          value="<?php echo $viewData['page']->getId() ?>" />
@@ -101,10 +93,5 @@
                 <span class="label label-important">El tipo de seccion que eligio es propia del sistema, y su contenido se administra accediendo desde el menu.</span>
             </div>
         </div>
-    </div>
-    <br/>
-    <div class="form-actions">
-        <button type="submit" class="btn btn-primary btn-large">Save</button>
-        <a href="/adminPage/pages" class="btn btn-large">Cancelar</a>
     </div>
 </form>

@@ -198,6 +198,11 @@ class UserDao {
         return $em->delete($user);
     }
 
+    /**
+     * Return a Collection of roles.
+     * @param \flowcode\cms\domain\User $user
+     * @return \flowcode\orm\domain\Collection roles.
+     */
     public function findRoles(User $user) {
         $em = EntityManager::getInstance();
         return $em->findRelation($user, "Roles");

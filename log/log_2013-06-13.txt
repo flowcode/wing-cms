@@ -1,3 +1,8 @@
 2013-06-13 14:09:06 - CRIT --> Method flowcode\blog\domain\Post::__toString() must return a string value on /var/www/wing-cms/src/flowcode/orm/EntityManager.php at 190
 2013-06-13 14:09:11 - CRIT --> Method flowcode\blog\domain\Post::__toString() must return a string value on /var/www/wing-cms/src/flowcode/orm/EntityManager.php at 190
 2013-06-13 14:09:14 - CRIT --> Method flowcode\blog\domain\Post::__toString() must return a string value on /var/www/wing-cms/src/flowcode/orm/EntityManager.php at 190
+2013-06-13 14:19:28 - CRIT --> Invalid argument supplied for foreach() on /var/www/wing-cms/src/flowcode/cms/domain/User.php at 68
+2013-06-13 14:23:58 - CRIT --> Invalid argument supplied for foreach() on /var/www/wing-cms/src/flowcode/cms/domain/User.php at 72
+2013-06-13 14:25:32 - CRIT --> Invalid argument supplied for foreach() on /var/www/wing-cms/src/flowcode/cms/domain/User.php at 73
+2013-06-13 14:26:35 - CRIT --> Call to a member function count() on a non-object on /var/www/wing-cms/src/flowcode/cms/domain/User.php at 73
+2013-06-13 14:27:57 - CRIT --> Call to undefined method flowcode\cms\dao\UserDao::eliminarUsuarioPorId() on /var/www/wing-cms/src/flowcode/cms/service/UserService.php at 125
