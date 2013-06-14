@@ -18,7 +18,7 @@
                 <td><div><?php echo $entidad->getId() ?></div></td>
                 <td><div style = "width: 150px; height: 35px; overflow: hidden;"><?php echo $entidad->getName() ?></div></td>
                 <td>
-                    <a title="Editar" onclick="updateEntity('Update Menu','/adminMenu/edit/<? echo $entidad->getId() ?>','/adminMenu/save' )" class="btn btn-mini" ><li class="icon-edit icon-white"></li></a>
+                    <a title="Editar" onclick="updateEntity('Update Menu','/adminMenu/edit/<? echo $entidad->getId() ?>','' )" class="btn btn-mini" ><li class="icon-edit icon-white"></li></a>
                     <a title="Eliminar" href="<?php echo "/adminMenu/delete/" . $entidad->getId() ?>" class="btn btn-mini btn-danger" onclick="if (confirm('Estás seguro?')) {
                                 return true;
                             }

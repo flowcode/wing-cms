@@ -47,7 +47,7 @@ class ItemMenuDao {
     function findFathersByMenuId($menuId){
         $em = EntityManager::getInstance();
         $where = "id_father = '0' AND id_menu='$menuId'";
-        return $em->findByWhereFilter("itemmenu", $where);
+        return $em->findByWhereFilter("itemmenu", $where, "order");
     }
 
     /**

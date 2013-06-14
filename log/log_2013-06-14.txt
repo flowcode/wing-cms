@@ -1,0 +1,18 @@
+2013-06-14 10:48:23 - CRIT --> Call to a member function render() on a non-object on /var/www/wing-cms/src/flowcode/wing/mvc/Kernel.php at 87
+2013-06-14 14:30:56 - CRIT --> Call to a member function render() on a non-object on /var/www/wing-cms/src/flowcode/wing/mvc/Kernel.php at 87
+2013-06-14 14:31:02 - CRIT --> Call to undefined method flowcode\cms\domain\ItemMenu::getLink() on /var/www/wing-cms/src/flowcode/cms/view/admin/menuEdit.view.php at 193
+2013-06-14 16:39:56 - CRIT --> Can't use method return value in write context on /var/www/wing-cms/src/flowcode/cms/controller/AdminMenuController.php at 97
+2013-06-14 16:40:30 - CRIT --> Can't use method return value in write context on /var/www/wing-cms/src/flowcode/cms/controller/AdminMenuController.php at 97
+2013-06-14 17:03:18 - CRIT --> Call to a member function render() on a non-object on /var/www/wing-cms/src/flowcode/wing/mvc/Kernel.php at 87
+2013-06-14 17:03:18 - CRIT --> Call to a member function render() on a non-object on /var/www/wing-cms/src/flowcode/wing/mvc/Kernel.php at 87
+2013-06-14 17:08:28 - CRIT --> Undefined variable: viewName on /var/www/wing-cms/src/flowcode/cms/controller/AdminMenuController.php at 131
+2013-06-14 17:08:28 - CRIT --> Call to a member function render() on a non-object on /var/www/wing-cms/src/flowcode/wing/mvc/Kernel.php at 87
+2013-06-14 17:08:29 - CRIT --> Call to undefined method flowcode\orm\EntityManager::buildDeleteRelationQuery() on /var/www/wing-cms/src/flowcode/orm/EntityManager.php at 79
+2013-06-14 17:09:20 - CRIT --> Undefined variable: viewName on /var/www/wing-cms/src/flowcode/cms/controller/AdminMenuController.php at 131
+2013-06-14 17:09:21 - CRIT --> Call to undefined method flowcode\orm\EntityManager::buildDeleteRelationQuery() on /var/www/wing-cms/src/flowcode/orm/EntityManager.php at 79
+2013-06-14 17:09:46 - CRIT --> Undefined variable: viewName on /var/www/wing-cms/src/flowcode/cms/controller/AdminMenuController.php at 131
+2013-06-14 17:09:47 - CRIT --> Call to undefined method flowcode\orm\EntityManager::buildDeleteRelationQuery() on /var/www/wing-cms/src/flowcode/orm/EntityManager.php at 79
+2013-06-14 17:10:31 - CRIT --> Undefined variable: viewName on /var/www/wing-cms/src/flowcode/cms/controller/AdminMenuController.php at 131
+2013-06-14 17:10:44 - CRIT --> Undefined variable: viewName on /var/www/wing-cms/src/flowcode/cms/controller/AdminMenuController.php at 131
+2013-06-14 17:15:44 - CRIT --> Call to undefined method flowcode\cms\controller\AdminMenuController::delete() on /var/www/wing-cms/src/flowcode/wing/mvc/Kernel.php at 86
+2013-06-14 17:20:05 - CRIT --> Undefined variable: pages on /var/www/wing-cms/src/flowcode/cms/controller/AdminMenuController.php at 75

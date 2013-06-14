@@ -67,15 +67,11 @@ class AdminMenuController extends Controller {
 
         $menu = $this->menuService->findById($id);
 
-        $pageSrv = new PageService();
-        $pages = $pageSrv->findAll();
-
         $itemMenuSrv = new ItemMenuService();
         $items = $itemMenuSrv->findFathersByMenu($menu);
 
         $viewData['menu'] = $menu;
         $viewData['items'] = $items;
-        $viewData['pages'] = $pages;
 
         return new BareView($viewData, "cms/view/admin/menuEdit");
     }
@@ -93,16 +89,15 @@ class AdminMenuController extends Controller {
     public function saveItemMenu(HttpRequest $httpRequest) {
 
         $itemMenuSrv = new ItemMenuService();
-
         $itemmenu = new ItemMenu();
+        $id = $httpRequest->getParameter("id");
+        if ($id != null && !empty($id)) {
+            $itemmenu->setId($httpRequest->getParameter("id"));
+        }
         $itemmenu->setName($httpRequest->getParameter("name"));
-        $itemmenu->setFatherId($httpRequest->getParameter("fatherId"));
-        $itemmenu->setPageId($httpRequest->getParameter("pageId"));
         $itemmenu->setMenuId($httpRequest->getParameter("menuId"));
+        $itemmenu->setFatherId($httpRequest->getParameter("fatherId"));
         $itemmenu->setLinkUrl($httpRequest->getParameter("linkurl"));
-        $itemmenu->setLinkTarget($httpRequest->getParameter("linktarget"));
-        $itemmenu->setOrder($httpRequest->getParameter("order"));
-
         $id = $itemMenuSrv->save($itemmenu);
 
         $viewData['data'] = $id;
@@ -129,7 +124,7 @@ class AdminMenuController extends Controller {
             $itemMenuSrv->save($itemMenu);
             $viewData['data'] = "ok";
         }
-        return View::getPlainView($this, $viewName, $viewData);
+        return View::getPlainView($this, "wing/view/default", $viewData);
     }
 
 }

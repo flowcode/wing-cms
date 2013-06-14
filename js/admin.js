@@ -42,23 +42,24 @@ function createEntity(text, urlForm, urlAction) {
 }
 
 function saveEntity(url) {
-    console.log($(".form").serialize());
-    $.ajax({
-        url: url,
-        type: "post",
-        data: $(".form").serialize(),
-        success: function(data) {
-            if (data == "success") {
-                sayToUser("success", "Se guardo correctamente.");
-                $("#dialog > .modal-body").empty();
-            } else {
+    if (url.length > 0) {
+        $.ajax({
+            url: url,
+            type: "post",
+            data: $(".form").serialize(),
+            success: function(data) {
+                if (data == "success") {
+                    sayToUser("success", "Se guardo correctamente.");
+                    $("#dialog > .modal-body").empty();
+                } else {
+                    sayToUser("error", "Hubo un error en la operación");
+                }
+            },
+            error: function(data) {
                 sayToUser("error", "Hubo un error en la operación");
             }
-        },
-        error: function(data) {
-            sayToUser("error", "Hubo un error en la operación");
-        }
-    });
+        });
+    }
 }
 function updateEntity(text, urlForm, urlAction) {
     $.ajax({

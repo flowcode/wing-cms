@@ -14,23 +14,28 @@
 
 <table class="table table-condensed">
     <thead>
-        <th>#</th>
-        <th>Nombre</th>
-        <th>Descripcion</th>
-        <th>Estado</th>
-        <th>Tipo</th>
-        <th>Acciones</th>
-    </thead>
+    <th>#</th>
+    <th>Nombre</th>
+    <th>Permalink</th>
+    <th>Descripcion</th>
+    <th>Estado</th>
+    <th>Tipo</th>
+    <th>Acciones</th>
+</thead>
 <?php foreach ($viewData["pager"]->getItems() as $entidad): ?>
     <tr>
         <td><div><?php echo $entidad->getId() ?></div></td>
-        <td><div style = "width: 150px; height: 35px; overflow: hidden;"><?php echo $entidad->getName() ?></div></td>
+        <td><?php echo $entidad->getName() ?></td>
+        <td><?php echo $entidad->getPermalink() ?></td>
         <td><div style = "width: 300px; height: 35px; overflow: hidden;"><?php echo $entidad->getDescription() ?></div></td>
         <td><?php echo $entidad->getStatus() ?></td>
         <td><?php echo $entidad->getType() ?></td>
         <td>
             <a title="Editar" onclick="updateEntity('Update Page', '/adminPage/edit/id/<? echo $entidad->getId() ?>', '/adminPage/save')" class="btn btn-mini" ><li class="icon-edit icon-white"></li></a>
-            <a title="Eliminar" class="btn btn-mini btn-danger" onclick="if(confirm('Estás seguro?')){return true;}return false;" onclick="deleteEntity('<? echo "/adminPage/delete/id/" . $entidad->getId() ?>')" ><li class="icon-remove icon-white"></li></a>
+            <a title="Eliminar" class="btn btn-mini btn-danger" onclick="if (confirm('Estás seguro?')) {
+                        return true;
+                    }
+                    return false;" onclick="deleteEntity('<? echo "/adminPage/delete/id/" . $entidad->getId() ?>')" ><li class="icon-remove icon-white"></li></a>
         </td>
     </tr>
 <?php endforeach; ?>
@@ -47,20 +52,20 @@
     <li><a class="next" onclick="actualizarPagina(<?php echo $viewData['pager']->getNextPage() ?>)"><i class="icon-chevron-right icon-white"></i></a></li>
 </ul>
 <script>
-    $(document).ready(function(){
-        $("#search").focus();
-    });
-    function actualizarPagina(valor){
-        $('#pagina-sel').val(valor);
-        actualizarLista();
-    }
-    function actualizarLista(){
-        var paginaSel = $('#pagina-sel').val();
-     
-        var url = "/adminPage/pages";
-        if( paginaSel ){
-            url += "/page/" + paginaSel.toLowerCase();
-        }
-        window.location =  url;
-    }
+            $(document).ready(function() {
+                $("#search").focus();
+            });
+            function actualizarPagina(valor) {
+                $('#pagina-sel').val(valor);
+                actualizarLista();
+            }
+            function actualizarLista() {
+                var paginaSel = $('#pagina-sel').val();
+
+                var url = "/adminPage/pages";
+                if (paginaSel) {
+                    url += "/page/" + paginaSel.toLowerCase();
+                }
+                window.location = url;
+            }
 </script>

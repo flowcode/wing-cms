@@ -1,158 +1,128 @@
 <script type="text/javascript">
-    function nuevoItem(){
-        $("#item-menu-menu-id").val($("#menu-id").val());
-        clearItemMenuForm();
-        $("#item-menu-form").dialog({
-            modal: "true"
-        });
-    }
-    
-    function cerrarNuevoItem(){
-        $("#item-menu-form").dialog("close");
-    }
-    
-    function doGuardar(){
-        guardarOrden();
-      
-    }
-    
-    function guardarOrden(){
+    function guardarOrden() {
         var itemsArray = new Array();
-        var itemMenus = $(".item-menu");
-        for(var l=0; l<itemMenus.length; l++){
+        var itemMenus = $(".item-menu.parent");
+        for (var l = 0; l < itemMenus.length; l++) {
             var item = {
-                id:  $(itemMenus[l]).attr("id").replace("item-menu-",""),
+                id: $(itemMenus[l]).attr("data-menu-item"),
                 orden: l
             }
             itemsArray.push(item);
         }
+        console.log(itemsArray);
         $.ajax({
             url: "/adminMenu/saveItemsOrder",
             type: "POST",
             data: {items: itemsArray},
-            success: function(data){
-                console.log(data);
-                var form = document.getElementById("menuForm");
-                form.submit();
+            success: function(data) {
+                if (data == "ok") {
+                    sayToUser("success", "Se guardo con éxito.")
+                }
             },
-            error: function(a,b,c){
+            error: function(a, b, c) {
+                sayToUser("error", "Algo no salió como se esperaba");
                 console.log(a);
             }
         });
     }
-    
-    function guardarItem(){
 
-        var item = {
-            name: $("#item-menu-nombre").val(),
-            pageId: $("#item-menu-seccion").val(),
-            menuId: $("#menu-id").val(),
-            linkUrl: $("#item-menu-link").val(),
-            linTarget: $("#item-menu-linktarget").val(),
-            order: $("#item-menu-orden").val(),
-            fatherId: $("#item-menu-padre").val()
-        }
-            
-        var url = "/adminMenu/saveItemMenu";
-                
-        $.ajax({
-            url: url,
-            type: "post",
-            data: {
-                name: item.name, 
-                pageId: item.pageId,
-                linkurl: escape(item.linkUrl),
-                linktarget: item.linTarget,
-                order: item.order,
-                fatherId: item.fatherId,
-                menuId: item.menuId
-            },
-            success: function(savedId){
-                item.id = savedId;
-                if(item.fatherId != "" && item.fatherId != undefined ){
-                    agregarItemHijo("item-menu-"+item.fatherId, item);
-                }else{
-                    agregarItem(item);
+    function deleteItem(obj) {
+        var id = $(obj).parent(".item-menu").attr("data-menu-item");
+        if (id.length > 0) {
+            var url = "/adminMenu/deleteItemMenu";
+            url += "/id/" + id;
+            $.ajax({
+                url: url,
+                type: "html",
+                success: function(data) {
+                    $(obj).parent().remove();
+                    sayToUser("success", "Eliminado");
+                },
+                error: function() {
+                    sayToUser("error", "No pudo ser eliminado");
                 }
-            },
-            complete: function(){
-                cerrarNuevoItem();
-            },
-            error: function(){
-                alert("error");
-            }
-        });
+            });
+        } else {
+            $(obj).parent().remove();
+        }
     }
-    
-    function eliminarItem(id){
-        
-        var url = "/adminMenu/deleteItemMenu";
-        url += "/id/"+id;
-        
-        $.ajax({
-            url: url,
-            type: "html",
-            success: function(data){
-                borrarItem(data);
-            },
-            error: function(){
-                alert("error");
-            }
-        });
-    }
-    
-    function agregarItem(itemObj){
-        itemHtml  = "<div id='item-menu-"+itemObj.id+"' class='item-menu' >";
-        itemHtml +=     "<span>"+itemObj.order+" |</span>";
-        itemHtml +=     "<span>"+itemObj.name+"</span>";
-        itemHtml +=     "<a onclick='eliminarItem("+itemObj.id+")'><li class='icon-remove'></li></a>";
-        itemHtml +=     "<a onclick='nuevoItemHijo("+itemObj.id+")'><li class='icon-plus'></li></a>";
+
+    function getItem() {
+        var itemHtml = "<div data-menu-item='' data-menu-father='' class='item-menu editable' >";
+        itemHtml += "<span><i class='icon-move'></i></span>";
+        itemHtml += '<div class="item-menu-name editable" onclick="editContent(this);" contentEditable="true">Click para cambiar el nombre</div>';
+        itemHtml += '<input type="text" class="item-menu-link editable" onclick="editContent(this);" placeholder="Url del link..." />';
+        itemHtml += '<a onclick="deleteItem(this)"><li class="icon-remove"></li></a>';
+        itemHtml += '<a onclick="addChildItem(this);"><li class="icon-plus"></li></a>';
+        itemHtml += '<div class="sortable childs"></div>';
         itemHtml += "</div>";
-        $("#items").append(itemHtml);
+        return itemHtml;
     }
-    function agregarItemHijo(idPadre, itemObj){
-        itemHtml  = "<div id='item-menu-"+itemObj.id+"' class='item-menu item-menu-hijo' >";
-        itemHtml +=     "<span>"+itemObj.order+" |</span>";
-        itemHtml +=     "<span>"+itemObj.name+"</span>   <a onclick='eliminarItem("+itemObj.id+")'><li class='icon-remove'></li></a>";
-        itemHtml += "</div>";
-        $("#"+idPadre).append(itemHtml);
+    function addItem() {
+        $("#items").append(getItem());
     }
-    function borrarItem(id){
-        $("#item-menu-"+id).remove();
+    function addChildItem(obj) {
+        var child = getItem();
+        $(child).attr("data-menu-father", $(obj).parent(".item-menu").attr("data-menu-item"));
+        $(obj).next(".childs").append(child);
     }
-    
-    function nuevoItemHijo(idPadre){
-        $("#item-menu-padre").val(idPadre);
-        $("#item-menu-menu-id").val("");
-        clearItemMenuForm();
-        $("#item-menu-form").dialog({
-            modal: "true"
+    function editContent(obj) {
+        $(obj).focusout(function() {
+            var parentItem = $(obj).parent(".item-menu");
+            var item = {
+                id: parentItem.attr("data-menu-item"),
+                name: parentItem.children(".item-menu-name").html(),
+                menuId: $("#menu-id").val(),
+                fatherId: parentItem.attr("data-menu-father"),
+                linkUrl: parentItem.children(".item-menu-link").val(),
+            }
+            $.ajax({
+                url: "/adminMenu/saveItemMenu",
+                type: "post",
+                data: {
+                    id: item.id,
+                    name: item.name,
+                    linkurl: escape(item.linkUrl),
+                    fatherId: item.fatherId,
+                    menuId: item.menuId
+                },
+                success: function(savedId) {
+                    parentItem.attr("data-menu-item", savedId);
+                    sayToUser("success", "guardado");
+                },
+                error: function() {
+                    sayToUser("error", "guardado");
+                }
+            });
         });
     }
-    
-    function clearItemMenuForm(){
-        $("#item-menu-nombre").val("");
-        $("#item-menu-seccion").val("");
-        orden: $("#item-menu-orden").val("");
-    }
-    
-    $(document).ready(function(){
-        $(".sortable").sortable();
-        $( ".sortable" ).disableSelection();
-    });
-    
-</script>
+    $(document).ready(function() {
+        $(".sortable").sortable({cursor: "move", cancel: ".editable"});
+        $("#modal-save").one('click', function() {
+            guardarOrden();
+        });
+    });</script>
 <style>
     .item-menu{
         border: 1px solid darkgray;
         padding: 5px;
-        width: 600px;
-        margin: 5px;
+        width: 90%;
+        margin: 5px auto auto 5%;
         background-color: white;
         border-radius: 3px;
     }
-    .item-menu span{
-        /*        font-weight: bold;*/
+    .item-menu-link{
+        margin: 0px !important;
+        width: 40%;
+    }
+    i.icon-move{
+        cursor: move;
+    }
+    .item-menu-name{
+        display: inline-block;
+        width: 40%;
+        margin-left: 5px;
+        margin-right: 10px;
     }
     .item-menu a{
         float: right;
@@ -165,74 +135,37 @@
         background-color: #B8E834;
     }
 </style>
-<form action="<?php echo "/adminMenu/save" ?>" method="post" id="menuForm">
-    <input type="hidden" name="id" id="menu-id" value="<?php echo $viewData['menu']->getId() ?>" />
+<form action="/adminMenu/save" method="post" id="menuForm">
+    <input type="hidden" name="id" id="menu-id" value="<? echo $viewData['menu']->getId() ?>" />
     <div>
         <label>Nombre</label>
-        <input type="text" name="name" value="<?php echo $viewData['menu']->getName() ?>"/>
+        <input type="text" name="name" value="<? echo $viewData['menu']->getName() ?>"/>
     </div>
     <div class="well">
         <h4>Items</h4>
         <div id="items" class="sortable">
-            <?php foreach ($viewData['items'] as $item): ?>
-                <div class="item-menu" id='<?php echo "item-menu-" . $item->getId() ?>'>
+            <? foreach ($viewData['items'] as $item): ?>
+                <div class="item-menu parent" data-menu-item='<? echo $item->getId() ?>'>
                     <span><i class="icon-move"></i></span>
-                    <span><?php echo $item->getName() ?></span>
-                    <a onclick='eliminarItem(<?php echo $item->getId() ?>)'><li class="icon-remove"></li></a>
-                    <a onclick='nuevoItemHijo(<?php echo $item->getId() ?>)'><li class='icon-plus'></li></a>
-                    <a onclick='editarItem(<?php echo $item->getId() ?>)'><li class='icon-edit'></li></a>
-                    <div class="sortable">
-                        <?php foreach ($item->getSubItems() as $subitem): ?>
-                            <div class="item-menu item-menu-hijo" id='<?php echo "item-menu-" . $subitem->getId() ?>'>
+                    <div class="item-menu-name editable" onclick="editContent(this);" contenteditable="true"><? echo $item->getName() ?></div>
+                    <input type="text" class="item-menu-link editable" onclick="editContent(this);" placeholder="Url del link..." value="<? echo $item->getLinkUrl() ?>" />
+                    <a onclick="deleteItem(this)"><li class="icon-remove"></li></a>
+                    <a onclick="addChildItem(this);"><li class='icon-plus'></li></a>
+                    <div class="sortable childs">
+                        <? foreach ($item->getSubItems() as $subitem): ?>
+                            <div class="item-menu item-menu-hijo" data-menu-item='<? echo $subitem->getId() ?>'>
                                 <span><i class="icon-move"></i></span>
-                                <span><?php echo $subitem->getName() ?></span>
-                                <a onclick='eliminarItem(<?php echo $subitem->getId() ?>)'><li class="icon-remove"></li></a>
-                                <a onclick='editarItemHijo(<?php echo $subitem->getId() ?>)'><li class="icon-edit"></li></a>
+                                <div class="item-menu-name editable" onclick="editContent(this);"><? echo $subitem->getName() ?></div>
+                                <input type="text" class="item-menu-link editable" onclick="editContent(this);" placeholder="Url del link..." value="<? echo $subitem->getLinkUrl() ?>" />
+                                <a onclick="deleteItem(this)"><li class="icon-remove"></li></a>
+                                <a onclick="addChildItem(this);"><li class="icon-edit"></li></a>
+                                <div class="sortable childs"></div>
                             </div>
-                        <?php endforeach; ?>
+                        <? endforeach; ?>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            <? endforeach; ?>
         </div>
-        <a class="btn" onclick="nuevoItem();"><li class='icon-plus-sign'></li>nuevo item</a>
-    </div>
-    <br/>
-    <div class="form-actions">
-        <button type="button" onclick="doGuardar();" class="btn btn-primary btn-large">Guardar</button>
-        <a href="/adminMenu/index" class="btn btn-large">Cancelar</a>
+        <a class="btn" onclick="addItem();"><li class='icon-plus-sign'></li>nuevo item</a>
     </div>
 </form>
-
-<div id="item-menu-form" style="display: none;">
-    <input type="hidden" id="item-menu-padre" value="" />
-    <input type="hidden" id="item-menu-menu-id" value="" />
-    <div>
-        <label>Nombre</label>
-        <input type="text" id="item-menu-nombre" />
-    </div>
-    <div>
-        <label>Página</label>
-        <select id="item-menu-seccion">
-            <option value="">Elija la pagina...</option>
-            <?php foreach ($viewData['pages'] as $page): ?>
-                <option value="<?php echo $page->getId(); ?>"><?php echo $page->getName(); ?></option>
-            <?php endforeach; ?>
-        </select>
-        <label>Link</label>
-        <input type="text" id="item-menu-link" placeholder="Url del link..." />
-        <label>Target</label>
-        <select name="target" id="item-menu-linktarget">
-            <optgroup>
-                <option value="_blank">new tab</option>
-                <option value="">same tab</option>
-            </optgroup>
-        </select>
-    </div>
-    <div>
-        <label>Orden</label>
-        <input type="text" id="item-menu-orden" value="1" />
-    </div>
-    <br/>
-    <a class="btn btn-primary" onclick="guardarItem();" >Guardar</a>
-    <a class="btn" onclick="cerrarNuevoItem();">Cancelar</a>
-</div>
