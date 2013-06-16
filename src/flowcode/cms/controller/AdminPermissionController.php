@@ -25,8 +25,15 @@ class AdminPermissionController extends Controller {
         $this->permissionService = new PermissionService();
     }
 
-    function index(HttpRequest $HttpRequest) {
-        $viewData['permissions'] = $this->permissionService->findAll();
+    function index(HttpRequest $httpRequest) {
+        
+        $viewData['filter'] = $httpRequest->getParameter('search');
+        $viewData['page'] = $httpRequest->getParameter('page');
+        if (is_null($viewData['page']) || empty($viewData['page'])) {
+            $viewData['page'] = 1;
+        }
+        $viewData['pager'] = $this->permissionService->findByFilter($viewData['filter'], $viewData['page']);
+        
         return new BareView($viewData, "cms/view/admin/permissionList");
     }
 

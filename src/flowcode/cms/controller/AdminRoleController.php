@@ -28,8 +28,13 @@ class AdminRoleController extends Controller {
         $this->roleService = new RoleService();
     }
 
-    function index(HttpRequest $HttpRequest) {
-        $viewData['roles'] = $this->roleService->findAll();
+    function index(HttpRequest $httpRequest) {
+        $viewData['filter'] = $httpRequest->getParameter('search');
+        $viewData['page'] = $httpRequest->getParameter('page');
+        if (is_null($viewData['page']) || empty($viewData['page'])) {
+            $viewData['page'] = 1;
+        }
+        $viewData['pager'] = $this->roleService->findByFilter($viewData['filter'], $viewData['page']);
         return new BareView($viewData, "cms/view/admin/roleList");
     }
 

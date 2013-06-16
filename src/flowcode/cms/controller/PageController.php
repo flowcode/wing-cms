@@ -7,6 +7,7 @@ use flowcode\cms\domain\PlainPageManager;
 use flowcode\cms\service\PageService;
 use flowcode\wing\mvc\Controller;
 use flowcode\wing\mvc\HttpRequest;
+use flowcode\wing\mvc\Router;
 use flowcode\wing\mvc\View;
 
 /**
@@ -32,8 +33,11 @@ class PageController extends Controller {
         $permalink = substr($httpRequest->getRequestedUrl(), 1);
 
         $page = null;
+        if (strlen($permalink) <= 0) {
+            $permalink = Router::get("homepage", "permalink");
+        }
         $page = $this->pageService->getPageByPermalink($permalink);
-        
+
         if (is_null($page)) {
             return $this->manageNotFound($permalink);
         }

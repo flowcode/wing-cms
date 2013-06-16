@@ -148,7 +148,15 @@ class AdminBlogController extends Controller {
 
     public function tags(HttpRequest $httpRequest) {
         $tagSrv = new TagService();
-        $viewData['tags'] = $tagSrv->findAll();
+        $viewData['filter'] = $httpRequest->getParameter('search');
+        
+        $viewData['page'] = $httpRequest->getParameter('page');
+        if (is_null($viewData['page']) || empty($viewData['page'])) {
+            $viewData['page'] = 1;
+        }
+
+        $viewData['pager'] = $tagSrv->findByFilter($viewData['filter'], $viewData['page']);
+        
         return new BareView($viewData, "blog/view/post/tags");
     }
 

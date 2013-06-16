@@ -9,7 +9,7 @@ use flowcode\wing\mvc\Entity;
  *
  * @author Juanma.
  */
-class Page extends Entity {
+class Page extends Entity implements IPage {
 
     private $name;
     private $permalink;
@@ -81,6 +81,14 @@ class Page extends Entity {
     public function getUrl() {
 
         return $this->permalink;
+    }
+
+    public function getMetaDescription() {
+        return $this->description;
+    }
+
+    public function getTitle() {
+        return $this->name;
     }
 
 }

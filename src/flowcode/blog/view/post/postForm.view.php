@@ -27,12 +27,21 @@
 
     CKEDITOR.on('instanceCreated', function(event) {
         var editor = event.editor, element = editor.element;
-        console.log(element.getAttribute('id'));
-        if (element.getAttribute('id') == 'intro') {
-            editor.on('configLoaded', function() {
-                editor.config.removePlugins = 'colorbutton,find,flash,newpage,removeformat,smiley,specialchar,templates';
-            });
-        }
+        editor.on('configLoaded', function() {
+            editor.config.removePlugins = 'colorbutton,find,flash,newpage,removeformat,smiley,specialchar,templates, forms, scayt, save, preview, print, pagebreak';
+            editor.config.toolbarGroups = [
+                {name: 'clipboard', groups: ['clipboard', 'undo']},
+                {name: 'links'},
+                {name: 'insert'},
+                {name: 'tools'},
+                {name: 'document', groups: ['mode']},
+                {name: 'basicstyles', groups: ['basicstyles', 'cleanup']},
+                '/',
+                {name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi']},
+                {name: 'styles'},
+                {name: 'colors'}
+            ];
+        });
     });
 
     $(document).ready(function() {

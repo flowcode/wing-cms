@@ -1,0 +1,11 @@
+2013-06-16 18:06:16 - CRIT --> Call to a member function render() on a non-object on /var/www/wing-cms/src/flowcode/wing/mvc/Kernel.php at 87
+2013-06-16 18:37:52 - CRIT --> Invalid argument supplied for foreach() on /var/www/wing-cms/src/flowcode/blog/view/post/postList.view.php at 54
+2013-06-16 18:39:00 - CRIT --> Undefined index: filter on /var/www/wing-cms/src/flowcode/blog/view/post/tags.view.php at 37
+2013-06-16 19:13:39 - CRIT --> Invalid argument supplied for foreach() on /var/www/wing-cms/src/flowcode/blog/view/post/tags.view.php at 71
+2013-06-16 19:14:12 - CRIT --> Call to undefined method flowcode\cms\controller\AdminRoleController::search() on /var/www/wing-cms/src/flowcode/wing/mvc/Kernel.php at 86
+2013-06-16 19:16:38 - CRIT --> Call to a member function getParameter() on a non-object on /var/www/wing-cms/src/flowcode/cms/controller/AdminPermissionController.php at 31
+2013-06-16 19:16:49 - CRIT --> Call to a member function getParameter() on a non-object on /var/www/wing-cms/src/flowcode/cms/controller/AdminPermissionController.php at 30
+2013-06-16 19:17:22 - CRIT --> Invalid argument supplied for foreach() on /var/www/wing-cms/src/flowcode/cms/view/admin/roleList.view.php at 70
+2013-06-16 19:24:09 - CRIT --> Invalid argument supplied for foreach() on /var/www/wing-cms/src/flowcode/cms/view/admin/roleList.view.php at 70
+2013-06-16 19:33:46 - CRIT --> Call to a member function getItems() on a non-object on /var/www/wing-cms/src/flowcode/cms/view/admin/userList.view.php at 75
+2013-06-16 19:34:39 - CRIT --> Call to a member function findByFilter() on a non-object on /var/www/wing-cms/src/flowcode/cms/service/UserService.php at 144

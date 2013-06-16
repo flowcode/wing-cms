@@ -71,7 +71,7 @@ class ItemMenuDao {
     function findByFatherId($fatherId) {
         $em = EntityManager::getInstance();
         $where = "id_father = '$fatherId'";
-        return $em->findByWhereFilter("itemmenu", $where);
+        return $em->findByWhereFilter("itemmenu", $where, "order");
     }
 
     function delete(ItemMenu $itemMenu) {

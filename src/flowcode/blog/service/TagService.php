@@ -34,6 +34,15 @@ class TagService {
         return $this->tagDao->findById($id);
     }
     
+    /**
+     * Find all tags by filter.
+     * @return \flowcode\wing\utils\Pager. 
+     */
+    public function findByFilter($filter = null, $page = 1) {
+        $pager = $this->tagDao->findByFilter($filter, $page);
+        return $pager;
+    }
+    
     
 }
 

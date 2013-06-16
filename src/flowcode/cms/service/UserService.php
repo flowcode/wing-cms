@@ -140,6 +140,11 @@ class UserService {
         }
     }
 
+    public function findByFilter($filter = null, $page = 1) {
+        $pager = $this->userDao->findByFilter($filter, $page);
+        return $pager;
+    }
+
     public function getUserDao() {
         return $this->userDao;
     }

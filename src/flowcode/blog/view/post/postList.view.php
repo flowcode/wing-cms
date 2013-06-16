@@ -1,7 +1,5 @@
 <script type="text/javascript">
-    $(document).ready(function() {
-        $("#search").focus();
-    });
+
     function actualizarPagina(valor) {
         $('#pagina-sel').val(valor);
         actualizarLista();
@@ -19,6 +17,16 @@
         }
         window.location = url;
     }
+    $(document).ready(function() {
+        $("#search").focus(function() {
+            $(this).keyup(function(e) {
+                if (e.keyCode === 13) {
+                    actualizarLista();
+                }
+            });
+        });
+        $("#search").focus();
+    });
 </script>
 
 <div class="page-header">

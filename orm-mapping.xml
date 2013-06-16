@@ -12,7 +12,7 @@
         <property name="Status" column="status"/>
         <property name="Type" column="type"/>
         
-        <filter name="generic" columns="name,description" perPage="20" />
+        <filter name="generic" columns="name,description" perPage="10" />
     </entity>
     
     <entity name="user" class="flowcode\cms\domain\User" table="user" >
@@ -29,6 +29,8 @@
                   foreignColumn="id_role" 
                   cardinality="many-to-many" />
         
+        <filter name="generic" columns="username,name" perPage="10" />
+        
     </entity>
     
     <entity name="role" class="flowcode\cms\domain\Role" table="role" >
@@ -41,11 +43,13 @@
                   localColumn="id_role" 
                   foreignColumn="id_permission" 
                   cardinality="many-to-many" />
+        <filter name="generic" columns="name" perPage="20" />
     </entity>
     
     <entity name="permission" class="flowcode\cms\domain\Permission" table="permission" >
         <property name="Id" column="id"/>
         <property name="Name" column="name"/>
+        <filter name="generic" columns="name,description" perPage="10" />
     </entity>
     
     <entity name="menu" class="flowcode\cms\domain\Menu" table="menu" >
@@ -95,6 +99,7 @@
     <entity name="tag" class="flowcode\blog\domain\Tag" table="tag" >
         <property name="Id" column="id"/>
         <property name="Name" column="name"/>
+        <filter name="generic" columns="name" perPage="10" />
     </entity>
                 
 </orm-mapping>

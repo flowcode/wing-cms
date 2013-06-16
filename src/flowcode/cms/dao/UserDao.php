@@ -4,6 +4,7 @@ namespace flowcode\cms\dao;
 
 use Exception;
 use flowcode\cms\domain\User;
+use flowcode\orm\domain\Collection;
 use flowcode\orm\EntityManager;
 use flowcode\wing\mvc\DataSource;
 
@@ -200,12 +201,18 @@ class UserDao {
 
     /**
      * Return a Collection of roles.
-     * @param \flowcode\cms\domain\User $user
-     * @return \flowcode\orm\domain\Collection roles.
+     * @param User $user
+     * @return Collection roles.
      */
     public function findRoles(User $user) {
         $em = EntityManager::getInstance();
         return $em->findRelation($user, "Roles");
+    }
+    
+    public function findByFilter($filter = null, $page = 1) {
+        $em = EntityManager::getInstance();
+        $pager = $em->findByGenericFilter("user", $filter, $page);
+        return $pager;
     }
 
     private function getInstaceFromArray($array) {

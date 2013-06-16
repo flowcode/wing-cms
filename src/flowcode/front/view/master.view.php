@@ -35,19 +35,15 @@
                                 <?php $menu = \flowcode\cms\controller\MenuController::getMenu("1"); ?>
                                 <?php $items = $menu->getMainItems(); ?>
                                 <?php foreach ($items as $item): ?>
-                                    <? if (count($item->getSubItems()) > 0): ?>
+                                    <? if ($item->getSubItems()->count() > 0): ?>
                                         <li class="dropdown" id="menu-<?php echo $item->getId(); ?>">
-                                            <?php if ($item->getPage() != NULL): ?>
-                                                <a class="dropdown-toggle" href="/<?php echo $item->getUrl() ?>"><?php echo $item->getName() ?></a>
+                                            <?php if ($item->getLinkUrl() != ""): ?>
+                                                <a class="dropdown-toggle" href="<?php echo $item->getLinkUrl(); ?>" ><?php echo $item->getName(); ?></a>
                                             <?php else: ?>
-                                                <?php if ($item->getLinkUrl() != ""): ?>
-                                                    <a class="dropdown-toggle" href="<?php echo $item->getLinkUrl(); ?>" ><?php echo $item->getName(); ?></a>
-                                                <?php else: ?>
-                                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#menu-<?php echo $item->getId(); ?>">
-                                                        <?php echo $item->getName(); ?>
-                                                        <b class="caret"></b>
-                                                    </a>
-                                                <?php endif; ?>
+                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#menu-<?php echo $item->getId(); ?>">
+                                                    <?php echo $item->getName(); ?>
+                                                    <b class="caret"></b>
+                                                </a>
                                             <?php endif; ?>
                                             <ul class="dropdown-menu">
                                                 <?php foreach ($item->getSubItems() as $subitem): ?>
@@ -68,15 +64,7 @@
 
                                     <? else: ?>
                                         <li>
-                                            <?php if ($item->getPage() != NULL): ?>
-                                                <a href="/<?php echo $item->getUrl() ?>"><?php echo $item->getName() ?></a>
-                                            <?php else: ?>
-                                                <?php if ($item->getLinkUrl() != ""): ?>
-                                                    <a href="<?php echo $item->getLinkUrl(); ?>" ><?php echo $item->getName(); ?></a>
-                                                <?php else: ?>
-                                                    <a><?php echo $item->getName(); ?></a>
-                                                <?php endif; ?>
-                                            <?php endif; ?>
+                                            <a href="<?php echo $item->getLinkUrl(); ?>" ><?php echo $item->getName(); ?></a>
                                         </li>
                                     <? endif; ?>
                                 <?php endforeach; ?>

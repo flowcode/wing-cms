@@ -3,7 +3,7 @@
 namespace flowcode\blog\domain;
 
 use flowcode\blog\service\PostService;
-use flowcode\wing\mvc\Config;
+use flowcode\cms\domain\IPage;
 use flowcode\wing\mvc\Entity;
 
 /**
@@ -11,7 +11,7 @@ use flowcode\wing\mvc\Entity;
  *
  * @author juanma
  */
-class Post extends Entity {
+class Post extends Entity implements IPage{
 
     private $permalink;
     private $title;
@@ -115,6 +115,10 @@ class Post extends Entity {
 
     public function setTags($tags) {
         $this->tags = $tags;
+    }
+
+    public function getMetaDescription() {
+        return $this->description;
     }
 
 }

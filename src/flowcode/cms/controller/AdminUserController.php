@@ -25,8 +25,13 @@ class AdminUserController extends Controller {
         $this->userService = new UserService();
     }
 
-    function index($HttpRequest) {
-        $viewData['users'] = $this->userService->obtenerUsuariosTodos();
+    function index($httpRequest) {
+        $viewData['filter'] = $httpRequest->getParameter('search');
+        $viewData['page'] = $httpRequest->getParameter('page');
+        if (is_null($viewData['page']) || empty($viewData['page'])) {
+            $viewData['page'] = 1;
+        }
+        $viewData['pager'] = $this->userService->findByFilter($viewData['filter'], $viewData['page']);
         return new BareView($viewData, "cms/view/admin/userList");
     }
 

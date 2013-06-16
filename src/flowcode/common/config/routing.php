@@ -1,6 +1,9 @@
 <?php
 
 $setup = array(
+    "homepage" => array(
+        "permalink" => "home",
+    ),
     "admin" => array(
         "controller" => "AdminHome",
     ),

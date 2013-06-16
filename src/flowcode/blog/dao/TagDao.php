@@ -5,7 +5,6 @@ namespace flowcode\blog\dao;
 use flowcode\blog\domain\Tag;
 use flowcode\orm\EntityManager;
 
-
 /**
  * Description of TagDao
  *
@@ -31,6 +30,12 @@ class TagDao {
 
     public function findById($id) {
         return EntityManager::getInstance()->findById("tag", $id);
+    }
+
+    public function findByFilter($filter = null, $page = 1) {
+        $em = EntityManager::getInstance();
+        $pager = $em->findByGenericFilter("tag", $filter, $page);
+        return $pager;
     }
 
 }
